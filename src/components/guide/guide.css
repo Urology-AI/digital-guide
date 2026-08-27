@@ -536,16 +536,26 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 
 /* ---- Chat widget ---- */
 .guide-chat-launch {
-  position: fixed; right: 1.1rem; bottom: 3rem; z-index: 65;
+  position: fixed; right: 1.1rem; bottom: 3rem; z-index: 48;
   background: var(--g-blue-bright); color: #fff; border: none; border-radius: 999px;
   padding: 0.8rem 1.15rem; font-family: inherit; font-weight: 600; font-size: 0.88rem;
   box-shadow: var(--g-shadow); display: flex; align-items: center; gap: 0.5rem; cursor: pointer;
 }
+.guide-chat-launch.is-open { z-index: 62; }
 .guide-chat-panel {
-  position: fixed; right: 1.1rem; bottom: 6.4rem; z-index: 65;
-  width: min(370px, calc(100vw - 2.2rem)); max-height: min(580px, calc(100vh - 8rem));
+  position: fixed; right: 1.1rem; bottom: 6.4rem; z-index: 60;
+  width: min(370px, calc(100vw - 2.2rem)); max-height: min(580px, calc(100dvh - 8rem));
   background: var(--g-surface); border: 1px solid var(--g-line); border-radius: 16px;
   box-shadow: var(--g-shadow); display: flex; flex-direction: column; overflow: hidden;
+}
+@media (max-width: 560px) {
+  .guide-chat-launch { bottom: 1rem; padding: 0.85rem; }
+  .guide-chat-launch .label { display: none; }
+  .guide-chat-launch.is-open { display: none; } /* header ✕ closes the sheet */
+  .guide-chat-panel {
+    right: 0; left: 0; bottom: 0; width: 100%;
+    max-height: 88dvh; border-radius: 16px 16px 0 0; border-bottom: none;
+  }
 }
 .guide-chat-head {
   background: var(--g-violet); color: #fff; padding: 0.85rem 1rem;

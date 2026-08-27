@@ -21,7 +21,9 @@ export function GuideChat({ c, activeChapterLabel }: { c: GuideContent; activeCh
   const logRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+    if (msgs.length > 0 && logRef.current) {
+      logRef.current.scrollTop = logRef.current.scrollHeight;
+    }
   }, [msgs, busy]);
 
   async function ask(q: string) {
@@ -46,12 +48,14 @@ export function GuideChat({ c, activeChapterLabel }: { c: GuideContent; activeCh
     <>
       <button
         type="button"
-        className="guide-chat-launch"
+        className={`guide-chat-launch${open ? " is-open" : ""}`}
         aria-haspopup="dialog"
         aria-expanded={open}
+        aria-label={open ? cc.close : cc.launch}
         onClick={() => setOpen((v) => !v)}
       >
-        <span aria-hidden="true">💬</span> {open ? cc.close : cc.launch}
+        <span aria-hidden="true">{open ? "✕" : "💬"}</span>
+        <span className="label">{open ? cc.close : cc.launch}</span>
       </button>
 
       {open && (

@@ -118,6 +118,10 @@ export interface GuideContent {
     howToUse: string[];
     canCannot: string;
     languageNote: string;
+    epsaLabel: string;
+    epsaBody: string;
+    epsaLinkText: string;
+    epsaUrl: string;
   };
 
   journey: {
@@ -183,6 +187,9 @@ export interface GuideContent {
     eyebrow: string;
     title: string;
     intro: string;
+    chairName: string;
+    chairRole: string;
+    chairBody: string;
     roles: CmpRow[];
     secondOpinionTitle: string;
     secondOpinionItems: string[];
@@ -331,7 +338,7 @@ const EN: GuideContent = {
   hero: {
     eyebrow: "Patient Guide",
     title: "Understanding Localized Prostate Cancer",
-    lead: "A clear guide to diagnosis, treatment choices, recovery, and the questions that matter most.",
+    lead: "A clear guide to diagnosis, treatment choices, recovery, and the questions that matter most — from the Mount Sinai Department of Urology, led by Dr. Ashutosh K. Tewari, a pioneer of robotic prostate surgery.",
     reassurance:
       "A diagnosis can feel urgent. Your decision does not have to feel rushed. The right plan begins with understanding your cancer and your priorities.",
     chips: [
@@ -366,6 +373,11 @@ const EN: GuideContent = {
       "This guide can help you understand common pathways and prepare for shared decision-making. It cannot recommend a specific treatment or replace advice from clinicians who know your full history.",
     languageNote:
       "This guide uses \"men\" when summarizing studies that reported results that way. Anyone with a prostate — including transgender women and nonbinary people — may need prostate care.",
+    epsaLabel: "Not yet diagnosed?",
+    epsaBody:
+      "If you are weighing whether to start PSA testing, the Mount Sinai ePSA tool estimates your risk of clinically significant prostate cancer and whether a PSA test is worth discussing with your doctor.",
+    epsaLinkText: "Open the ePSA risk tool",
+    epsaUrl: "https://epsa.millionstrongmen.com/",
   },
 
   journey: {
@@ -501,6 +513,10 @@ const EN: GuideContent = {
     title: "Build the right care team",
     intro:
       "Localized prostate cancer care can involve several specialists. Hearing more than one perspective is a strength, not a failure to decide.",
+    chairName: "Dr. Ashutosh K. Tewari",
+    chairRole: "Chair, Milton and Carroll Petrie Department of Urology · Mount Sinai",
+    chairBody:
+      "Dr. Tewari is a urologic surgeon internationally recognized for advancing robotic-assisted radical prostatectomy and nerve-sparing techniques aimed at preserving urinary control and sexual function. His team's research spans surgical precision, imaging, and biomarkers. If you are considering surgery, your consultation will cover which approach fits your anatomy and cancer, and what outcomes to expect in a patient like you.",
     roles: [
       { label: "Urologic oncologist", a: "Confirms diagnosis and discusses surgery, surveillance, focal approaches, and urinary care." },
       { label: "Radiation oncologist", a: "Explains external-beam radiation, brachytherapy, schedules, and radiation-specific effects." },
@@ -594,13 +610,17 @@ const EN: GuideContent = {
         id: "surgery",
         n: "OPTION B",
         title: "Surgery: radical prostatectomy",
-        summary: "Removes the prostate and seminal vesicles, and may include nearby lymph nodes.",
+        summary: "Removes the prostate and seminal vesicles, often robot-assisted; may include nearby lymph nodes.",
         blocks: [
+          {
+            title: "How it is done at Mount Sinai",
+            body: "Most radical prostatectomies here are robot-assisted: the surgeon operates through small incisions with a magnified 3D view and wristed instruments. The Department of Urology, chaired by Dr. Ashutosh K. Tewari, has helped develop nerve-sparing and precision approaches, and uses MRI and pathology to plan the operation around your specific tumor — sometimes described as a surgical \"digital twin\" of the prostate.",
+          },
           {
             title: "Potential advantages",
             items: [
               "Removes the prostate and provides final pathology and pathologic stage.",
-              "PSA is expected to fall to a very low or undetectable level after recovery.",
+              "PSA is expected to fall to a very low or undetectable level after recovery, which makes follow-up straightforward.",
               "Radiation can remain an option if additional treatment is later needed.",
             ],
           },
@@ -608,14 +628,18 @@ const EN: GuideContent = {
             title: "Important tradeoffs",
             items: [
               "An operation, anesthesia, catheter, and recovery period are required.",
-              "Urinary leakage is common early and may persist in a smaller number of people.",
+              "Urinary leakage is common early and improves for most people over months; it can persist in a smaller number.",
               "Erectile function may take months to recover and may not return to baseline.",
               "Ejaculation and natural fertility are lost after prostate removal; orgasm may still be possible.",
             ],
           },
           {
             title: "Nerve-sparing",
-            body: "Nerve-sparing may improve the chance of erectile recovery when it is safe and anatomically feasible. Cancer location, baseline function, age, medical conditions, and whether nerves can be preserved on one or both sides all affect outcomes.",
+            body: "Nerve-sparing aims to preserve the nerves involved in erections when it is safe and anatomically feasible. Cancer location, baseline function, age, medical conditions, and whether nerves can be spared on one or both sides all affect outcomes.",
+          },
+          {
+            title: "Surgeon experience matters",
+            body: "Guidelines note that outcomes after prostatectomy — cancer control, continence, and erectile recovery — vary with surgeon and center experience. Ask any surgeon how often they perform this operation and what their own results are.",
           },
         ],
         callout: {

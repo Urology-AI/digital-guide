@@ -19,6 +19,13 @@ export function Start({ c }: { c: GuideContent }) {
           {s.languageNote}
         </p>
       </Expandable>
+
+      <div className="guide-askbox">
+        <strong>{s.epsaLabel}</strong> {s.epsaBody}{" "}
+        <a href={s.epsaUrl} target="_blank" rel="noopener noreferrer">
+          {s.epsaLinkText} →
+        </a>
+      </div>
     </Chapter>
   );
 }

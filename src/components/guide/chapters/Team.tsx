@@ -5,6 +5,23 @@ export function Team({ c }: { c: GuideContent }) {
   const t = c.team;
   return (
     <Chapter id="team" eyebrow={t.eyebrow} title={t.title} intro={t.intro}>
+      <div className="guide-team">
+        <div className="badge">
+          <img
+            src={`${import.meta.env.BASE_URL}drtewari.png`}
+            alt={t.chairName}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        </div>
+        <div>
+          <h3>{t.chairName}</h3>
+          <span className="role">{t.chairRole}</span>
+          <p style={{ marginBottom: 0 }}>{t.chairBody}</p>
+        </div>
+      </div>
+
       <div className="guide-role-grid">
         {t.roles.map((r) => (
           <div className="guide-role" key={r.label}>

@@ -71,6 +71,14 @@ const KB: KbEntry[] = [
     a: "Localized prostate cancer care can involve a urologic oncologist, radiation oncologist, medical oncologist, radiologist and pathologist, sexual medicine and pelvic health, and a nurse or navigator. A second opinion is especially helpful when pathology or risk group is uncertain or the options carry different quality-of-life tradeoffs.",
   },
   {
+    keys: ["tewari", "who is dr", "chair", "robotic", "robot"],
+    a: "The Mount Sinai Department of Urology is chaired by Dr. Ashutosh K. Tewari, a urologic surgeon known for advancing robot-assisted radical prostatectomy and nerve-sparing techniques to preserve urinary control and sexual function. Radical prostatectomy here is usually robot-assisted and planned around your specific tumor using MRI and pathology. Outcomes vary with surgeon experience — ask any surgeon about their own results. See \"Care team & priorities\" and \"Treatment choices.\"",
+  },
+  {
+    keys: ["epsa", "not diagnosed", "should i get a psa", "screening tool"],
+    a: "If you are not yet diagnosed and are weighing whether to start PSA testing, the Mount Sinai ePSA tool (epsa.millionstrongmen.com) estimates your risk of clinically significant prostate cancer and whether a PSA test is worth discussing with your doctor.",
+  },
+  {
     keys: ["priorit", "decide", "how long", "shared decision"],
     a: "When cancer-control outcomes are expected to be similar, quality-of-life differences can drive the decision. Weigh cancer control, urinary/sexual/bowel function, time and convenience, and future options. Ask your team how long you can safely take to decide. See \"Care team & priorities.\"",
   },
