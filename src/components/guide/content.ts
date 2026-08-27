@@ -204,6 +204,10 @@ export interface GuideContent {
     eyebrow: string;
     title: string;
     intro: string;
+    byStageTitle: string;
+    byStageIntro: string;
+    byStageRows: CmpRow[];
+    byStageFoot: string;
     expandHint: string;
     paths: TreatmentPath[];
     compareTitle: string;
@@ -557,7 +561,30 @@ const EN: GuideContent = {
     eyebrow: "Treatment choices",
     title: "Compare the approaches",
     intro:
-      "There may be more than one reasonable option. This is a discussion tool — not a recommendation. The best option depends on your specific cancer, health, anatomy, and priorities.",
+      "There may be more than one reasonable option. This is a discussion tool — not a recommendation. Which options are even on the table depends on where you are in your cancer journey — mainly your risk group.",
+    byStageTitle: "What is usually on the table, by risk group",
+    byStageIntro:
+      "Your PSA, Grade Group, and stage set a risk group, and that is the biggest factor in which treatments your team will discuss. This is a simplified map for localized disease — your own plan depends on the full picture.",
+    byStageRows: [
+      {
+        label: "Very low / low risk",
+        a: "Active surveillance is usually preferred. Surgery or radiation are options if you choose treatment.",
+      },
+      {
+        label: "Favorable intermediate",
+        a: "Active surveillance may still be an option for some. Surgery or radiation are the common choices; radiation is sometimes given alone.",
+      },
+      {
+        label: "Unfavorable intermediate / high risk",
+        a: "Surgery, or radiation combined with a period of hormone therapy. A multidisciplinary discussion is especially valuable here.",
+      },
+      {
+        label: "Beyond the prostate (locally advanced, spread, or recurrence)",
+        a: "A different pathway — often combinations of radiation, hormone therapy, and systemic treatment. This guide focuses on localized disease; ask your team for guidance specific to your situation.",
+      },
+    ],
+    byStageFoot:
+      "Recurrence after treatment, or cancer that has spread, changes the options again — this is why knowing your current stage and risk group matters before comparing anything.",
     expandHint: "Select a card for advantages, tradeoffs, and what to ask.",
     paths: [
       {

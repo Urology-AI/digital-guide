@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { GuideContent } from "../content";
-import { Blocks, Callout, Chapter, ScrollX } from "../primitives";
+import { Blocks, Callout, Chapter, DefTable, ScrollX } from "../primitives";
 
 export function Treatment({ c }: { c: GuideContent }) {
   const t = c.treatment;
@@ -8,6 +8,12 @@ export function Treatment({ c }: { c: GuideContent }) {
 
   return (
     <Chapter id="treatment" alt eyebrow={t.eyebrow} title={t.title} intro={t.intro}>
+      <h3>{t.byStageTitle}</h3>
+      <p>{t.byStageIntro}</p>
+      <DefTable head={["Risk group", "Options usually discussed"]} rows={t.byStageRows} />
+      <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{t.byStageFoot}</p>
+
+      <h3 style={{ marginTop: "2rem" }}>The options in detail</h3>
       <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{t.expandHint}</p>
 
       <div className="guide-path-list">
