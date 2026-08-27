@@ -1,0 +1,31 @@
+name = "compass-chat-proxy"
+main = "chat-proxy.js"
+compatibility_date = "2024-09-23"
+
+# --- Retrieval-augmented grounding (optional) -------------------------------
+# Enables RAG over an approved, de-identified publication corpus.
+# Setup:
+#   npx wrangler vectorize create compass-papers --dimensions=768 --metric=cosine
+#   npx wrangler secret put INGEST_TOKEN      # long random string; used by ingest script
+# then uncomment both bindings below and redeploy. Workers AI ('AI') needs no
+# extra setup. If these are absent the worker still runs — RAG is simply off.
+
+# [ai]
+# binding = "AI"
+
+# [[vectorize]]
+# binding = "VECTORIZE"
+# index_name = "compass-papers"
+
+# --- Per-IP rate limiting (optional) ---------------------------------------
+#   npx wrangler kv namespace create RATE_LIMIT_KV
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT_KV"
+# id = "<your-kv-namespace-id>"
+
+# --- Secrets (set via wrangler, never here) -------------------------------
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put TURNSTILE_SECRET_KEY   # optional — enables POST /session
+#   npx wrangler secret put SESSION_SECRET         # optional — HMAC key for sessions
+#   npx wrangler secret put INGEST_TOKEN           # optional — enables POST /ingest
+#   npx wrangler secret put APP_TOKEN              # optional legacy fallback

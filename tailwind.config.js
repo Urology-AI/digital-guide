@@ -35,6 +35,18 @@ export default {
           magenta: "#DC298D",
           violet: "#212070",
         },
+        // Patient Guide accent pair — calm clinical patient-education feel,
+        // anchored to Mount Sinai blue/violet with a warm amber for callouts.
+        guide: {
+          bg: "#f4f7fb",
+          surface: "#ffffff",
+          ink: "#10193a",
+          line: "#dbe3f0",
+          blue: "#00AEEF",
+          violet: "#212070",
+          navy: "#00002D",
+          amber: "#b26a1a",
+        },
       },
     },
   },

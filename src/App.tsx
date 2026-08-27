@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { PatientGuide } from "./components/guide/PatientGuide";
 import { TalkingAvatar } from "./components/TalkingAvatar";
 import { ChatInput } from "./components/ChatInput";
 import { DirectTTS } from "./components/DirectTTS";
@@ -30,6 +31,15 @@ function resolveAvatarUrl(rawUrl?: string): string {
 }
 
 function App() {
+  // The avatar chat experience (ChatExperience, below) is disabled for now —
+  // it depends on the Python chat/TTS backend that is being retired. The guide
+  // has its own chat widget (Cloudflare worker). To re-enable, route to
+  // <ChatExperience /> here.
+  return <PatientGuide />;
+}
+
+/** Avatar chat + Direct TTS. Currently unmounted (see App). Kept for re-enable. */
+export function ChatExperience() {
   const { lang } = useLang();
   const [mode, setMode] = useState<AppMode>("chat");
   const [messages, setMessages] = useState<Message[]>([]);
