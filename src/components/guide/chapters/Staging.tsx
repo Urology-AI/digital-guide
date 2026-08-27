@@ -6,6 +6,12 @@ export function Staging({ c }: { c: GuideContent }) {
   return (
     <Chapter id="staging" alt eyebrow={s.eyebrow} title={s.title}>
       <h3>{s.continuumTitle}</h3>
+      <div className="guide-continuum-bar" aria-hidden="true" />
+      <div className="guide-continuum-scale" aria-hidden="true">
+        <span>Lower risk</span>
+        <span>Intermediate</span>
+        <span>Higher risk</span>
+      </div>
       <div className="guide-continuum">
         {s.tiers.map((t) => (
           <div className={`guide-tier tier-${t.id}`} key={t.id}>

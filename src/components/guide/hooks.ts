@@ -41,6 +41,15 @@ export function useGuideTheme(): [ThemeChoice, (t: ThemeChoice) => void] {
       /* ignore */
     }
   }, []);
+
+  // Mirror the choice onto <html> so the page background (index.css) and the
+  // browser UI (color-scheme / theme-color) follow the guide's theme.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute("data-guide-theme", theme);
+    return () => root.removeAttribute("data-guide-theme");
+  }, [theme]);
+
   return [theme, setTheme];
 }
 

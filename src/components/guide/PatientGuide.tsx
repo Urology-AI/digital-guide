@@ -6,6 +6,7 @@ import { useLang } from "../../i18n/LanguageContext";
 import { GuideNav } from "./GuideNav";
 import { GuideHero } from "./GuideHero";
 import { GuideChat } from "./GuideChat";
+import { ThemeToggle } from "./ThemeToggle";
 import { Welcome } from "./Welcome";
 import { Start } from "./chapters/Start";
 import { Journey } from "./chapters/Journey";
@@ -108,17 +109,35 @@ export function PatientGuide() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [currentId, showWelcome]);
 
+  // Left / right arrow keys page between chapters (unless typing in a field).
+  useEffect(() => {
+    if (showWelcome) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = e.target as HTMLElement | null;
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      if (el?.isContentEditable) return;
+      if (e.key === "ArrowRight" && next) goTo(next.id);
+      else if (e.key === "ArrowLeft" && prev) goTo(prev.id);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showWelcome, next, prev, goTo]);
+
   if (showWelcome) {
     return (
       <div className="guide-scope" data-guide-theme={theme}>
         <Welcome
           c={c}
           hasPlace={Boolean(savedPlace)}
+          theme={theme}
+          setTheme={setTheme}
           onStart={() => {
             setCurrentId(CHAPTERS[0].id);
             enter();
           }}
           onContinue={enter}
+          onJump={(id) => goTo(id)}
         />
       </div>
     );
@@ -139,6 +158,7 @@ export function PatientGuide() {
         <span className="guide-topbar-count">
           {idx + 1}/{CHAPTERS.length}
         </span>
+        <ThemeToggle c={c} theme={theme} setTheme={setTheme} compact />
       </div>
 
       <div className="guide-shell">
