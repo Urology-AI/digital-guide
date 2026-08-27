@@ -426,6 +426,10 @@ const EN: GuideContent = {
       "Works on any device",
     ],
   },
+  // TODO(clinical review): verify every figure below against a current, citable
+  // source (SEER / ACS) and confirm the phrasing "localized" matches how that
+  // source defines the stage. ">99%" is widely reported as ~100% 5-year
+  // relative survival for local/regional disease — pin the exact source + date.
   stats: [
     { num: ">99%", cap: "5-year relative survival for localized prostate cancer" },
     { num: "T1–T2", cap: "how most localized disease is staged" },
@@ -476,6 +480,7 @@ const EN: GuideContent = {
       "Localized prostate cancer generally means that available testing suggests the cancer is confined to the prostate. \"Locally advanced\" or \"regional\" may mean growth just outside the prostate or into nearby structures or lymph nodes. Your clinician may use TNM stage, a risk group, or both.",
     notOneTest:
       "Your team combines pathology, PSA, examination, MRI and other imaging when needed, overall health, life expectancy, family history, and what matters most to you.",
+    // TODO(clinical review): same figure as `stats` — keep both in sync with one cited source.
     reassuringFact:
       "Five-year relative survival for localized prostate cancer is greater than 99%. Statistics describe groups, not individual outcomes, but they help explain why there is often time for thoughtful decision-making.",
   },
@@ -554,6 +559,10 @@ const EN: GuideContent = {
       "Features such as cribriform or intraductal patterns, or perineural invasion, which your team weighs carefully.",
       "Findings such as ASAP or high-grade PIN are not cancer themselves but often prompt a repeat biopsy.",
     ],
+    // TODO(clinical review): "roughly one in four ... higher grade" — biopsy
+    // upgrading rates at prostatectomy range ~25–35% across series and depend
+    // on biopsy technique (systematic vs MRI-fusion). Confirm the figure and
+    // qualifier, or soften to "a meaningful share".
     worthAsking: {
       label: "Worth asking",
       body: "Would review by a genitourinary pathologist change my Grade Group or treatment options? Because a biopsy samples only part of the gland, roughly one in four cancers turns out to be higher grade than the first biopsy suggested.",

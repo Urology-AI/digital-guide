@@ -1,6 +1,14 @@
 import type { GuideContent } from "./content";
+import { ThemeToggle, type ThemeChoice } from "./ThemeToggle";
 
-type ThemeChoice = "auto" | "light" | "dark";
+/** Groups the flat chapter list into labelled sections for the side nav. */
+const SECTIONS: { label: string; ids: string[] }[] = [
+  { label: "Get oriented", ids: ["start", "journey"] },
+  { label: "The essentials", ids: ["basics", "psa", "diagnosis", "staging"] },
+  { label: "Making a decision", ids: ["team", "treatment"] },
+  { label: "After treatment", ids: ["quality", "recovery", "living", "genetics"] },
+  { label: "Toolkit & reference", ids: ["glossary", "checklist", "tools", "sources"] },
+];
 
 export function GuideNav({
   c,
@@ -19,12 +27,7 @@ export function GuideNav({
   theme: ThemeChoice;
   setTheme: (t: ThemeChoice) => void;
 }) {
-  const themes: ThemeChoice[] = ["auto", "light", "dark"];
-  const themeLabel: Record<ThemeChoice, string> = {
-    auto: c.theme.auto,
-    light: c.theme.light,
-    dark: c.theme.dark,
-  };
+  const byId = new Map(c.nav.map((n) => [n.id, n]));
 
   return (
     <>
@@ -46,32 +49,39 @@ export function GuideNav({
           <span>{c.brandDept}</span>
           <span>{c.brandInstitute}</span>
         </div>
-        <ul className="guide-navlist">
-          {c.nav.map((item) => (
-            <li key={item.id}>
-              <button
-                type="button"
-                className={activeId === item.id ? "active" : ""}
-                aria-current={activeId === item.id ? "true" : undefined}
-                onClick={() => onNavigate(item.id)}
-              >
-                <span className="n">{item.n}</span>
-                {item.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+
+        {SECTIONS.map((section) => (
+          <div key={section.label}>
+            <p className="guide-navgroup">
+              <span>{section.label}</span>
+            </p>
+            <ul className="guide-navlist">
+              {section.ids.map((id) => {
+                const item = byId.get(id);
+                if (!item) return null;
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      className={activeId === item.id ? "active" : ""}
+                      aria-current={activeId === item.id ? "true" : undefined}
+                      onClick={() => onNavigate(item.id)}
+                    >
+                      <span className="n">{item.n}</span>
+                      {item.label}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+
         <div className="guide-nav-theme" role="group" aria-label={c.theme.label}>
-          {themes.map((tm) => (
-            <button
-              key={tm}
-              type="button"
-              className={theme === tm ? "active" : ""}
-              onClick={() => setTheme(tm)}
-            >
-              {themeLabel[tm]}
-            </button>
-          ))}
+          <p className="guide-navgroup">
+            <span>{c.theme.label}</span>
+          </p>
+          <ThemeToggle c={c} theme={theme} setTheme={setTheme} />
         </div>
       </nav>
     </>

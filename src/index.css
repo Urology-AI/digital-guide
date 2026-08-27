@@ -18,3 +18,17 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+/* The patient guide owns the whole viewport and manages its own light/dark
+   theme. Let the page background follow it so overscroll / rubber-banding
+   doesn't flash the old immersive-dark chrome. */
+html[data-guide-theme] { color-scheme: light; }
+html[data-guide-theme="dark"] { color-scheme: dark; }
+@media (prefers-color-scheme: dark) {
+  html[data-guide-theme="auto"] { color-scheme: dark; }
+}
+html[data-guide-theme] body { background: #f4f7fb; transition: background 0.2s ease; }
+html[data-guide-theme="dark"] body { background: #0a0f24; }
+@media (prefers-color-scheme: dark) {
+  html[data-guide-theme="auto"] body { background: #0a0f24; }
+}
