@@ -1,11 +1,39 @@
-# Chat with Dr Ash Tewari
+# Digital Guide — Understanding Localized Prostate Cancer
 
 A research prototype for patient education and emotional support. **Non-diagnostic, non-therapeutic.**
 
+The app currently ships the **interactive Patient Guide** (`src/components/guide/`) —
+a chapter-by-chapter guide to localized prostate cancer built from the Mount Sinai
+draft, with an "Ask a question" chat widget backed by a Cloudflare Worker
+(`worker/`). The older avatar chat + FastAPI backend are kept in the tree but
+**unmounted** (`App.tsx` renders only `<PatientGuide/>`; re-enable via
+`<ChatExperience/>`).
+
 ## Stack
 
-- **Backend**: FastAPI (Python) + **Gemini API** (free-tier capable)
-- **Frontend**: React + Vite + TypeScript + Tailwind
+- **Patient Guide**: React + Vite + TypeScript + Tailwind (static, GitHub Pages)
+- **Guide chat**: Cloudflare Worker (`worker/`) → Gemini + optional RAG (Vectorize)
+- **Legacy avatar chat** (unmounted): FastAPI (Python) + Gemini API
+
+## Patient Guide
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build
+```
+
+Frontend env (`.env`, or repo Variables in CI — see `.env.example`):
+
+| Var | Purpose |
+|-----|---------|
+| `VITE_COMPASS_CHAT_URL` | Guide chat worker URL. Unset ⇒ chat answers offline from bundled content. |
+| `VITE_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key (public). Default baked into the deploy workflow. |
+
+Deployed guide chat worker: `https://compass-chat-proxy.e-psa.workers.dev`
+(deploy + secrets: see [`worker/README.md`](worker/README.md)).
+
+## Legacy backend (FastAPI) — currently unused
 
 ## Setup
 

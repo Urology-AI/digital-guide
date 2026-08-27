@@ -1,0 +1,5 @@
+# Corpus documents are not committed — they may be copyrighted or large,
+# and they are ingested into Vectorize, not served from the repo.
+*
+!.gitignore
+!README.md
