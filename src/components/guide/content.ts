@@ -92,6 +92,16 @@ export interface SourceGroup {
   refs: SourceRef[];
 }
 
+export interface PathwayCard {
+  id: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  cta: string;
+  href?: string;
+  note?: string;
+}
+
 export interface GuideContent {
   brandName: string;
   brandDept: string;
@@ -100,6 +110,25 @@ export interface GuideContent {
   draftNotice: string;
   theme: { auto: string; light: string; dark: string; label: string };
   nav: NavItem[];
+
+  welcome: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    reassurance: string;
+    startLabel: string;
+    continueLabel: string;
+    highlights: { label: string; text: string }[];
+    footNote: string;
+  };
+
+  tools: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    items: PathwayCard[];
+    ruoNote: string;
+  };
 
   hero: {
     eyebrow: string;
@@ -321,6 +350,51 @@ const EN: GuideContent = {
   draftNotice:
     "Draft for medical and brand review. Treatment standards change — confirm all clinical details with your Mount Sinai care team.",
   theme: { auto: "Auto", light: "Light", dark: "Dark", label: "Color theme" },
+  welcome: {
+    eyebrow: "Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute",
+    title: "Understanding Localized Prostate Cancer",
+    lead: "A step-by-step guide to a prostate cancer diagnosis — the tests, the terms, your treatment choices, recovery, and the questions worth asking — from the Mount Sinai Department of Urology, led by Dr. Ashutosh K. Tewari.",
+    reassurance:
+      "A diagnosis can feel urgent. Your decision does not have to feel rushed. The right plan begins with understanding your cancer and your priorities.",
+    startLabel: "Start the guide",
+    continueLabel: "Continue where you left off",
+    highlights: [
+      { label: "15 short chapters", text: "one at a time, in plain language" },
+      { label: "Built to write in", text: "check off questions, save your diagnosis record" },
+      { label: "Ask as you go", text: "a quick-answer assistant grounded in this guide" },
+    ],
+    footNote:
+      "For general education and shared decision-making. This draft is pending medical review and does not replace your care team.",
+  },
+
+  tools: {
+    eyebrow: "Your toolkit",
+    title: "Mount Sinai prostate tools",
+    intro:
+      "Two research tools from the Department of Urology sit alongside this guide, for different points in the journey.",
+    items: [
+      {
+        id: "epsa",
+        eyebrow: "Before a diagnosis",
+        title: "ePSA — risk assessment",
+        body: "A short questionnaire (family history, symptoms, lifestyle, and — if you have it — your PSA and MRI results) that estimates your risk and flags whether a PSA test is worth discussing. Useful to revisit as your numbers change so you can see where you stand.",
+        cta: "Open ePSA",
+        href: "https://epsa.millionstrongmen.com/",
+      },
+      {
+        id: "compass",
+        eyebrow: "Planning surgery",
+        title: "COMPASS — surgical digital twin",
+        body: "For patients already choosing robot-assisted radical prostatectomy. COMPASS combines clinical data with MRI, micro-ultrasound, and PSMA PET to predict adverse pathology, biochemical recurrence, side-specific nerve-sparing, and functional recovery (urinary control and erections) — shown on a 3D model to plan the operation.",
+        cta: "Open COMPASS",
+        href: "https://urology-ai.github.io/digital-twin/",
+        note: "Research use only, not FDA cleared (IRB STUDY-14-00050, Mount Sinai). It is decision support for your surgical team — bring the results to your consultation rather than acting on them alone.",
+      },
+    ],
+    ruoNote:
+      "Functional-recovery estimates depend heavily on your baseline urinary and sexual function and on factors you can influence — staying active, cardiovascular health, not smoking, and pelvic floor physical therapy. Ask your team what you can do before and after surgery.",
+  },
+
   nav: [
     { id: "start", n: "00", label: "Start here" },
     { id: "journey", n: "01", label: "The journey" },
@@ -336,7 +410,8 @@ const EN: GuideContent = {
     { id: "genetics", n: "11", label: "Genetics & family" },
     { id: "glossary", n: "12", label: "Glossary" },
     { id: "checklist", n: "13", label: "Your toolkit" },
-    { id: "sources", n: "14", label: "Sources" },
+    { id: "tools", n: "14", label: "Mount Sinai tools" },
+    { id: "sources", n: "15", label: "Sources" },
   ],
 
   hero: {

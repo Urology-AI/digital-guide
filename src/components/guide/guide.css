@@ -387,6 +387,57 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
   padding: 0.5rem 1rem; text-align: center;
 }
 
+/* ---- Welcome page ---- */
+.guide-welcome {
+  max-width: 760px; margin: 0 auto; padding: 3rem 1.4rem 4rem; min-height: 100vh;
+}
+@media (min-width: 720px) { .guide-welcome { padding-top: 5rem; } }
+.guide-welcome-hero .lockup {
+  display: inline-block; background: var(--g-violet); color: #fff; font-size: 0.68rem;
+  letter-spacing: 0.16em; font-weight: 700; padding: 0.35rem 0.6rem; border-radius: 5px;
+  margin-bottom: 1.1rem;
+}
+.guide-welcome-hero .eyebrow { color: var(--g-magenta); }
+.guide-welcome-hero h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); margin: 0.2rem 0 0.5rem; }
+.guide-welcome-hero .lead { font-size: 1.08rem; color: var(--g-ink-soft); max-width: 60ch; }
+.guide-welcome-reassure {
+  margin-top: 1.2rem; padding: 0.9rem 1.1rem; border-left: 3px solid var(--g-blue-bright);
+  background: var(--g-blue-tint); border-radius: 0 10px 10px 0; font-weight: 600; color: var(--g-violet);
+}
+.guide-welcome-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.6rem; }
+.guide-welcome-actions .primary {
+  background: var(--g-blue-bright); color: #fff; border: none; border-radius: 10px;
+  padding: 0.8rem 1.4rem; font-family: inherit; font-weight: 700; font-size: 0.98rem; cursor: pointer;
+}
+.guide-welcome-actions .ghost {
+  background: none; border: 1px solid var(--g-line); border-radius: 10px;
+  padding: 0.8rem 1.2rem; font-family: inherit; font-weight: 600; font-size: 0.9rem;
+  color: var(--g-ink-soft); cursor: pointer;
+}
+.guide-welcome-highlights {
+  list-style: none; margin: 2.4rem 0 0; padding: 0; display: grid; gap: 0.8rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 620px) { .guide-welcome-highlights { grid-template-columns: 1fr; } }
+.guide-welcome-highlights li {
+  border: 1px solid var(--g-line); border-radius: 12px; padding: 0.9rem 1rem; background: var(--g-surface);
+}
+.guide-welcome-highlights strong { display: block; color: var(--g-violet); font-size: 0.92rem; }
+.guide-welcome-highlights span { font-size: 0.85rem; color: var(--g-muted); }
+.guide-welcome-foot { margin-top: 2.2rem; font-size: 0.82rem; color: var(--g-muted); max-width: 62ch; }
+
+/* ---- Tools chapter ---- */
+.guide-tool-list { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0 1.4rem; }
+.guide-tool-card {
+  border: 1px solid var(--g-line); border-radius: var(--g-radius); padding: 1.2rem 1.3rem; background: var(--g-surface);
+}
+.guide-tool-card h3 { margin: 0.25rem 0 0.5rem; }
+.guide-tool-card .note { font-size: 0.83rem; color: var(--g-muted); border-left: 2px solid var(--g-amber); padding-left: 0.7rem; }
+.guide-tool-cta {
+  display: inline-block; margin-top: 0.4rem; font-weight: 700; color: var(--g-blue); text-decoration: none;
+}
+.guide-tool-cta:hover { text-decoration: underline; }
+
 /* ---- Chapter-at-a-time UI ---- */
 .guide-topbar .guide-topbar-menu {
   display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 0;

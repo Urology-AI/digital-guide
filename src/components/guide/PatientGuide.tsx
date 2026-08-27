@@ -6,6 +6,7 @@ import { useLang } from "../../i18n/LanguageContext";
 import { GuideNav } from "./GuideNav";
 import { GuideHero } from "./GuideHero";
 import { GuideChat } from "./GuideChat";
+import { Welcome } from "./Welcome";
 import { Start } from "./chapters/Start";
 import { Journey } from "./chapters/Journey";
 import { Basics } from "./chapters/Basics";
@@ -20,6 +21,7 @@ import { LivingWith } from "./chapters/LivingWith";
 import { Genetics } from "./chapters/Genetics";
 import { Glossary } from "./chapters/Glossary";
 import { Checklist } from "./chapters/Checklist";
+import { Tools } from "./chapters/Tools";
 import { Sources } from "./chapters/Sources";
 import type { GuideContent } from "./content";
 
@@ -38,10 +40,12 @@ const CHAPTERS: { id: string; C: (p: { c: GuideContent }) => JSX.Element }[] = [
   { id: "genetics", C: Genetics },
   { id: "glossary", C: Glossary },
   { id: "checklist", C: Checklist },
+  { id: "tools", C: Tools },
   { id: "sources", C: Sources },
 ];
 
 const PLACE_KEY = "guide_place";
+const ENTERED_KEY = "guide_entered";
 
 export function PatientGuide() {
   const { lang } = useLang();
@@ -49,37 +53,76 @@ export function PatientGuide() {
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useGuideTheme();
 
-  const [currentId, setCurrentId] = useState<string>(() => {
+  const savedPlace = (() => {
     try {
       const saved = localStorage.getItem(PLACE_KEY);
-      if (saved && CHAPTERS.some((ch) => ch.id === saved)) return saved;
+      return saved && CHAPTERS.some((ch) => ch.id === saved) ? saved : null;
     } catch {
-      /* ignore */
+      return null;
     }
-    return CHAPTERS[0].id;
-  });
+  })();
 
-  const idx = Math.max(0, CHAPTERS.findIndex((ch) => ch.id === currentId));
+  const [showWelcome, setShowWelcome] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem(ENTERED_KEY) !== "1";
+    } catch {
+      return true;
+    }
+  });
+  const [currentId, setCurrentId] = useState<string>(savedPlace ?? CHAPTERS[0].id);
+
+  const idx = Math.max(
+    0,
+    CHAPTERS.findIndex((ch) => ch.id === currentId)
+  );
   const Current = CHAPTERS[idx].C;
   const prev = idx > 0 ? CHAPTERS[idx - 1] : null;
   const next = idx < CHAPTERS.length - 1 ? CHAPTERS[idx + 1] : null;
   const labelFor = (id: string) => c.nav.find((n) => n.id === id)?.label ?? id;
 
-  const goTo = useCallback((id: string) => {
-    setNavOpen(false);
-    setCurrentId(id);
+  const enter = useCallback(() => {
+    setShowWelcome(false);
     try {
-      localStorage.setItem(PLACE_KEY, id);
+      localStorage.setItem(ENTERED_KEY, "1");
     } catch {
       /* ignore */
     }
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
+  const goTo = useCallback(
+    (id: string) => {
+      setNavOpen(false);
+      setCurrentId(id);
+      try {
+        localStorage.setItem(PLACE_KEY, id);
+      } catch {
+        /* ignore */
+      }
+      if (showWelcome) enter();
+    },
+    [showWelcome, enter]
+  );
+
   useEffect(() => {
-    const scroller = document.querySelector(".guide-main");
-    scroller?.scrollTo({ top: 0, behavior: "auto" });
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [currentId]);
+  }, [currentId, showWelcome]);
+
+  if (showWelcome) {
+    return (
+      <div className="guide-scope" data-guide-theme={theme}>
+        <Welcome
+          c={c}
+          hasPlace={Boolean(savedPlace)}
+          onStart={() => {
+            setCurrentId(CHAPTERS[0].id);
+            enter();
+          }}
+          onContinue={enter}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="guide-scope" data-guide-theme={theme}>

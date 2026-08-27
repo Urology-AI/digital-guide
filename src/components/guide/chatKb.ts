@@ -75,8 +75,16 @@ const KB: KbEntry[] = [
     a: "The Mount Sinai Department of Urology is chaired by Dr. Ashutosh K. Tewari, a urologic surgeon known for advancing robot-assisted radical prostatectomy and nerve-sparing techniques to preserve urinary control and sexual function. Radical prostatectomy here is usually robot-assisted and planned around your specific tumor using MRI and pathology. Outcomes vary with surgeon experience — ask any surgeon about their own results. See \"Care team & priorities\" and \"Treatment choices.\"",
   },
   {
-    keys: ["epsa", "not diagnosed", "should i get a psa", "screening tool"],
-    a: "If you are not yet diagnosed and are weighing whether to start PSA testing, the Mount Sinai ePSA tool (epsa.millionstrongmen.com) estimates your risk of clinically significant prostate cancer and whether a PSA test is worth discussing with your doctor.",
+    keys: ["epsa", "not diagnosed", "should i get a psa", "screening tool", "where i stand", "check my risk"],
+    a: "If you are not yet diagnosed and are weighing whether to start PSA testing, the Mount Sinai ePSA tool (epsa.millionstrongmen.com) estimates your risk of clinically significant prostate cancer and whether a PSA test is worth discussing with your doctor. It is worth revisiting as your PSA or MRI results come in so you can see where you stand. See the \"Mount Sinai tools\" chapter.",
+  },
+  {
+    keys: ["compass", "digital twin", "surgical planning", "3d model", "nerve spar"],
+    a: "COMPASS is a Mount Sinai surgical \"digital twin\" for patients who have already chosen robot-assisted prostatectomy. It combines clinical data with MRI, micro-ultrasound, and PSMA PET to predict adverse pathology, recurrence risk, side-specific nerve-sparing, and functional recovery on a 3D model, to help your surgical team plan the operation. It is a research tool (IRB STUDY-14-00050, not FDA cleared) — bring the results to your consultation, don't act on them alone. See the \"Mount Sinai tools\" chapter.",
+  },
+  {
+    keys: ["diet", "exercise", "improve outcome", "recovery better", "what can i do"],
+    a: "Functional recovery after surgery depends most on your baseline urinary and sexual function, but factors you can influence help: staying active, cardiovascular health, not smoking, and pelvic floor physical therapy before and after surgery. No diet or exercise plan guarantees an outcome — ask your team what fits your situation. See \"Quality of life\" and \"Recovery & follow-up.\"",
   },
   {
     keys: ["priorit", "decide", "how long", "shared decision"],
