@@ -210,9 +210,26 @@ export function PatientGuide() {
           </div>
 
           <footer className="guide-footer">
+            <div className="guide-footer-top">
+              <div className="guide-footer-brand">
+                <span className="lockup">MOUNT SINAI</span>
+                <strong>{c.brandName}</strong>
+                <span className="dept">{c.footer.brandline}</span>
+                <a href="https://www.mountsinai.org" className="contact">
+                  {c.footer.contact}
+                </a>
+              </div>
+              <nav className="guide-footer-links" aria-label="Guide sections">
+                <span className="hd">Jump to</span>
+                {["start", "treatment", "checklist", "tools", "glossary", "sources"].map((id) => (
+                  <button key={id} type="button" onClick={() => goTo(id)}>
+                    {labelFor(id)}
+                  </button>
+                ))}
+              </nav>
+            </div>
             <p className="fine">{c.footer.fine}</p>
-            <p className="fine brandline">{c.footer.brandline}</p>
-            <p className="fine">{c.footer.contact}</p>
+            <p className="fine muted">{c.sources.version}</p>
           </footer>
         </main>
       </div>
