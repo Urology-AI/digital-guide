@@ -6,32 +6,31 @@
    ========================================================================== */
 
 .guide-scope {
-  /* Monochrome palette: black, white, and a neutral gray scale.
-     The brand-named tokens are kept so every rule keeps working — they now
-     resolve to grays, and emphasis comes from weight and contrast, not hue. */
+  /* Light mode is true white; dark mode is true black. Mount Sinai brand
+     colors ride on top of both grounds. */
   --g-bg: #ffffff;
   --g-surface: #ffffff;
-  --g-surface-2: #f5f5f5;
-  --g-ink: #0a0a0a;
-  --g-ink-soft: #3f3f46;
-  --g-muted: #6e6e78;
-  --g-line: #e0e0e4;
-  --g-blue: #0a0a0a;
-  --g-blue-bright: #111111;
-  --g-violet: #0a0a0a;
-  --g-navy: #000000;
-  --g-blue-tint: #f2f2f3;
-  --g-violet-tint: #ebebed;
-  --g-magenta: #52525b;
-  --g-amber: #3f3f46;
-  --g-amber-tint: #f5f5f5;
-  --g-focus: #000000;
-  --g-bar-bg: #0a0a0a;
+  --g-surface-2: #f3f6fb;
+  --g-ink: #10193a;
+  --g-ink-soft: #3a4568;
+  --g-muted: #6b7590;
+  --g-line: #dbe3f0;
+  --g-blue: #0077b3;          /* accessible text-weight Sinai blue */
+  --g-blue-bright: #00AEEF;   /* Sinai brand blue for fills/accents */
+  --g-violet: #212070;        /* Sinai violet */
+  --g-navy: #00002D;          /* Sinai deep navy */
+  --g-blue-tint: #e0f2fb;
+  --g-violet-tint: #e7e7f4;
+  --g-magenta: #DC298D;
+  --g-amber: #b26a1a;
+  --g-amber-tint: #f6ead6;
+  --g-focus: #00AEEF;
+  --g-bar-bg: #212070;
   --g-bar-ink: #ffffff;
-  --g-bar-line: #0a0a0a;
+  --g-bar-line: #212070;
   /* Text drawn on top of a filled accent (buttons, chips, chat header). */
   --g-on-accent: #ffffff;
-  --g-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.3);
+  --g-shadow: 0 18px 40px -22px rgba(33, 32, 112, 0.35);
   --g-radius: 14px;
 
   background: var(--g-bg);
@@ -51,49 +50,51 @@
 @media (prefers-color-scheme: dark) {
   .guide-scope[data-guide-theme="auto"],
   .guide-scope[data-guide-theme="dark"] {
-    --g-bg: #0a0a0a;
-    --g-surface: #141414;
-    --g-surface-2: #1c1c1c;
-    --g-ink: #fafafa;
-    --g-ink-soft: #d4d4d8;
-    --g-muted: #a1a1aa;
-    --g-line: #2e2e32;
-    --g-blue: #fafafa;
-    --g-blue-bright: #e4e4e7;
-    --g-violet: #fafafa;
-    --g-blue-tint: #232326;
-    --g-violet-tint: #26262a;
-    --g-magenta: #c4c4cc;
-    --g-amber: #d4d4d8;
-    --g-amber-tint: #1e1e21;
-    --g-bar-bg: #000000;
-    --g-bar-ink: #e4e4e7;
-    --g-bar-line: #2e2e32;
-    --g-on-accent: #0a0a0a;
-    --g-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+    --g-bg: #000000;
+    --g-surface: #0c0c10;
+    --g-surface-2: #14141b;
+    --g-ink: #f4f6fd;
+    --g-ink-soft: #c8cfe6;
+    --g-muted: #949bb5;
+    --g-line: #24242e;
+    --g-blue: #6fd0f2;
+    --g-blue-bright: #3fbdf0;
+    --g-violet: #c9c8ef;
+    --g-blue-tint: #0d1a26;
+    --g-violet-tint: #16162a;
+    --g-magenta: #f06ab0;
+    --g-amber: #e0b06a;
+    --g-amber-tint: #1c170c;
+    --g-focus: #3fbdf0;
+    --g-bar-bg: #0c0c10;
+    --g-bar-ink: #e6eaf7;
+    --g-bar-line: #24242e;
+    --g-on-accent: #04121a;
+    --g-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.85);
   }
 }
 .guide-scope[data-guide-theme="dark"] {
-  --g-bg: #0a0a0a;
-  --g-surface: #141414;
-  --g-surface-2: #1c1c1c;
-  --g-ink: #fafafa;
-  --g-ink-soft: #d4d4d8;
-  --g-muted: #a1a1aa;
-  --g-line: #2e2e32;
-  --g-blue: #fafafa;
-  --g-blue-bright: #e4e4e7;
-  --g-violet: #fafafa;
-  --g-blue-tint: #232326;
-  --g-violet-tint: #26262a;
-  --g-magenta: #c4c4cc;
-  --g-amber: #d4d4d8;
-  --g-amber-tint: #1e1e21;
-  --g-bar-bg: #000000;
-  --g-bar-ink: #e4e4e7;
-  --g-bar-line: #2e2e32;
-  --g-on-accent: #0a0a0a;
-  --g-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+  --g-bg: #000000;
+  --g-surface: #0c0c10;
+  --g-surface-2: #14141b;
+  --g-ink: #f4f6fd;
+  --g-ink-soft: #c8cfe6;
+  --g-muted: #949bb5;
+  --g-line: #24242e;
+  --g-blue: #6fd0f2;
+  --g-blue-bright: #3fbdf0;
+  --g-violet: #c9c8ef;
+  --g-blue-tint: #0d1a26;
+  --g-violet-tint: #16162a;
+  --g-magenta: #f06ab0;
+  --g-amber: #e0b06a;
+  --g-amber-tint: #1c170c;
+  --g-focus: #3fbdf0;
+  --g-bar-bg: #0c0c10;
+  --g-bar-ink: #e6eaf7;
+  --g-bar-line: #24242e;
+  --g-on-accent: #04121a;
+  --g-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.85);
 }
 
 .guide-scope * { box-sizing: border-box; }
@@ -119,11 +120,8 @@
 }
 .guide-scope p { margin: 0 0 1em; max-width: 66ch; }
 .guide-scope li { margin-bottom: 0.3em; }
-.guide-scope a { color: var(--g-blue); text-decoration: none; }
-/* Without color to mark them, inline links in prose carry an underline.
-   Card-sized links (the faculty roster) stay clean and underline on hover. */
-.guide-scope p > a,
-.guide-scope li > a { text-decoration: underline; text-underline-offset: 2px; }
+.guide-scope a { color: var(--g-blue); }
+.guide-faculty { text-decoration: none; }
 .guide-scope :focus-visible { outline: 3px solid var(--g-focus); outline-offset: 2px; border-radius: 4px; }
 .guide-scope table { border-collapse: collapse; width: 100%; }
 
@@ -395,7 +393,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 }
 .guide-team .badge {
   width: 64px; height: 64px; border-radius: 14px; flex: none; overflow: hidden;
-  background: linear-gradient(155deg, var(--g-muted), var(--g-ink));
+  background: linear-gradient(155deg, var(--g-blue-bright), var(--g-violet));
   display: flex; align-items: center; justify-content: center;
   color: var(--g-on-accent); font-weight: 700; font-size: 1.3rem;
 }
@@ -410,7 +408,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-footer::before {
   content: ""; display: block; width: 46px; height: 3px; border-radius: 2px;
   margin-bottom: 1.1rem;
-  background: linear-gradient(90deg, var(--g-ink), var(--g-muted));
+  background: linear-gradient(90deg, var(--g-blue-bright), var(--g-magenta));
 }
 @media (max-width: 760px) { .guide-footer { padding: 1.8rem 1.2rem; } }
 .guide-footer .fine { max-width: 74ch; }
@@ -749,7 +747,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 /* ---- Risk continuum: gradient bar ---- */
 .guide-continuum-bar {
   position: relative; height: 12px; border-radius: 999px; margin: 1rem 0 0.4rem;
-  background: linear-gradient(90deg, var(--g-muted) 0%, var(--g-ink) 100%);
+  background: linear-gradient(90deg, var(--g-blue-bright) 0%, #7db8e8 33%, var(--g-magenta) 66%, var(--g-violet) 100%);
 }
 .guide-scope[data-guide-theme="dark"] .guide-continuum-bar { opacity: 0.9; }
 .guide-continuum-scale {
@@ -775,7 +773,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-welcome-portrait {
   float: right; width: 128px; height: 128px; border-radius: 18px; margin: 0 0 1rem 1.4rem;
   object-fit: cover; border: 1px solid var(--g-line); box-shadow: var(--g-shadow);
-  background: linear-gradient(155deg, var(--g-muted), var(--g-ink));
+  background: linear-gradient(155deg, var(--g-blue-bright), var(--g-violet));
 }
 @media (max-width: 560px) {
   .guide-welcome-portrait { width: 84px; height: 84px; margin-left: 1rem; }
@@ -837,7 +835,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-faculty .mono {
   flex: none; width: 42px; height: 42px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(155deg, var(--g-muted), var(--g-ink));
+  background: linear-gradient(155deg, var(--g-blue-bright), var(--g-violet));
   color: var(--g-on-accent); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.02em;
 }
 .guide-faculty .who { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
@@ -865,7 +863,7 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-chapter-view .guide-chapter-head h3::before {
   content: ""; position: absolute; top: 0; left: 0;
   width: 34px; height: 3px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--g-ink), var(--g-muted));
+  background: linear-gradient(90deg, var(--g-blue-bright), var(--g-magenta));
 }
 
 /* Pager: clearer affordance and a softer lift. */
