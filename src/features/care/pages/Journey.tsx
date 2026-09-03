@@ -8,6 +8,7 @@ import {
 } from "../../../data/care/demo";
 import { DemoBadge, Disclaimer, Section } from "../components/ui";
 import { PsaTrend } from "../components/charts";
+import { AS_TOOL, ToolLink } from "../components/ToolLink";
 
 const STATE_STYLE = {
   done: "bg-emerald-50 text-emerald-700 ring-emerald-200",
@@ -113,14 +114,9 @@ export function Journey() {
             </li>
           ))}
         </ol>
-        <a
-          className="mt-5 inline-block rounded-xl bg-sinai-400 px-5 py-3 text-sm font-bold text-white transition hover:bg-sinai-500"
-          href="https://as.millionstrongmen.com/patient/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open the Active Surveillance Program →
-        </a>
+        <div className="mt-5">
+          <ToolLink data={AS_TOOL} />
+        </div>
       </div>
 
       <div className="mt-8">

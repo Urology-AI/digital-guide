@@ -5,7 +5,7 @@ import { DEMO_LABEL, RISK_FACTORS } from "../../../data/care/demo";
 import { REFS } from "../../../data/care/references";
 import { DemoBadge, Disclaimer, References } from "../components/ui";
 import { DiagnosticPathway, PiradsScale, PsaTrend } from "../components/charts";
-import { EpsaCheck } from "../components/EpsaCheck";
+import { AS_TOOL, COMPASS_TOOL, EPSA_TOOL, ToolLink } from "../components/ToolLink";
 import { Topic } from "./Topic";
 
 export function Health() {
@@ -60,7 +60,7 @@ export function Risk() {
       }
       after={
         <div className="mt-6">
-          <EpsaCheck />
+          <ToolLink data={EPSA_TOOL} />
         </div>
       }
     />
@@ -92,6 +92,9 @@ export function Psa() {
             present, and staying below it does not rule cancer out.
           </p>
           <References title={tc(lang, "refs.title")} items={[REFS.nciPsa, REFS.uspstf, REFS.acs]} />
+          <div className="mt-6">
+            <ToolLink data={EPSA_TOOL} />
+          </div>
         </div>
       }
     />
@@ -159,25 +162,11 @@ export function Treatment() {
       title="Treatment approaches"
       lead="The approaches a care team may discuss for localized prostate cancer. Which apply depends on your own cancer, health, and priorities — this page does not recommend one."
       after={
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 space-y-4">
+          <ToolLink data={AS_TOOL} />
+          <ToolLink data={COMPASS_TOOL} />
           <a
-            className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-sinai-400 hover:shadow-lg"
-            href="https://as.millionstrongmen.com/patient/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="text-xs font-semibold uppercase tracking-wide text-sinai-magenta">
-              If you are considering surveillance
-            </span>
-            <h3 className="mt-2 text-base font-bold text-slate-900">Tewari Active Surveillance Program</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              The department's surveillance pathway, explained for patients — what monitoring involves and what may
-              change the plan.
-            </p>
-            <span className="mt-3 block text-sm font-semibold text-sinai-600">Open the patient version →</span>
-          </a>
-          <a
-            className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-sinai-400 hover:shadow-lg"
+            className="block rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-sinai-400 hover:shadow-lg"
             href="#/guide"
           >
             <span className="text-xs font-semibold uppercase tracking-wide text-sinai-magenta">Go deeper</span>
@@ -219,7 +208,8 @@ export function Monitoring() {
       title="Follow-up and active surveillance"
       lead="How PSA is followed after treatment, and what being on active surveillance involves."
       after={
-        <div className="mt-8">
+        <div className="mt-8 space-y-6">
+          <ToolLink data={AS_TOOL} />
           <Disclaimer text={tc(lang, "disclaimer")} />
         </div>
       }
