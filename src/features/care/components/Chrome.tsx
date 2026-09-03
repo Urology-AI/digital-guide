@@ -3,6 +3,7 @@ import { useLang } from "../../../i18n/LanguageContext";
 import { CARE_LANGS, tc } from "../../../i18n/care";
 import { JOURNEY } from "../../../data/care/journey";
 import { BrandLockup, MountSinaiLogo } from "./Logo";
+import { Search } from "./Search";
 
 const NAV: { key: Parameters<typeof tc>[1]; route: string }[] = [
   { key: "nav.home", route: "/" },
@@ -12,7 +13,6 @@ const NAV: { key: Parameters<typeof tc>[1]; route: string }[] = [
   { key: "nav.treatment", route: "/treatment" },
   { key: "nav.recovery", route: "/recovery" },
   { key: "nav.monitoring", route: "/monitoring" },
-  { key: "nav.journey", route: "/journey" },
 ];
 
 export function Header({ path }: { path: string }) {
@@ -50,6 +50,10 @@ export function Header({ path }: { path: string }) {
           </ul>
         </nav>
 
+        <div className="ml-auto hidden lg:block">
+          <Search />
+        </div>
+
         <label className="ml-auto flex items-center gap-2 lg:ml-0">
           <span className="sr-only">{tc(lang, "nav.language")}</span>
           <select
@@ -79,6 +83,9 @@ export function Header({ path }: { path: string }) {
 
       {open && (
         <nav id="care-mobile-nav" aria-label="Primary" className="border-t border-slate-200 lg:hidden">
+          <div className="mx-auto max-w-6xl px-3 pt-3">
+            <Search />
+          </div>
           <ul className="mx-auto max-w-6xl px-3 py-2">
             {NAV.map((n) => (
               <li key={n.route}>
@@ -141,7 +148,7 @@ export function BottomNav({ path }: { path: string }) {
     { label: tc(lang, "nav.home"), route: "/", icon: "◆" },
     { label: tc(lang, "nav.screening"), route: "/psa", icon: "◎" },
     { label: tc(lang, "nav.treatment"), route: "/treatment", icon: "✚" },
-    { label: tc(lang, "nav.journey"), route: "/journey", icon: "▤" },
+    { label: tc(lang, "nav.diagnosis"), route: "/diagnosis", icon: "▤" },
   ];
   return (
     <nav

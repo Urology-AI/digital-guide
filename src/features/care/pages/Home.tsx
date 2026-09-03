@@ -2,6 +2,7 @@ import { useLang } from "../../../i18n/LanguageContext";
 import { tc } from "../../../i18n/care";
 import { ENTRY_POINTS, JOURNEY } from "../../../data/care/journey";
 import { Card, Disclaimer, Grid, Section } from "../components/ui";
+import { Search } from "../components/Search";
 
 export function Home() {
   const { lang } = useLang();
@@ -23,6 +24,13 @@ export function Home() {
             {tc(lang, "home.title")}
           </p>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">{tc(lang, "home.lead")}</p>
+
+          <div className="mt-8">
+            <p className="mb-2 text-sm font-semibold text-slate-700">
+              Have a report in front of you? Look up what it says.
+            </p>
+            <Search variant="hero" />
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a

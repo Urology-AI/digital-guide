@@ -55,9 +55,3 @@ export interface EntryPoint {
   route: string;
 }
 
-export interface DemoResult {
-  label: string;
-  value: string;
-  meta: string;
-  state: "done" | "pending" | "upcoming";
-}

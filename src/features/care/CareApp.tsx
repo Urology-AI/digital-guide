@@ -4,8 +4,8 @@ import { BottomNav, Footer, Header } from "./components/Chrome";
 import { routePath, useRoute } from "./router";
 import { Home } from "./pages/Home";
 import { Start } from "./pages/Start";
-import { Journey } from "./pages/Journey";
 import { Caregiver, Questions } from "./pages/Questions";
+import { TopicDetail } from "./pages/TopicDetail";
 import { Diagnosis, Health, Imaging, Monitoring, Psa, Recovery, Risk, Treatment } from "./pages/Stages";
 
 export const ROUTES: Record<string, () => JSX.Element> = {
@@ -19,7 +19,6 @@ export const ROUTES: Record<string, () => JSX.Element> = {
   "/treatment": Treatment,
   "/recovery": Recovery,
   "/monitoring": Monitoring,
-  "/journey": Journey,
   "/questions": Questions,
   "/caregiver": Caregiver,
 };
@@ -43,6 +42,21 @@ export function CareApp() {
           ← Tewari Prostate Care
         </a>
         <PatientGuide />
+      </div>
+    );
+  }
+
+  // Direct links to a single explanation: #/t/<content id>, the target of search.
+  if (path.startsWith("/t/")) {
+    const id = path.slice(3);
+    return (
+      <div className="flex min-h-screen flex-col bg-white text-slate-900">
+        <Header path={path} />
+        <main id="main" className="flex-1">
+          <TopicDetail id={id} />
+        </main>
+        <Footer />
+        <BottomNav path={path} />
       </div>
     );
   }
