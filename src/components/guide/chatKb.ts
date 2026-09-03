@@ -27,6 +27,18 @@ const KB: KbEntry[] = [
     a: "PSA is a protein made by prostate tissue. An elevated value does not by itself prove cancer — it can rise with benign enlargement, inflammation, infection, or recent procedures. The trend over time, prostate size, PSA density, and your overall context all matter. See \"PSA, explained.\"",
   },
   {
+    keys: ["psa level", "psa number", "4.0", "how high", "normal psa"],
+    a: "There is no PSA level that proves or rules out cancer. By convention a PSA above 4.0 ng/mL is called abnormal, though clinicians adjust for age and context. For scale, the National Cancer Institute reports that about 6–7% of men have a false-positive PSA, and about 25% of men biopsied for an elevated PSA are found to have cancer. Your trend, prostate size, PSA density, and exam all matter. See \"PSA, explained.\"",
+  },
+  {
+    keys: ["when to screen", "screening age", "should i get screened", "uspstf", "start psa testing"],
+    a: "Guidelines differ. The USPSTF frames PSA screening as an individual decision for ages 55–69 and does not recommend routine screening at 70 and older. The American Cancer Society suggests starting the conversation at 50 at average risk, 45 at high risk (Black men, or a father or brother diagnosed before 65), and 40 with more than one first-degree relative diagnosed young. If you already have a diagnosis, these ages matter for your relatives rather than for you. See \"PSA, explained.\"",
+  },
+  {
+    keys: ["survival", "prognosis", "life expectancy", "how serious"],
+    a: "In NCI SEER data (2016–2022), 5-year relative survival for localized prostate cancer is essentially 100%, and about 69% of prostate cancers are found before they spread beyond the prostate. Relative survival compares a group with the diagnosis to the general population — it describes groups, not any one person, and your own outlook depends on your grade, stage, PSA, and health. See \"Start here.\"",
+  },
+  {
     keys: ["before a psa", "prepare psa", "psa preparation"],
     a: "Before a PSA test, ask whether recent infection, ejaculation, cycling, urinary procedures, or medications could affect your result, and whether any preparation is recommended for you.",
   },

@@ -924,3 +924,9 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-welcome-actions .primary:hover {
   transform: translateY(-2px); box-shadow: 0 16px 30px -18px rgba(0, 174, 239, 0.8);
 }
+
+/* Attribution under the hero statistics strip. */
+.guide-stat-source {
+  margin: 0.7rem 3rem 0; font-size: 0.78rem; color: var(--g-muted); max-width: 78ch;
+}
+@media (max-width: 760px) { .guide-stat-source { margin-left: 1.2rem; margin-right: 1.2rem; } }

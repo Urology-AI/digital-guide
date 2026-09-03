@@ -139,6 +139,7 @@ export interface GuideContent {
     chips: string[];
   };
   stats: { num: string; cap: string }[];
+  statsSource: string;
 
   start: {
     eyebrow: string;
@@ -180,6 +181,13 @@ export interface GuideContent {
     factors: CmpRow[];
     testsThatFollow: string[];
     beforeTest: Callout;
+    numbersTitle: string;
+    numbersIntro: string;
+    numbers: CmpRow[];
+    screeningTitle: string;
+    screeningIntro: string;
+    screeningRows: CmpRow[];
+    screeningFoot: string;
   };
 
   diagnosis: {
@@ -451,16 +459,16 @@ const EN: GuideContent = {
       "Works on any device",
     ],
   },
-  // TODO(clinical review): verify every figure below against a current, citable
-  // source (SEER / ACS) and confirm the phrasing "localized" matches how that
-  // source defines the stage. ">99%" is widely reported as ~100% 5-year
-  // relative survival for local/regional disease — pin the exact source + date.
+  // Figures below are pinned to NCI SEER Cancer Stat Facts: Prostate Cancer
+  // (SEER 21, 2016-2022 survival data), cited in `statsSource` and in Sources.
   stats: [
-    { num: ">99%", cap: "5-year relative survival for localized prostate cancer" },
+    { num: "~100%", cap: "5-year relative survival for localized prostate cancer (SEER)" },
     { num: "T1–T2", cap: "how most localized disease is staged" },
     { num: "1–5", cap: "Grade Groups, from lower-grade to highest-grade" },
-    { num: "5", cap: "common treatment approaches to compare" },
+    { num: "69%", cap: "of prostate cancers are found while still localized" },
   ],
+  statsSource:
+    "Source: NCI Surveillance, Epidemiology, and End Results Program (SEER) Cancer Stat Facts: Prostate Cancer. Survival figures use SEER 21 data for 2016–2022; stage distribution uses 2019–2023 cases. Relative survival compares people with the diagnosis to the general population — it is not a prediction for any one person.",
 
   start: {
     eyebrow: "Start here",
@@ -505,9 +513,8 @@ const EN: GuideContent = {
       "Localized prostate cancer generally means that available testing suggests the cancer is confined to the prostate. \"Locally advanced\" or \"regional\" may mean growth just outside the prostate or into nearby structures or lymph nodes. Your clinician may use TNM stage, a risk group, or both.",
     notOneTest:
       "Your team combines pathology, PSA, examination, MRI and other imaging when needed, overall health, life expectancy, family history, and what matters most to you.",
-    // TODO(clinical review): same figure as `stats` — keep both in sync with one cited source.
     reassuringFact:
-      "Five-year relative survival for localized prostate cancer is greater than 99%. Statistics describe groups, not individual outcomes, but they help explain why there is often time for thoughtful decision-making.",
+      "In SEER data (2016–2022), 5-year relative survival for localized prostate cancer is essentially 100%, and about 69% of prostate cancers are found before they have spread beyond the prostate. Statistics describe groups, not individual outcomes, but they help explain why there is often time for thoughtful decision-making.",
   },
 
   basics: {
@@ -544,6 +551,46 @@ const EN: GuideContent = {
       label: "Before a PSA test",
       body: "Ask whether recent infection, ejaculation, cycling, urinary procedures, or medications could affect your result — and whether any preparation is recommended for you.",
     },
+    numbersTitle: "What the numbers usually mean",
+    numbersIntro:
+      "There is no PSA level that proves or rules out cancer. These figures, from the National Cancer Institute, give a sense of scale — your own result is read in the context of your age, prostate size, trend, and exam.",
+    numbers: [
+      {
+        label: "Above 4.0 ng/mL",
+        a: "The conventional threshold for calling a PSA abnormal, though clinicians adjust it for age and context. NCI is explicit that no single level means someone has cancer.",
+      },
+      {
+        label: "About 6–7%",
+        a: "of men have a false-positive PSA — an elevated result with no cancer found on biopsy.",
+      },
+      {
+        label: "About 25%",
+        a: "of men who have a biopsy because of an elevated PSA are found to have prostate cancer.",
+      },
+      {
+        label: "Slow-growing disease",
+        a: "Many cancers found by screening would never have caused symptoms. That is the case for weighing screening rather than assuming it — and for considering active surveillance when one is found.",
+      },
+    ],
+    screeningTitle: "When screening is usually discussed",
+    screeningIntro:
+      "Guidelines differ, which is why this is a conversation rather than a rule. Two widely used sets of recommendations:",
+    screeningRows: [
+      {
+        label: "U.S. Preventive Services Task Force",
+        a: "Ages 55–69: an individual decision made after discussing benefits and harms with a clinician. Age 70 and older: routine PSA screening is not recommended.",
+      },
+      {
+        label: "American Cancer Society",
+        a: "Start the conversation at 50 at average risk (with at least a 10-year life expectancy); 45 at high risk — Black men, or a father or brother diagnosed before 65; 40 with more than one first-degree relative diagnosed young.",
+      },
+      {
+        label: "Higher inherited risk",
+        a: "NCI notes that men at higher risk — including Black men, BRCA2 carriers, and those with a family history — may begin screening discussions at 40 to 45.",
+      },
+    ],
+    screeningFoot:
+      "If you already have a prostate cancer diagnosis, these screening ages no longer apply to you — they matter for your brothers and sons. See \"Genetics and inherited risk.\"",
   },
 
   diagnosis: {
@@ -584,13 +631,12 @@ const EN: GuideContent = {
       "Features such as cribriform or intraductal patterns, or perineural invasion, which your team weighs carefully.",
       "Findings such as ASAP or high-grade PIN are not cancer themselves but often prompt a repeat biopsy.",
     ],
-    // TODO(clinical review): "roughly one in four ... higher grade" — biopsy
-    // upgrading rates at prostatectomy range ~25–35% across series and depend
-    // on biopsy technique (systematic vs MRI-fusion). Confirm the figure and
-    // qualifier, or soften to "a meaningful share".
+    // Upgrading rates at prostatectomy vary widely by series and by biopsy
+    // technique (roughly 14-40%, and higher for Grade Group 1), so the copy
+    // describes the direction and the reason rather than quoting one number.
     worthAsking: {
       label: "Worth asking",
-      body: "Would review by a genitourinary pathologist change my Grade Group or treatment options? Because a biopsy samples only part of the gland, roughly one in four cancers turns out to be higher grade than the first biopsy suggested.",
+      body: "Would review by a genitourinary pathologist change my Grade Group or treatment options? Because a biopsy samples only part of the gland, a meaningful share of cancers turn out to be higher grade once the whole prostate is examined — published rates vary widely and are highest for Grade Group 1. MRI-targeted sampling narrows the gap but does not close it, which is why confirmatory testing is part of active surveillance.",
     },
     ifNegativeTitle: "If the biopsy does not find cancer",
     ifNegative:
@@ -1245,8 +1291,20 @@ const EN: GuideContent = {
             url: "https://www.cancer.gov/types/prostate/patient/prostate-treatment-pdq",
           },
           {
-            cite: "National Cancer Institute. Prostate-Specific Antigen (PSA) Test.",
+            cite: "National Cancer Institute. Prostate-Specific Antigen (PSA) Test — thresholds, false positives, and screening age guidance.",
             url: "https://www.cancer.gov/types/prostate/psa-fact-sheet",
+          },
+          {
+            cite: "National Cancer Institute, Surveillance, Epidemiology, and End Results Program. Cancer Stat Facts: Prostate Cancer (SEER 21 survival data 2016–2022; stage distribution 2019–2023). Source for the survival and stage figures in this guide.",
+            url: "https://seer.cancer.gov/statfacts/html/prost.html",
+          },
+          {
+            cite: "U.S. Preventive Services Task Force. Prostate Cancer: Screening — recommendation statement (shared decision-making ages 55–69; against routine screening at 70 and older).",
+            url: "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/prostate-cancer-screening",
+          },
+          {
+            cite: "American Cancer Society. American Cancer Society Recommendations for Prostate Cancer Early Detection (screening discussion at ages 50 / 45 / 40 by risk).",
+            url: "https://www.cancer.org/cancer/types/prostate-cancer/detection-diagnosis-staging/acs-recommendations.html",
           },
           {
             cite: "National Cancer Institute. Genetics of Prostate Cancer (PDQ).",
@@ -1279,7 +1337,7 @@ const EN: GuideContent = {
       "Complete accessibility, reading-level, legal, privacy, translation, and print-production review.",
     ],
     version:
-      "Draft created August 27, 2026. Review source dates and update the guide at least annually or when practice standards change.",
+      "Draft created August 27, 2026. Statistics, PSA figures, screening ages, and Mount Sinai faculty titles were re-verified against the cited sources on September 3, 2026. Review source dates and update the guide at least annually or when practice standards change.",
   },
 
   footer: {
