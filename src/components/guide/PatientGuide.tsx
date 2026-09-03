@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import "./guide.css";
 import { getGuideContent } from "./content";
-import { useGuideTheme } from "./hooks";
+import { useActiveChapter, useGuideTheme, useReadMode } from "./hooks";
 import { useLang } from "../../i18n/LanguageContext";
 import { GuideNav } from "./GuideNav";
 import { GuideHero } from "./GuideHero";
@@ -53,6 +53,9 @@ export function PatientGuide() {
   const c = useMemo(() => getGuideContent(lang), [lang]);
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useGuideTheme();
+  const [readMode, setReadMode] = useReadMode();
+  const chapterIds = useMemo(() => CHAPTERS.map((ch) => ch.id), []);
+  const scrolledId = useActiveChapter(readMode === "scroll" ? chapterIds : []);
 
   const savedPlace = (() => {
     try {
@@ -72,9 +75,10 @@ export function PatientGuide() {
   });
   const [currentId, setCurrentId] = useState<string>(savedPlace ?? CHAPTERS[0].id);
 
+  const activeId = readMode === "scroll" ? scrolledId || currentId : currentId;
   const idx = Math.max(
     0,
-    CHAPTERS.findIndex((ch) => ch.id === currentId)
+    CHAPTERS.findIndex((ch) => ch.id === activeId)
   );
   const Current = CHAPTERS[idx].C;
   const prev = idx > 0 ? CHAPTERS[idx - 1] : null;
@@ -101,17 +105,35 @@ export function PatientGuide() {
         /* ignore */
       }
       if (showWelcome) enter();
+      if (readMode === "scroll") {
+        // Let the section render before scrolling to it.
+        requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
     },
-    [showWelcome, enter]
+    [showWelcome, enter, readMode]
   );
 
+  // Paged reading starts each chapter at the top; continuous reading must not
+  // yank the page while someone is scrolling through it.
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [currentId, showWelcome]);
+    if (readMode === "pages") window.scrollTo({ top: 0, behavior: "auto" });
+  }, [currentId, showWelcome, readMode]);
+
+  // Remember where the reader got to while scrolling.
+  useEffect(() => {
+    if (readMode !== "scroll" || !scrolledId) return;
+    try {
+      localStorage.setItem(PLACE_KEY, scrolledId);
+    } catch {
+      /* ignore */
+    }
+  }, [readMode, scrolledId]);
 
   // Left / right arrow keys page between chapters (unless typing in a field).
   useEffect(() => {
-    if (showWelcome) return;
+    if (showWelcome || readMode === "scroll") return;
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const el = e.target as HTMLElement | null;
@@ -122,7 +144,7 @@ export function PatientGuide() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [showWelcome, next, prev, goTo]);
+  }, [showWelcome, next, prev, goTo, readMode]);
 
   if (showWelcome) {
     return (
@@ -164,12 +186,14 @@ export function PatientGuide() {
       <div className="guide-shell">
         <GuideNav
           c={c}
-          activeId={currentId}
+          activeId={activeId}
           open={navOpen}
           onClose={() => setNavOpen(false)}
           onNavigate={goTo}
           theme={theme}
           setTheme={setTheme}
+          readMode={readMode}
+          setReadMode={setReadMode}
         />
 
         <main className="guide-main">
@@ -186,6 +210,13 @@ export function PatientGuide() {
             </>
           )}
 
+          {readMode === "scroll" ? (
+            <div className="guide-chapter-view guide-book">
+              {CHAPTERS.map(({ id, C }) => (
+                <C c={c} key={id} />
+              ))}
+            </div>
+          ) : (
           <div className="guide-chapter-view" key={currentId}>
             <Current c={c} />
 
@@ -208,6 +239,7 @@ export function PatientGuide() {
               )}
             </nav>
           </div>
+          )}
 
           <footer className="guide-footer">
             <p className="fine">{c.footer.fine}</p>

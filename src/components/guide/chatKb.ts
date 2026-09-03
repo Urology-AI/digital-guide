@@ -11,12 +11,32 @@ interface KbEntry {
 
 const KB: KbEntry[] = [
   {
+    keys: ["tewari", "who is the chair", "surgeon", "dr ash"],
+    a: "Dr. Ashutosh K. Tewari is Professor and System Chair of the Milton and Carroll Petrie Department of Urology at the Icahn School of Medicine at Mount Sinai, and Director of the Center of Excellence for Prostate Cancer at The Tisch Cancer Center. He is board certified by the American Board of Urology and is known for advancing robotic-assisted radical prostatectomy, nerve-sparing, and reconstruction techniques; his research covers the genomic causes of prostate cancer, imaging biomarkers, and a prostate cancer vaccine. See \"Care team & priorities.\"",
+  },
+  {
+    keys: ["mount sinai", "center of excellence", "appointment", "phone", "where to go"],
+    a: "Prostate cancer care at Mount Sinai is delivered through the Center of Excellence for Prostate Cancer within The Tisch Cancer Center, an NCI-designated comprehensive cancer center: MRI-fusion targeted biopsy and genomic testing, robotic, laparoscopic and open surgery, IMRT and brachytherapy, structured active surveillance, focal therapy protocols, and clinical trials. To make an appointment, call 844-MD-CANCER (844-632-2262), or the Department of Urology at 212-241-9955. See \"Care team & priorities.\"",
+  },
+  {
     keys: ["grade group", "gleason", "score mean", "biopsy report"],
     a: "A pathologist adds the two most common Gleason growth patterns and translates the result into a Grade Group from 1 to 5. Grade Group 1 (Gleason 3+3=6) is lower grade and often suited to active surveillance; Grade Group 5 (Gleason 9–10) is the highest grade. See the \"Your biopsy report\" chapter.",
   },
   {
     keys: ["psa", "blood test", "psa density"],
     a: "PSA is a protein made by prostate tissue. An elevated value does not by itself prove cancer — it can rise with benign enlargement, inflammation, infection, or recent procedures. The trend over time, prostate size, PSA density, and your overall context all matter. See \"PSA, explained.\"",
+  },
+  {
+    keys: ["psa level", "psa number", "4.0", "how high", "normal psa"],
+    a: "There is no PSA level that proves or rules out cancer. By convention a PSA above 4.0 ng/mL is called abnormal, though clinicians adjust for age and context. For scale, the National Cancer Institute reports that about 6–7% of men have a false-positive PSA, and about 25% of men biopsied for an elevated PSA are found to have cancer. Your trend, prostate size, PSA density, and exam all matter. See \"PSA, explained.\"",
+  },
+  {
+    keys: ["when to screen", "screening age", "should i get screened", "uspstf", "start psa testing"],
+    a: "Guidelines differ. The USPSTF frames PSA screening as an individual decision for ages 55–69 and does not recommend routine screening at 70 and older. The American Cancer Society suggests starting the conversation at 50 at average risk, 45 at high risk (Black men, or a father or brother diagnosed before 65), and 40 with more than one first-degree relative diagnosed young. If you already have a diagnosis, these ages matter for your relatives rather than for you. See \"PSA, explained.\"",
+  },
+  {
+    keys: ["survival", "prognosis", "life expectancy", "how serious"],
+    a: "In NCI SEER data (2016–2022), 5-year relative survival for localized prostate cancer is essentially 100%, and about 69% of prostate cancers are found before they spread beyond the prostate. Relative survival compares a group with the diagnosis to the general population — it describes groups, not any one person, and your own outlook depends on your grade, stage, PSA, and health. See \"Start here.\"",
   },
   {
     keys: ["before a psa", "prepare psa", "psa preparation"],
@@ -37,6 +57,14 @@ const KB: KbEntry[] = [
   {
     keys: ["surgery", "prostatectomy", "nerve-sparing"],
     a: "Radical prostatectomy removes the prostate and seminal vesicles and provides final pathology. PSA is expected to fall to a very low or undetectable level. Tradeoffs include an operation and catheter, early urinary leakage, erectile changes, and loss of ejaculation and natural fertility. Nerve-sparing may help erectile recovery when safe. See \"Treatment choices.\"",
+  },
+  {
+    keys: ["protect trial", "long term", "which is better", "survival difference", "evidence"],
+    a: "The ProtecT trial randomized 1,643 men with PSA-detected localized cancer to active monitoring, surgery, or radiotherapy and followed them for a median of 15 years. Prostate-cancer deaths were low and statistically similar in all three groups (3.1% monitoring, 2.2% surgery, 2.9% radiotherapy). The groups differed in metastasis (9.4% vs 4.7% vs 5.0%) and local progression (25.9% vs 10.5% vs 11.0%). Its \"active monitoring\" was a PSA-triggered protocol from the 2000s, less intensive than today's MRI-based surveillance. See \"Treatment choices.\"",
+  },
+  {
+    keys: ["how long hormone", "adt duration", "months of hormone", "length of hormone therapy"],
+    a: "In the 2022 AUA/ASTRO guideline, ADT given with radiation runs about 4–6 months for unfavorable intermediate-risk disease and generally 18–36 months for high-risk disease; selected very high-risk or node-positive cases may get ADT with abiraterone and prednisone for about 24 months. Your own duration may differ — ask why that length was chosen and what would change it. See \"Treatment choices.\"",
   },
   {
     keys: ["radiation", "brachytherapy", "external beam"],

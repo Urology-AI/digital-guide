@@ -1,5 +1,5 @@
 import type { GuideContent } from "../content";
-import { Callout, Chapter } from "../primitives";
+import { Callout, Chapter, DefTable, ToolCta } from "../primitives";
 
 export function Psa({ c }: { c: GuideContent }) {
   const p = c.psa;
@@ -22,6 +22,27 @@ export function Psa({ c }: { c: GuideContent }) {
         </ul>
       </div>
       <Callout data={p.beforeTest} />
+      <ToolCta data={c.toolCta.epsa} />
+
+      <div className="guide-chapter-head" style={{ marginTop: "2.4rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{p.numbersTitle}</h3>
+        <p>{p.numbersIntro}</p>
+      </div>
+      <div className="guide-role-grid">
+        {p.numbers.map((n) => (
+          <div className="guide-role" key={n.label}>
+            <h4>{n.label}</h4>
+            <p>{n.a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="guide-chapter-head" style={{ marginTop: "2.4rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{p.screeningTitle}</h3>
+        <p>{p.screeningIntro}</p>
+      </div>
+      <DefTable head={["Recommendation", "What it says"]} rows={p.screeningRows} />
+      <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{p.screeningFoot}</p>
     </Chapter>
   );
 }

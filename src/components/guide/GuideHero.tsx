@@ -24,6 +24,7 @@ export function GuideHero({ c }: { c: GuideContent }) {
           </div>
         ))}
       </div>
+      <p className="guide-stat-source">{c.statsSource}</p>
     </>
   );
 }

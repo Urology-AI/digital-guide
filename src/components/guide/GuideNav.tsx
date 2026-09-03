@@ -1,5 +1,6 @@
 import type { GuideContent } from "./content";
 import { ThemeToggle, type ThemeChoice } from "./ThemeToggle";
+import type { ReadMode } from "./hooks";
 
 /** Groups the flat chapter list into labelled sections for the side nav. */
 const SECTIONS: { label: string; ids: string[] }[] = [
@@ -18,6 +19,8 @@ export function GuideNav({
   onNavigate,
   theme,
   setTheme,
+  readMode,
+  setReadMode,
 }: {
   c: GuideContent;
   activeId: string;
@@ -26,6 +29,8 @@ export function GuideNav({
   onNavigate: (id: string) => void;
   theme: ThemeChoice;
   setTheme: (t: ThemeChoice) => void;
+  readMode: ReadMode;
+  setReadMode: (m: ReadMode) => void;
 }) {
   const byId = new Map(c.nav.map((n) => [n.id, n]));
 
@@ -76,6 +81,30 @@ export function GuideNav({
             </ul>
           </div>
         ))}
+
+        <div className="guide-nav-theme" role="group" aria-label={c.readModeLabel}>
+          <p className="guide-navgroup">
+            <span>{c.readModeLabel}</span>
+          </p>
+          <div className="guide-theme-toggle">
+            <button
+              type="button"
+              className={readMode === "pages" ? "active" : ""}
+              aria-pressed={readMode === "pages"}
+              onClick={() => setReadMode("pages")}
+            >
+              {c.readModePages}
+            </button>
+            <button
+              type="button"
+              className={readMode === "scroll" ? "active" : ""}
+              aria-pressed={readMode === "scroll"}
+              onClick={() => setReadMode("scroll")}
+            >
+              {c.readModeScroll}
+            </button>
+          </div>
+        </div>
 
         <div className="guide-nav-theme" role="group" aria-label={c.theme.label}>
           <p className="guide-navgroup">

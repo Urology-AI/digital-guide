@@ -169,3 +169,4 @@ If your repo name is different, replace `/digital-avatar/` with your repo path.
 ## Disclaimer
 
 This tool provides educational information and emotional support. It does not provide medical advice.
+

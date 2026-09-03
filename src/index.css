@@ -13,8 +13,10 @@
 body {
   margin: 0;
   font-family: "DM Sans", system-ui, sans-serif;
-  background: var(--sinai-bg);
-  color: var(--sinai-text);
+  /* Tewari Prostate Care is a light product surface; the deep guide sets its
+     own background via [data-guide-theme] below. */
+  background: #ffffff;
+  color: #0f172a;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -27,8 +29,8 @@ html[data-guide-theme="dark"] { color-scheme: dark; }
 @media (prefers-color-scheme: dark) {
   html[data-guide-theme="auto"] { color-scheme: dark; }
 }
-html[data-guide-theme] body { background: #f4f7fb; transition: background 0.2s ease; }
-html[data-guide-theme="dark"] body { background: #0a0f24; }
+html[data-guide-theme] body { background: #ffffff; transition: background 0.2s ease; }
+html[data-guide-theme="dark"] body { background: #000000; }
 @media (prefers-color-scheme: dark) {
-  html[data-guide-theme="auto"] body { background: #0a0f24; }
+  html[data-guide-theme="auto"] body { background: #000000; }
 }
