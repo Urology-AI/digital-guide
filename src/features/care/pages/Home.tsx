@@ -78,6 +78,25 @@ export function Home() {
         </Grid>
       </Section>
 
+      <Section
+        eyebrow="Support"
+        title="Help for appointments — and for the people alongside you"
+        lead="Two things worth having before your next visit."
+      >
+        <Grid cols={2}>
+          <Card
+            title={tc(lang, "questions.title")}
+            description="Question lists organized by stage — before a PSA test, after an elevated result, after an MRI or biopsy, and before treatment. Copy them and take them with you."
+            href="#/questions"
+          />
+          <Card
+            title="Supporting someone through prostate cancer"
+            description="For family and caregivers: understanding the journey, preparing for appointments, helping track results, and looking after yourself too."
+            href="#/caregiver"
+          />
+        </Grid>
+      </Section>
+
       <Section eyebrow="Go deeper" title={tc(lang, "deepdive.title")} lead={tc(lang, "deepdive.lead")} tone="tint">
         <a
           href="#/guide"

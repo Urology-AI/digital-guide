@@ -22,8 +22,10 @@ export function Header({ path }: { path: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3 sm:px-8">
-        <a href="#/" className="shrink-0">
-          <span className="sr-only">{tc(lang, "app.name")}</span>
+        {/* aria-label supplies a single accessible name: the lockup's own text
+            is hidden below sm, and duplicating it in a sr-only span made screen
+            readers announce the product name twice. */}
+        <a href="#/" className="shrink-0" aria-label={tc(lang, "app.name")}>
           <BrandLockup />
         </a>
 
@@ -109,6 +111,20 @@ export function Footer() {
         <p className="mt-1 text-xs text-slate-500">
           Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute · Mount Sinai
         </p>
+        <nav aria-label="Support" className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/questions">
+            {tc(lang, "questions.title")}
+          </a>
+          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/caregiver">
+            Family &amp; caregivers
+          </a>
+          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/risk">
+            Risk factors
+          </a>
+          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/guide">
+            Full clinical guide
+          </a>
+        </nav>
         <p className="mt-4 max-w-3xl text-xs leading-relaxed text-slate-500">{tc(lang, "disclaimer")}</p>
         <p className="mt-2 text-xs text-slate-400">
           Cancer appointments 844-MD-CANCER · Urology 212-241-9955
