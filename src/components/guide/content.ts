@@ -269,6 +269,11 @@ export interface GuideContent {
     byStageRows: CmpRow[];
     byStageFoot: string;
     expandHint: string;
+    surgeryFirstNote: string;
+    papersTitle: string;
+    papersIntro: string;
+    papers: { cite: string; url: string; note: string }[];
+    papersFoot: string;
     paths: TreatmentPath[];
     evidenceTitle: string;
     evidenceIntro: string;
@@ -662,7 +667,7 @@ const EN: GuideContent = {
     clinicalStage:
       "Clinical stage estimates how far the cancer extends based on examination, biopsy, imaging, and other findings. TNM describes the primary tumor (T), nearby lymph nodes (N), and distant spread (M). Localized disease is commonly T1 or T2; some T3 disease is described as locally advanced.",
     riskGroup:
-      "Risk groups combine PSA, Grade Group, and clinical stage to estimate the likelihood of growth or recurrence. Terms may include very low, low, favorable intermediate, unfavorable intermediate, high, or very high risk. Different systems can classify the same case slightly differently.",
+      "Risk groups combine PSA, Grade Group, and clinical stage to estimate the likelihood of growth or recurrence. Terms you will hear include low, favorable intermediate, unfavorable intermediate, high, and very high risk. NCCN removed the separate \"very low risk\" category in its 2026 update, folding those cancers into low risk — if you see the older term on a report or an older website, that is why. Different systems can also classify the same case slightly differently.",
     imaging: [
       "MRI can show the prostate and surrounding tissues and help identify suspicious areas.",
       "CT, bone scan, or PSMA PET may be considered when risk or symptoms make spread more likely.",
@@ -833,8 +838,8 @@ const EN: GuideContent = {
       "Your PSA, Grade Group, and stage set a risk group, and that is the biggest factor in which treatments your team will discuss. This is a simplified map for localized disease — your own plan depends on the full picture.",
     byStageRows: [
       {
-        label: "Very low / low risk",
-        a: "Active surveillance is usually preferred. Surgery or radiation are options if you choose treatment.",
+        label: "Low risk",
+        a: "Active surveillance is usually preferred, and NCCN reaffirmed that preference in 2026. Surgery or radiation remain options if you choose treatment.",
       },
       {
         label: "Favorable intermediate",
@@ -852,56 +857,12 @@ const EN: GuideContent = {
     byStageFoot:
       "Recurrence after treatment, or cancer that has spread, changes the options again — this is why knowing your current stage and risk group matters before comparing anything.",
     expandHint: "Select a card for advantages, tradeoffs, and what to ask.",
+    surgeryFirstNote:
+      "This guide comes from a surgical department, so surgery is described first and in the most detail — that reflects where our expertise lies, not a recommendation for you. Guidelines still favor active surveillance for most low-risk disease, and radiation is an equally standard choice for many. Use the comparison table and the trial evidence further down to weigh them.",
     paths: [
       {
-        id: "as",
-        n: "OPTION A",
-        title: "Active surveillance",
-        summary: "Closely monitor selected cancers; start treatment if there are signs of progression.",
-        blocks: [
-          {
-            title: "Who may consider it",
-            body: "The preferred approach for many people with very-low or low-risk prostate cancer — typically Grade Group 1, PSA under 10, and a limited amount of cancer on biopsy — with a life expectancy of about 10 years or more and comfort with ongoing monitoring. It is sometimes an option for carefully selected favorable intermediate-risk cancers, for example when only a small amount of Gleason pattern 4 is present, PSA density is low, or genomic tests suggest low risk.",
-          },
-          {
-            title: "Confirming you are a good candidate",
-            body: "Because a first biopsy can under-read a cancer, confirmatory testing is common before committing: a repeat biopsy (usually within 12–24 months), an MRI with PSA density, and sometimes a genomic test. Even with these, an aggressive cancer can occasionally go undetected.",
-          },
-          {
-            title: "What monitoring may include",
-            items: [
-              "A PSA blood test roughly every 6 months.",
-              "A clinical visit and, about once a year, an examination.",
-              "MRI and repeat biopsy on a schedule your team sets, often every 1–3 years, sooner if something changes.",
-              "Imaging and genomic tests support decisions but do not replace biopsy.",
-            ],
-          },
-          {
-            title: "When surveillance may change to treatment",
-            items: [
-              "A higher Grade Group on a repeat biopsy.",
-              "A meaningful increase in the amount of cancer, or a concerning rise in PSA density.",
-              "A new or growing suspicious area on MRI.",
-              "Significant anxiety, or your own preference to treat despite stable results.",
-            ],
-          },
-          {
-            title: "Benefits and tradeoffs",
-            items: [
-              "Avoids or delays treatment-related urinary, sexual, and bowel effects, and keeps curative treatment available if the cancer changes.",
-              "Requires reliable follow-up and repeat testing, and living with an untreated cancer can be emotionally difficult.",
-              "Many men on surveillance eventually need treatment; a smaller number are found to have, or develop, a more aggressive cancer.",
-            ],
-          },
-        ],
-        callout: {
-          label: "Not the same as watchful waiting",
-          body: "Active surveillance aims to preserve the option of cure and uses regular testing. Watchful waiting is less intensive, is usually chosen when life expectancy is shorter or other health problems outweigh the cancer risk, and focuses on treating symptoms if they arise.",
-        },
-      },
-      {
         id: "surgery",
-        n: "OPTION B",
+        n: "OPTION A",
         title: "Surgery: radical prostatectomy",
         summary: "Removes the prostate and seminal vesicles, often robot-assisted; may include nearby lymph nodes.",
         blocks: [
@@ -938,6 +899,52 @@ const EN: GuideContent = {
         callout: {
           label: "Ask for personal numbers",
           body: "Request the surgeon's estimate of your cancer-control, continence, and erectile-function outcomes — and ask what factors make your estimate different from a published average.",
+        },
+      },
+      {
+        id: "as",
+        n: "OPTION B",
+        title: "Active surveillance",
+        summary: "Closely monitor selected cancers; start treatment if there are signs of progression.",
+        blocks: [
+          {
+            title: "Who may consider it",
+            body: "The preferred approach for most people with low-risk prostate cancer — typically Grade Group 1, PSA under 10, and a limited amount of cancer on biopsy — with a life expectancy of about 10 years or more and comfort with ongoing monitoring. It is sometimes an option for carefully selected favorable intermediate-risk cancers, for example when only a small amount of Gleason pattern 4 is present, PSA density is low, or genomic tests suggest low risk.",
+          },
+          {
+            title: "Confirming you are a good candidate",
+            body: "Because a first biopsy can under-read a cancer, confirmatory testing is common before committing: a repeat biopsy (usually within 12–24 months), an MRI with PSA density, and sometimes a genomic test. Even with these, an aggressive cancer can occasionally go undetected.",
+          },
+          {
+            title: "What monitoring may include",
+            items: [
+              "A PSA blood test roughly every 6 months.",
+              "A clinical visit and, about once a year, an examination.",
+              "MRI and repeat biopsy on a schedule your team sets, often every 1–3 years, sooner if something changes.",
+              "Imaging and genomic tests support decisions but do not replace biopsy.",
+            ],
+          },
+          {
+            title: "When surveillance may change to treatment",
+            items: [
+              "A higher Grade Group on a repeat biopsy.",
+              "A meaningful increase in the amount of cancer, or a concerning rise in PSA density.",
+              "A new or growing suspicious area on MRI.",
+              "Significant anxiety, or your own preference to treat despite stable results.",
+            ],
+          },
+          {
+            title: "Benefits and tradeoffs",
+            items: [
+              "Avoids or delays treatment-related urinary, sexual, and bowel effects, and keeps curative treatment available if the cancer changes.",
+              "Requires reliable follow-up and repeat testing, and living with an untreated cancer can be emotionally difficult.",
+              "Many men on surveillance eventually need treatment; a smaller number are found to have, or develop, a more aggressive cancer.",
+            ],
+          },
+        ],
+        callout: {
+          label: "Not the same as watchful waiting",
+          body: "Active surveillance aims to preserve the option of cure and uses regular testing. Watchful waiting is less intensive, is usually chosen when life expectancy is shorter or other health problems outweigh the cancer risk, and focuses on treating symptoms if they arise.",
         },
       },
       {
@@ -1006,7 +1013,7 @@ const EN: GuideContent = {
         ],
         callout: {
           label: "Important",
-          body: "Focal therapy is not simply a smaller version of standard treatment. It requires careful selection and ongoing monitoring of the whole prostate.",
+          body: "Focal therapy is not simply a smaller version of standard treatment. It requires careful selection and ongoing monitoring of the whole prostate. NCCN's 2026 update specifically urges caution in using focal therapy for newly diagnosed prostate cancer — ask whether you would be treated on a protocol, and what the evidence is for your situation.",
         },
       },
       {
@@ -1069,6 +1076,73 @@ const EN: GuideContent = {
     ],
     evidenceSource:
       "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer. N Engl J Med. 2023;388(17):1547–1558.",
+    papersTitle: "The surgical technique, in the peer-reviewed literature",
+    papersIntro:
+      "The nerve-sparing and reconstruction techniques described above are published, cited, and open to scrutiny. These are papers by Dr. Tewari and colleagues, in date order, so you can read the primary description of what may be proposed for you — or bring it to a second opinion.",
+    papers: [
+      {
+        cite: "Tewari A, Peabody J, Sarle R, et al. Technique of da Vinci robot-assisted anatomic radical prostatectomy. Urology. 2002;60(4):569\u2013572.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/12385908/",
+        note: "The original description of the robot-assisted anatomic technique.",
+      },
+      {
+        cite: "Tewari A, Srivastava A, Menon M. A prospective comparison of radical retropubic and robot-assisted prostatectomy: experience in one institution. BJU Int. 2003;92(3):205\u2013210.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/12887468/",
+        note: "An early head-to-head comparison of open and robot-assisted surgery.",
+      },
+      {
+        cite: "Tewari AK, Bigelow K, Rao S, et al. Anatomic restoration technique of continence mechanism and preservation of puboprostatic collar. Urology. 2007;69(4):726\u2013731.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/17445659/",
+        note: "Reconstruction aimed at recovering urinary control after surgery.",
+      },
+      {
+        cite: "Tewari AK, Srivastava A, Huang MW, et al. Anatomical grades of nerve sparing: a risk-stratified approach to neural-hammock sparing during robot-assisted radical prostatectomy. BJU Int. 2011;108(6b):984\u2013992.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/21917101/",
+        note: "Grades nerve-sparing by risk instead of treating it as all-or-nothing.",
+      },
+      {
+        cite: "Ficarra V, Novara G, Ahlering TE, \u2026 Tewari AK, et al. Systematic review and meta-analysis of studies reporting potency rates after robot-assisted radical prostatectomy. Eur Urol. 2012;62(3):418\u2013430.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/22749850/",
+        note: "Pooled erectile-function outcomes across the published literature.",
+      },
+      {
+        cite: "Srivastava A, Chopra S, Pham A, et al. Effect of a risk-stratified grade of nerve-sparing technique on early return of continence after robot-assisted laparoscopic radical prostatectomy. Eur Urol. 2013;63(3):438\u2013444.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/22901982/",
+        note: "Links graded nerve-sparing to how quickly continence returns.",
+      },
+      {
+        cite: "Walz J, Epstein JI, Ganzer R, \u2026 Tewari A, et al. A critical analysis of the current knowledge of surgical anatomy of the prostate related to optimisation of cancer control and preservation of continence and erection. Eur Urol. 2016;70(2):301\u2013311.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/26850969/",
+        note: "International review of the anatomy the operation is planned around.",
+      },
+      {
+        cite: "Martini A, Gupta A, Lewis SC, et al. Development and internal validation of a side-specific, multiparametric MRI-based nomogram for the prediction of extracapsular extension. BJU Int. 2018;122(6):1025\u20131033.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/29676063/",
+        note: "Uses MRI to predict, side by side, whether nerve-sparing is safe.",
+      },
+      {
+        cite: "Martini A, Cumarasamy S, Haines KG, Tewari AK. An updated approach to incremental nerve sparing for robot-assisted radical prostatectomy. BJU Int. 2019;124(1):103\u2013108.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/30575261/",
+        note: "The current framework for deciding how much nerve tissue to spare.",
+      },
+      {
+        cite: "Vis AN, van der Poel HG, Ruiter AEC, \u2026 Tewari AK, et al. Posterior, anterior, and periurethral surgical reconstruction of urinary continence mechanisms in robot-assisted radical prostatectomy. Eur Urol. 2019;76(6):814\u2013822.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/30514568/",
+        note: "Systematic review of the reconstruction steps used to restore continence.",
+      },
+      {
+        cite: "Martini A, Falagario UG, Villers A, et al. Contemporary techniques of prostate dissection for robot-assisted prostatectomy. Eur Urol. 2020;78(4):583\u2013591.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/32747200/",
+        note: "How the gland is dissected, and what each variation aims to protect.",
+      },
+      {
+        cite: "Wagaskar VG, Mittal A, Sobotka S, et al. Hood technique for robotic radical prostatectomy \u2014 preserving periurethral anatomical structures in the space of Retzius and the pouch of Douglas. Eur Urol. 2021;80(2):213\u2013221.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/33067016/",
+        note: "A Mount Sinai technique aimed at early return of urinary control.",
+      },
+    ],
+    papersFoot:
+      "Citations verified against PubMed. A published technique means an approach has been described and peer-reviewed \u2014 it is not a promise of your own result. Ask how each applies to your anatomy and your cancer.",
     compareTitle: "Compare the approaches",
     compareIntro:
       "This is a discussion tool — not a recommendation. The best option depends on your specific cancer, health, anatomy, and priorities.",
@@ -1284,7 +1358,7 @@ const EN: GuideContent = {
     eyebrow: "Sources",
     title: "Trusted information and review notes",
     intro:
-      "This guide used the 2023 Prostate Cancer Foundation patient guide as a scope reference only. The writing, organization, decision tools, diagrams, and visual system are newly created for Mount Sinai review. The clinical content is drawn from current AUA/ASTRO, NCCN, EAU, and NCI guidance.",
+      "This guide rests on three foundations: the NCCN Clinical Practice Guidelines for Prostate Cancer (Version 5.2026), the AUA/ASTRO Clinically Localized Prostate Cancer guideline (2022), and the peer-reviewed surgical work of Dr. Ashutosh K. Tewari and the Milton and Carroll Petrie Department of Urology, listed in the treatment chapter. Population figures come from NCI SEER, and the randomized comparison of treatment approaches comes from the ProtecT trial. The 2023 Prostate Cancer Foundation patient guide was used as a scope reference only — the writing, organization, decision tools, diagrams, and visual system are newly created for Mount Sinai review.",
     groups: [
       {
         heading: "Clinical practice guidelines",
@@ -1302,8 +1376,16 @@ const EN: GuideContent = {
             url: "https://www.auanet.org/guidelines-and-quality/guidelines/clinically-localized-prostate-cancer",
           },
           {
-            cite: "Schaeffer EM, Srinivas S, Adra N, et al. NCCN Guidelines Insights: Prostate Cancer, Version 3.2024. J Natl Compr Canc Netw. 2024;22(3):140–150. PMID: 38626801.",
-            url: "https://pubmed.ncbi.nlm.nih.gov/38626801/",
+            cite: "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology: Prostate Cancer, Version 5.2026 (January 23, 2026). The 2026 update removed the very-low-risk group, revised the principles of active surveillance, and urged caution with focal therapy in newly diagnosed disease.",
+            url: "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1459",
+          },
+          {
+            cite: "NCCN Guidelines Insights: Prostate Cancer, Version 5.2026. J Natl Compr Canc Netw. 2026;24(5):140–. Published summary of those changes.",
+            url: "https://jnccn.org/abstract/journals/jnccn/24/5/article-p140.xml",
+          },
+          {
+            cite: "National Comprehensive Cancer Network. NCCN Guidelines for Patients: Early-Stage Prostate Cancer (2026) — the patient-facing version of the same guidance.",
+            url: "https://www.nccn.org/patients/guidelines/content/PDF/prostate-early-patient.pdf",
           },
           {
             cite: "Cornford P, et al. EAU-EANM-ESTRO-ESUR-ISUP-SIOG Guidelines on Prostate Cancer — 2024 Update. Part I: screening, diagnosis, and local treatment with curative intent. Eur Urol. 2024;86(2):148–163.",

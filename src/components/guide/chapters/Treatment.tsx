@@ -15,6 +15,7 @@ export function Treatment({ c }: { c: GuideContent }) {
 
       <h3 style={{ marginTop: "2rem" }}>The options in detail</h3>
       <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{t.expandHint}</p>
+      <Callout data={{ label: "Why surgery is first here", body: t.surgeryFirstNote }} />
 
       <div className="guide-path-list">
         {t.paths.map((p) => {
@@ -45,6 +46,22 @@ export function Treatment({ c }: { c: GuideContent }) {
           );
         })}
       </div>
+
+      <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{t.papersTitle}</h3>
+        <p>{t.papersIntro}</p>
+      </div>
+      <ol className="guide-papers">
+        {t.papers.map((paper) => (
+          <li key={paper.url}>
+            <a href={paper.url} target="_blank" rel="noreferrer">
+              {paper.cite}
+            </a>
+            <span className="note">{paper.note}</span>
+          </li>
+        ))}
+      </ol>
+      <p className="guide-cite">{t.papersFoot}</p>
 
       <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
         <h3 style={{ fontSize: "1.3rem" }}>{t.evidenceTitle}</h3>
