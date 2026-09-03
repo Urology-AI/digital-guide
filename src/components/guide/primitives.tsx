@@ -18,10 +18,10 @@ export function Chapter({
 }) {
   return (
     <section className={`guide-chapter${alt ? " alt" : ""}`} id={id} aria-labelledby={`${id}-h`}>
-      <div className="guide-chapter-head">
+      <div className="guide-chapter-head guide-chapter-open">
         <span className="eyebrow">{eyebrow}</span>
         <h2 id={`${id}-h`}>{title}</h2>
-        {intro && <p>{intro}</p>}
+        {intro && <p className="chapter-lead">{intro}</p>}
       </div>
       {children}
     </section>
@@ -41,16 +41,38 @@ export function Callout({ data, tone }: { data: CalloutData; tone?: "info" | "wa
 export function ToolCta({
   data,
 }: {
-  data: { eyebrow: string; title: string; body: string; cta: string; href: string };
+  data: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+    href: string;
+    clinicianCta?: string;
+    clinicianHref?: string;
+    clinicianNote?: string;
+  };
 }) {
   return (
     <aside className="guide-toolcta">
       <span className="eyebrow">{data.eyebrow}</span>
       <h4>{data.title}</h4>
       <p>{data.body}</p>
-      <a href={data.href} target="_blank" rel="noopener noreferrer">
-        {data.cta} →
-      </a>
+      <div className="guide-toolcta-actions">
+        <a href={data.href} target="_blank" rel="noopener noreferrer">
+          {data.cta} →
+        </a>
+        {data.clinicianHref && (
+          <a
+            className="secondary"
+            href={data.clinicianHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {data.clinicianCta} →
+          </a>
+        )}
+      </div>
+      {data.clinicianNote && <p className="note">{data.clinicianNote}</p>}
     </aside>
   );
 }

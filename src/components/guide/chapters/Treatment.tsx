@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { GuideContent } from "../content";
 import { Blocks, Callout, Chapter, DefTable, ScrollX, ToolCta } from "../primitives";
+import { ContinenceCurve, Figure, NerveSparingDiagram, ProtectBars } from "../figures";
 
 export function Treatment({ c }: { c: GuideContent }) {
   const t = c.treatment;
@@ -17,7 +18,7 @@ export function Treatment({ c }: { c: GuideContent }) {
       <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{t.expandHint}</p>
       <Callout data={{ label: "Surveillance or surgery depends on your case", body: t.surgeryFirstNote }} />
       <div className="guide-toolcta-row">
-        <ToolCta data={c.toolCta.epsa} />
+        <ToolCta data={c.toolCta.surveillance} />
         <ToolCta data={c.toolCta.compass} />
       </div>
 
@@ -68,6 +69,16 @@ export function Treatment({ c }: { c: GuideContent }) {
         ))}
       </ol>
 
+      <Figure
+        n="1"
+        title="The four nerve-sparing planes"
+        caption="Nerve sparing is not all-or-nothing. The predicted risk that cancer has reached the edge of the prostate on a given side selects a dissection plane, from intrafascial (Grade 1, closest to the gland) out to extrafascial (Grade 4)."
+        source="Tewari et al., BJU Int 2011;108(6b):984–992; Martini et al., BJU Int 2019;124(1):103–108"
+        sourceUrl="https://pubmed.ncbi.nlm.nih.gov/30575261/"
+      >
+        <NerveSparingDiagram />
+      </Figure>
+
       <h4 style={{ marginTop: "2rem" }}>{t.pathOutcomeTitle}</h4>
       <p>{t.pathOutcomeIntro}</p>
       <div className="guide-outcome-grid">
@@ -78,6 +89,15 @@ export function Treatment({ c }: { c: GuideContent }) {
           </div>
         ))}
       </div>
+      <Figure
+        n="2"
+        title="Return of urinary control after the hood technique"
+        caption="Continence measured from catheter removal in a prospective series of 300 men. Most of the recovery happens in the first month; the curve then flattens. The week axis is spaced logarithmically so the early period is readable."
+        source="Wagaskar et al., Eur Urol 2021;80(2):213–221 (n=300; men with anterior tumours excluded)"
+        sourceUrl="https://pubmed.ncbi.nlm.nih.gov/33067016/"
+      >
+        <ContinenceCurve />
+      </Figure>
       <p className="guide-cite">{t.pathOutcomeCaveat}</p>
 
       <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
@@ -123,6 +143,16 @@ export function Treatment({ c }: { c: GuideContent }) {
           </tbody>
         </table>
       </ScrollX>
+      <Figure
+        n="3"
+        title="ProtecT at 15 years, by treatment arm"
+        caption="Prostate-cancer death was low and statistically similar across all three arms. The arms separated on metastasis and local progression, not survival."
+        source="Hamdy et al., N Engl J Med 2023;388(17):1547–1558 (n=1,643; median 15-year follow-up)"
+        sourceUrl="https://www.nejm.org/doi/full/10.1056/NEJMoa2214122"
+      >
+        <ProtectBars />
+      </Figure>
+
       <div className="guide-block">
         <h4>How to read this</h4>
         <ul>

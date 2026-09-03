@@ -1049,3 +1049,72 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
   .guide-welcome-share { gap: 0.9rem; }
   .guide-contact-card { padding: 1rem; }
 }
+
+.guide-toolcta-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.guide-toolcta-actions a.secondary {
+  background: transparent; color: var(--g-blue);
+  border: 1px solid var(--g-line); font-weight: 600;
+}
+.guide-toolcta-actions a.secondary:hover { border-color: var(--g-blue-bright); box-shadow: none; }
+.guide-toolcta .note { font-size: 0.8rem; color: var(--g-muted); margin: 0.8rem 0 0; }
+@media (max-width: 760px) { .guide-toolcta-actions a { width: 100%; } }
+
+/* ==========================================================================
+   Figures — charts and diagrams drawn from published data
+   ========================================================================== */
+.guide-figure {
+  margin: 1.6rem 0; padding: 1.2rem 1.3rem 1rem;
+  border: 1px solid var(--g-line); border-radius: var(--g-radius);
+  background: var(--g-surface);
+}
+.guide-figure .head { display: block; margin-bottom: 0.9rem; }
+.guide-figure .head .n {
+  display: inline-block; font-family: monospace; font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-magenta);
+  font-weight: 700; margin-bottom: 0.3rem;
+}
+.guide-figure .head strong { display: block; font-size: 1.02rem; color: var(--g-ink); }
+.guide-figure .head .cap { display: block; font-size: 0.88rem; color: var(--g-ink-soft); margin-top: 0.25rem; }
+.guide-figure .plot { overflow-x: auto; }
+.guide-figure .src {
+  display: block; margin-top: 0.7rem; padding-top: 0.6rem;
+  border-top: 1px solid var(--g-line); font-size: 0.78rem; color: var(--g-muted);
+}
+.guide-figure .src a { color: var(--g-blue); }
+.guide-plot-svg { width: 100%; min-width: 460px; height: auto; display: block; }
+.guide-plot-svg .grid { stroke: var(--g-line); stroke-width: 1; }
+.guide-plot-svg .axis { font-size: 11px; fill: var(--g-muted); font-family: inherit; }
+.guide-plot-svg .val { font-size: 11px; fill: var(--g-ink); font-weight: 700; font-family: inherit; }
+.guide-plot-svg .line { fill: none; stroke: var(--g-blue-bright); stroke-width: 2.5; stroke-linejoin: round; }
+.guide-plot-svg .area { fill: var(--g-blue-tint); stroke: none; opacity: 0.75; }
+.guide-plot-svg .dot { fill: var(--g-surface); stroke: var(--g-blue-bright); stroke-width: 2.5; }
+.guide-plot-svg .bar.s0 { fill: var(--g-violet); }
+.guide-plot-svg .bar.s1 { fill: var(--g-blue-bright); }
+.guide-plot-svg .bar.s2 { fill: var(--g-magenta); }
+.guide-plot-svg .bar.s3 { fill: var(--g-muted); }
+.guide-plot-svg .ns { fill: none; stroke: var(--g-line); stroke-width: 1.5; }
+.guide-plot-svg .ns1 { stroke: var(--g-blue-bright); }
+.guide-plot-svg .ns2 { stroke: var(--g-blue); }
+.guide-plot-svg .ns3 { stroke: var(--g-magenta); }
+.guide-plot-svg .ns4 { stroke: var(--g-violet); }
+.guide-plot-svg .nslabel { font-size: 11px; font-weight: 700; fill: var(--g-muted); font-family: monospace; }
+.guide-plot-svg .gland { fill: var(--g-violet-tint); stroke: var(--g-violet); stroke-width: 1.5; }
+.guide-plot-svg .glandlabel { font-size: 11px; fill: var(--g-ink-soft); font-family: inherit; }
+.guide-plot-svg .key-g { font-size: 12px; font-weight: 700; fill: var(--g-ink); font-family: inherit; }
+.guide-plot-svg .key-p { font-size: 12px; fill: var(--g-blue); font-family: inherit; }
+.guide-plot-svg .key-r { font-size: 11px; fill: var(--g-muted); font-family: inherit; }
+@media (max-width: 760px) { .guide-figure { padding: 1rem; } }
+
+/* Chapter openers: a book-like entry into each chapter. */
+.guide-chapter-open { position: relative; padding-top: 0.4rem; }
+.guide-chapter-open h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.15rem); line-height: 1.15; margin-bottom: 0.5rem;
+}
+.guide-chapter-open .chapter-lead {
+  font-size: 1.06rem; color: var(--g-ink-soft); max-width: 62ch;
+}
+.guide-chapter-open::after {
+  content: ""; display: block; width: 54px; height: 3px; border-radius: 2px;
+  margin-top: 1.2rem;
+  background: linear-gradient(90deg, var(--g-blue-bright), var(--g-magenta));
+}

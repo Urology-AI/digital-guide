@@ -129,6 +129,16 @@ export interface GuideContent {
 
   toolCta: {
     epsa: { eyebrow: string; title: string; body: string; cta: string; href: string };
+    surveillance: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      cta: string;
+      href: string;
+      clinicianCta: string;
+      clinicianHref: string;
+      clinicianNote: string;
+    };
     compass: { eyebrow: string; title: string; body: string; cta: string; href: string };
   };
 
@@ -439,6 +449,18 @@ const EN: GuideContent = {
       cta: "Check your risk with ePSA",
       href: "https://epsa.millionstrongmen.com/",
     },
+    surveillance: {
+      eyebrow: "If you are considering active surveillance",
+      title: "The Tewari Active Surveillance Program",
+      body: "The department runs a defined active surveillance pathway — risk stratification after your biopsy, a confirmatory biopsy and genomic testing before enrollment, then a standard monitoring protocol of quarterly PSA and office visits with annual MRI, micro-ultrasound, and exam. The patient version walks you through what surveillance actually involves and what would trigger a change of plan.",
+      cta: "See what surveillance involves",
+      href: "https://as.millionstrongmen.com/patient/",
+      clinicianCta: "Clinician pathway tool",
+      clinicianHref: "https://as.millionstrongmen.com/",
+      clinicianNote:
+        "The clinician version is the step-by-step decision tool your team uses to work through the same protocol — you are welcome to look at it, but it is written for clinicians.",
+    },
+
     compass: {
       eyebrow: "If you are weighing surgery",
       title: "COMPASS — surgical digital twin",
@@ -452,7 +474,7 @@ const EN: GuideContent = {
     eyebrow: "Your toolkit",
     title: "Mount Sinai prostate tools",
     intro:
-      "Two research tools from the Department of Urology sit alongside this guide, for different points in the journey.",
+      "Three tools from the Department of Urology sit alongside this guide, for different points in the journey — before a diagnosis, on surveillance, and when planning surgery.",
     items: [
       {
         id: "epsa",
@@ -461,6 +483,15 @@ const EN: GuideContent = {
         body: "A short questionnaire (family history, symptoms, lifestyle, and — if you have it — your PSA and MRI results) that estimates your risk and flags whether a PSA test is worth discussing. Useful to revisit as your numbers change so you can see where you stand.",
         cta: "Open ePSA",
         href: "https://epsa.millionstrongmen.com/",
+      },
+      {
+        id: "as",
+        eyebrow: "On or considering active surveillance",
+        title: "Tewari Active Surveillance Program",
+        body: "The department's defined surveillance pathway: risk stratification after a positive biopsy, confirmatory biopsy and genomic testing before enrollment, then quarterly PSA and office visits with annual MRI, micro-ultrasound, and exam. The patient version explains what monitoring involves and what findings would prompt a change of plan. A separate clinician version steps your team through the same protocol.",
+        cta: "Open the patient version",
+        href: "https://as.millionstrongmen.com/patient/",
+        note: "Clinician pathway tool: as.millionstrongmen.com — written for clinicians, not as patient instructions.",
       },
       {
         id: "compass",
