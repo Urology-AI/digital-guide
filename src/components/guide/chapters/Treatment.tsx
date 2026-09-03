@@ -46,6 +46,43 @@ export function Treatment({ c }: { c: GuideContent }) {
         })}
       </div>
 
+      <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{t.evidenceTitle}</h3>
+        <p>{t.evidenceIntro}</p>
+      </div>
+      <ScrollX>
+        <table className="guide-cmp">
+          <thead>
+            <tr>
+              {t.evidenceHead.map((h) => (
+                <th key={h}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {t.evidenceRows.map((r) => (
+              <tr key={r.label}>
+                <td>
+                  <strong>{r.label}</strong>
+                </td>
+                <td>{r.a}</td>
+                <td>{r.b}</td>
+                <td>{r.c}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </ScrollX>
+      <div className="guide-block">
+        <h4>How to read this</h4>
+        <ul>
+          {t.evidenceCaveats.map((it) => (
+            <li key={it}>{it}</li>
+          ))}
+        </ul>
+      </div>
+      <p className="guide-cite">{t.evidenceSource}</p>
+
       <h3 style={{ marginTop: "2.4rem" }}>{t.compareTitle}</h3>
       <p>{t.compareIntro}</p>
       <ScrollX>

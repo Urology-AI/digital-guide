@@ -59,6 +59,14 @@ const KB: KbEntry[] = [
     a: "Radical prostatectomy removes the prostate and seminal vesicles and provides final pathology. PSA is expected to fall to a very low or undetectable level. Tradeoffs include an operation and catheter, early urinary leakage, erectile changes, and loss of ejaculation and natural fertility. Nerve-sparing may help erectile recovery when safe. See \"Treatment choices.\"",
   },
   {
+    keys: ["protect trial", "long term", "which is better", "survival difference", "evidence"],
+    a: "The ProtecT trial randomized 1,643 men with PSA-detected localized cancer to active monitoring, surgery, or radiotherapy and followed them for a median of 15 years. Prostate-cancer deaths were low and statistically similar in all three groups (3.1% monitoring, 2.2% surgery, 2.9% radiotherapy). The groups differed in metastasis (9.4% vs 4.7% vs 5.0%) and local progression (25.9% vs 10.5% vs 11.0%). Its \"active monitoring\" was a PSA-triggered protocol from the 2000s, less intensive than today's MRI-based surveillance. See \"Treatment choices.\"",
+  },
+  {
+    keys: ["how long hormone", "adt duration", "months of hormone", "length of hormone therapy"],
+    a: "In the 2022 AUA/ASTRO guideline, ADT given with radiation runs about 4–6 months for unfavorable intermediate-risk disease and generally 18–36 months for high-risk disease; selected very high-risk or node-positive cases may get ADT with abiraterone and prednisone for about 24 months. Your own duration may differ — ask why that length was chosen and what would change it. See \"Treatment choices.\"",
+  },
+  {
     keys: ["radiation", "brachytherapy", "external beam"],
     a: "Radiation can be external-beam (from outside the body, over a range of schedules) or brachytherapy (radioactive sources placed in or near the prostate). No incision is needed. Early urinary and bowel irritation can occur; erectile function can decline gradually. See \"Treatment choices.\"",
   },

@@ -270,6 +270,12 @@ export interface GuideContent {
     byStageFoot: string;
     expandHint: string;
     paths: TreatmentPath[];
+    evidenceTitle: string;
+    evidenceIntro: string;
+    evidenceHead: string[];
+    evidenceRows: { label: string; a: string; b: string; c: string }[];
+    evidenceCaveats: string[];
+    evidenceSource: string;
     compareTitle: string;
     compareIntro: string;
     compareHead: [string, string, string, string];
@@ -1014,6 +1020,15 @@ const EN: GuideContent = {
             body: "For localized disease, ADT is most often combined with radiation in selected intermediate- and high-risk cases. The benefit and duration depend on risk group, radiation plan, overall health, and competing medical risks. ADT alone is generally not a curative treatment for otherwise treatable localized prostate cancer.",
           },
           {
+            title: "How long it usually lasts",
+            items: [
+              "Unfavorable intermediate risk with radiation: short-course ADT, about 4 to 6 months.",
+              "High risk with definitive radiation: a longer course, generally 18 to 36 months.",
+              "Selected very high-risk or node-positive disease: ADT with abiraterone and prednisone for about 24 months.",
+              "These are the durations in the 2022 AUA/ASTRO guideline. Yours may differ — ask why the specific length was chosen for you, and what would change it.",
+            ],
+          },
+          {
             title: "Possible effects",
             items: [
               "Body: hot flashes, fatigue, muscle loss, weight gain, breast tenderness, reduced bone density.",
@@ -1037,6 +1052,23 @@ const EN: GuideContent = {
         },
       },
     ],
+    evidenceTitle: "What the long-term evidence shows",
+    evidenceIntro:
+      "The ProtecT trial is the main randomized comparison of these approaches. It enrolled 1,643 men aged 50–69 whose cancer was found by PSA screening, assigned them to active monitoring, surgery, or radiotherapy, and followed them for a median of 15 years.",
+    evidenceHead: ["At 15 years", "Active monitoring", "Surgery", "Radiotherapy"],
+    evidenceRows: [
+      { label: "Died of prostate cancer", a: "3.1%", b: "2.2%", c: "2.9%" },
+      { label: "Cancer spread beyond the prostate (metastasis)", a: "9.4%", b: "4.7%", c: "5.0%" },
+      { label: "Cancer progressed locally", a: "25.9%", b: "10.5%", c: "11.0%" },
+    ],
+    evidenceCaveats: [
+      "Deaths from prostate cancer were low in all three groups and the differences between them were not statistically significant. Roughly 97% of men in every group were alive from a prostate cancer standpoint at 15 years.",
+      "Where the groups did differ was in metastasis and local progression — both about twice as common with monitoring. That is the tradeoff the table above is really describing.",
+      "\"Active monitoring\" in this trial was a PSA-triggered protocol from the 2000s, less intensive than today's MRI-based active surveillance. About three-quarters of that group went on to have radical treatment; 24% were alive with no prostate cancer treatment at all at the end of follow-up.",
+      "Participants were screen-detected and mostly low- or intermediate-risk, treated with the surgery and radiation techniques of 1999–2009. Results may not transfer directly to higher-risk disease or to current technique.",
+    ],
+    evidenceSource:
+      "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer. N Engl J Med. 2023;388(17):1547–1558.",
     compareTitle: "Compare the approaches",
     compareIntro:
       "This is a discussion tool — not a recommendation. The best option depends on your specific cancer, health, anatomy, and priorities.",
@@ -1278,7 +1310,11 @@ const EN: GuideContent = {
             url: "https://uroweb.org/guidelines/prostate-cancer",
           },
           {
-            cite: "American Urological Association / ASTRO. Clinically Localized Prostate Cancer Guideline (overview and full text).",
+            cite: "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer (the ProtecT trial). N Engl J Med. 2023;388(17):1547–1558. Source for the 15-year comparison table.",
+            url: "https://www.nejm.org/doi/full/10.1056/NEJMoa2214122",
+          },
+          {
+            cite: "American Urological Association / ASTRO. Clinically Localized Prostate Cancer Guideline (overview and full text). Source for the ADT durations given with radiation.",
             url: "https://www.auanet.org/guidelines-and-quality/guidelines/clinically-localized-prostate-cancer",
           },
         ],
