@@ -18,7 +18,17 @@ export function Team({ c }: { c: GuideContent }) {
         <div>
           <h3>{t.chairName}</h3>
           <span className="role">{t.chairRole}</span>
-          <p style={{ marginBottom: 0 }}>{t.chairBody}</p>
+          <ul className="guide-chair-titles">
+            {t.chairTitles.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+          <p>{t.chairBody}</p>
+          <p style={{ marginBottom: 0 }}>
+            <a className="guide-srclink" href={t.chairSourceUrl} target="_blank" rel="noreferrer">
+              {t.chairSourceLabel} ↗
+            </a>
+          </p>
         </div>
       </div>
 
@@ -53,6 +63,32 @@ export function Team({ c }: { c: GuideContent }) {
         ))}
       </div>
       <Callout data={t.decisionCheck} />
+
+      <div className="guide-chapter-head" style={{ marginTop: "2.4rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{t.msCare.title}</h3>
+        <p>{t.msCare.intro}</p>
+      </div>
+      <div className="guide-role-grid">
+        {t.msCare.items.map((it) => (
+          <div className="guide-role" key={it.label}>
+            <h4>{it.label}</h4>
+            <p>{it.a}</p>
+          </div>
+        ))}
+      </div>
+      <div className="guide-block">
+        <h4>{t.msCare.contactTitle}</h4>
+        <ul>
+          {t.msCare.contactLines.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+        <p style={{ marginBottom: 0 }}>
+          <a className="guide-srclink" href={t.msCare.sourceUrl} target="_blank" rel="noreferrer">
+            {t.msCare.sourceLabel} ↗
+          </a>
+        </p>
+      </div>
     </Chapter>
   );
 }

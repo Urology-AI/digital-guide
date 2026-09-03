@@ -218,7 +218,10 @@ export interface GuideContent {
     intro: string;
     chairName: string;
     chairRole: string;
+    chairTitles: string[];
     chairBody: string;
+    chairSourceUrl: string;
+    chairSourceLabel: string;
     roles: CmpRow[];
     secondOpinionTitle: string;
     secondOpinionItems: string[];
@@ -227,6 +230,15 @@ export interface GuideContent {
     prioritiesIntro: string;
     priorities: CmpRow[];
     decisionCheck: Callout;
+    msCare: {
+      title: string;
+      intro: string;
+      items: CmpRow[];
+      contactTitle: string;
+      contactLines: string[];
+      sourceUrl: string;
+      sourceLabel: string;
+    };
   };
 
   treatment: {
@@ -602,9 +614,16 @@ const EN: GuideContent = {
     intro:
       "Localized prostate cancer care can involve several specialists. Hearing more than one perspective is a strength, not a failure to decide.",
     chairName: "Dr. Ashutosh K. Tewari",
-    chairRole: "Chair, Milton and Carroll Petrie Department of Urology · Mount Sinai",
+    chairRole: "Professor and System Chair, Milton and Carroll Petrie Department of Urology · Icahn School of Medicine at Mount Sinai",
+    chairTitles: [
+      "Director, Center of Excellence for Prostate Cancer · The Tisch Cancer Center",
+      "Professor of Urology, Oncological Sciences, and Artificial Intelligence and Human Health",
+      "Board certified by the American Board of Urology",
+    ],
     chairBody:
-      "Dr. Tewari is a urologic surgeon internationally recognized for advancing robotic-assisted radical prostatectomy and nerve-sparing techniques aimed at preserving urinary control and sexual function. His team's research spans surgical precision, imaging, and biomarkers. If you are considering surgery, your consultation will cover which approach fits your anatomy and cancer, and what outcomes to expect in a patient like you.",
+      "Dr. Tewari is a urologic surgeon internationally recognized for advancing robotic-assisted radical prostatectomy and nerve-sparing techniques aimed at preserving urinary control and sexual function — including the total reconstruction technique used to help men recover continence. His clinical work covers MRI-targeted biopsy, active surveillance, robotic prostatectomy, and focal therapy protocols; his lab studies the genomic causes of prostate cancer, imaging biomarkers, and a prostate cancer vaccine supported by the NIH and Department of Defense. If you are considering surgery, your consultation will cover which approach fits your anatomy and your cancer, and what outcomes to expect in a patient like you.",
+    chairSourceUrl: "https://profiles.mountsinai.org/ashutosh-tewari",
+    chairSourceLabel: "Mount Sinai physician profile",
     roles: [
       { label: "Urologic oncologist", a: "Confirms diagnosis and discusses surgery, surveillance, focal approaches, and urinary care." },
       { label: "Radiation oncologist", a: "Explains external-beam radiation, brachytherapy, schedules, and radiation-specific effects." },
@@ -638,6 +657,27 @@ const EN: GuideContent = {
     decisionCheck: {
       label: "Decision check",
       body: "Before choosing, be able to explain: what happens next, the goal of treatment, the main alternatives, the most likely side effects, and the follow-up plan.",
+    },
+    msCare: {
+      title: "What care looks like at Mount Sinai",
+      intro:
+        "The Center of Excellence for Prostate Cancer sits inside The Tisch Cancer Center, an NCI-designated comprehensive cancer center. Urologic, radiation, and medical oncologists review cases alongside pathologists, radiologists, sexual medicine specialists, and oncology nurses, so one plan comes out of one discussion.",
+      items: [
+        { label: "Diagnosis", a: "MRI-fusion targeted biopsy, expert genitourinary pathology review, and genomic marker testing to sharpen your risk group." },
+        { label: "Surgery", a: "Robot-assisted, laparoscopic, and open prostatectomy, with nerve-sparing and reconstruction techniques developed in the department." },
+        { label: "Radiation", a: "Intensity-modulated radiation therapy (IMRT) and brachytherapy, planned with the surgical team rather than in isolation." },
+        { label: "Surveillance & focal therapy", a: "Structured active surveillance programs and clinical protocols for focal treatment of selected tumors." },
+        { label: "Research access", a: "Clinical trials in immunotherapy, vaccines, and imaging, through the department's research programs." },
+        { label: "Screening outreach", a: "The Robert F. Smith Mobile Prostate Cancer Screening Unit brings screening into New York communities." },
+      ],
+      contactTitle: "Making an appointment",
+      contactLines: [
+        "Mount Sinai cancer appointments: 844-MD-CANCER (844-632-2262)",
+        "Milton and Carroll Petrie Department of Urology / robotic prostate surgery: 212-241-9955",
+        "Main urology practice, 1425 Madison Avenue, 6th floor, Suite L6-50, New York, NY 10029",
+      ],
+      sourceUrl: "https://www.mountsinai.org/care/cancer/services/prostate",
+      sourceLabel: "Mount Sinai Prostate Cancer Center of Excellence",
     },
   },
 
@@ -1127,8 +1167,16 @@ const EN: GuideContent = {
             url: "https://www.cancer.org/cancer/types/prostate-cancer.html",
           },
           {
-            cite: "Mount Sinai Health System. Prostate cancer care and multidisciplinary program overview.",
-            url: "https://www.mountsinai.org/care",
+            cite: "Mount Sinai Health System. Center of Excellence for Prostate Cancer — services, multidisciplinary team, and screening programs.",
+            url: "https://www.mountsinai.org/care/cancer/services/prostate",
+          },
+          {
+            cite: "Mount Sinai. Ashutosh K. Tewari, MD — physician profile, titles, specialties, and research focus.",
+            url: "https://profiles.mountsinai.org/ashutosh-tewari",
+          },
+          {
+            cite: "Mount Sinai. Milton and Carroll Petrie Department of Urology — urologic care and services.",
+            url: "https://www.mountsinai.org/care/urology",
           },
         ],
       },
@@ -1147,7 +1195,7 @@ const EN: GuideContent = {
   footer: {
     fine: "This guide is for general education and does not replace a conversation with your care team. Every case is different — treatment decisions should always be made with your own doctors, based on your own pathology, imaging, and health history. Statistics are general population figures and may not reflect your individual outcome.",
     brandline: "Mount Sinai Health System · Milton and Carroll Petrie Department of Urology",
-    contact: "mountsinai.org · 1-800-MD-SINAI",
+    contact: "mountsinai.org · Cancer appointments 844-MD-CANCER · Urology 212-241-9955",
   },
 
   chat: {

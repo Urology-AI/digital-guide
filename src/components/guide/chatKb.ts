@@ -11,6 +11,14 @@ interface KbEntry {
 
 const KB: KbEntry[] = [
   {
+    keys: ["tewari", "who is the chair", "surgeon", "dr ash"],
+    a: "Dr. Ashutosh K. Tewari is Professor and System Chair of the Milton and Carroll Petrie Department of Urology at the Icahn School of Medicine at Mount Sinai, and Director of the Center of Excellence for Prostate Cancer at The Tisch Cancer Center. He is board certified by the American Board of Urology and is known for advancing robotic-assisted radical prostatectomy, nerve-sparing, and reconstruction techniques; his research covers the genomic causes of prostate cancer, imaging biomarkers, and a prostate cancer vaccine. See \"Care team & priorities.\"",
+  },
+  {
+    keys: ["mount sinai", "center of excellence", "appointment", "phone", "where to go"],
+    a: "Prostate cancer care at Mount Sinai is delivered through the Center of Excellence for Prostate Cancer within The Tisch Cancer Center, an NCI-designated comprehensive cancer center: MRI-fusion targeted biopsy and genomic testing, robotic, laparoscopic and open surgery, IMRT and brachytherapy, structured active surveillance, focal therapy protocols, and clinical trials. To make an appointment, call 844-MD-CANCER (844-632-2262), or the Department of Urology at 212-241-9955. See \"Care team & priorities.\"",
+  },
+  {
     keys: ["grade group", "gleason", "score mean", "biopsy report"],
     a: "A pathologist adds the two most common Gleason growth patterns and translates the result into a Grade Group from 1 to 5. Grade Group 1 (Gleason 3+3=6) is lower grade and often suited to active surveillance; Grade Group 5 (Gleason 9–10) is the highest grade. See the \"Your biopsy report\" chapter.",
   },
