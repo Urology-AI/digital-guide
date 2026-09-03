@@ -8,7 +8,7 @@ import { Journey } from "./pages/Journey";
 import { Caregiver, Questions } from "./pages/Questions";
 import { Diagnosis, Health, Imaging, Monitoring, Psa, Recovery, Risk, Treatment } from "./pages/Stages";
 
-const ROUTES: Record<string, () => JSX.Element> = {
+export const ROUTES: Record<string, () => JSX.Element> = {
   "/": Home,
   "/start": Start,
   "/health": Health,
