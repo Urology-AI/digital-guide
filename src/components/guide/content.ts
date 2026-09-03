@@ -116,6 +116,7 @@ export interface GuideContent {
     title: string;
     lead: string;
     reassurance: string;
+    portraitCaption: string;
     startLabel: string;
     continueLabel: string;
     highlights: { label: string; text: string }[];
@@ -230,6 +231,16 @@ export interface GuideContent {
     prioritiesIntro: string;
     priorities: CmpRow[];
     decisionCheck: Callout;
+    facultyTitle: string;
+    facultyIntro: string;
+    facultyNote: string;
+    faculty: {
+      name: string;
+      creds: string;
+      role: string;
+      focus: string;
+      url: string;
+    }[];
     msCare: {
       title: string;
       intro: string;
@@ -368,10 +379,12 @@ const EN: GuideContent = {
     lead: "A step-by-step guide to a prostate cancer diagnosis — the tests, the terms, your treatment choices, recovery, and the questions worth asking — from the Mount Sinai Department of Urology, led by Dr. Ashutosh K. Tewari.",
     reassurance:
       "A diagnosis can feel urgent. Your decision does not have to feel rushed. The right plan begins with understanding your cancer and your priorities.",
+    portraitCaption:
+      "Ashutosh K. Tewari, MBBS, MCh, FRCS (Hon.) — Professor and System Chair, Milton and Carroll Petrie Department of Urology",
     startLabel: "Start the guide",
     continueLabel: "Continue where you left off",
     highlights: [
-      { label: "15 short chapters", text: "one at a time, in plain language" },
+      { label: "16 short chapters", text: "one at a time, in plain language" },
       { label: "Built to write in", text: "check off questions, save your diagnosis record" },
       { label: "Ask as you go", text: "a quick-answer assistant grounded in this guide" },
     ],
@@ -658,6 +671,83 @@ const EN: GuideContent = {
       label: "Decision check",
       body: "Before choosing, be able to explain: what happens next, the goal of treatment, the main alternatives, the most likely side effects, and the follow-up plan.",
     },
+    facultyTitle: "The department behind this guide",
+    facultyIntro:
+      "Prostate cancer care at Mount Sinai is delivered by the Milton and Carroll Petrie Department of Urology together with radiation and medical oncology. These are some of the faculty whose work touches a prostate cancer diagnosis — you will not meet all of them, and your own team may include others.",
+    faculty: [
+      {
+        name: "Ashutosh K. Tewari",
+        creds: "MBBS, MCh, FRCS (Hon.)",
+        role: "Professor and System Chair, Urology · Director, Center of Excellence for Prostate Cancer",
+        focus: "Robotic radical prostatectomy, nerve-sparing and reconstruction, MRI-targeted biopsy, active surveillance, focal therapy protocols.",
+        url: "https://profiles.mountsinai.org/ashutosh-tewari",
+      },
+      {
+        name: "Ketan K. Badani",
+        creds: "MD",
+        role: "Vice Chair, Urology and Robotic Operations · Professor of Urology",
+        focus: "Robotic urologic oncology across prostate and kidney cancer, and reconstructive urology.",
+        url: "https://profiles.mountsinai.org/ketan-k-badani",
+      },
+      {
+        name: "Michael A. Palese",
+        creds: "MD",
+        role: "System Vice Chair, Clinical Operations · Site Chair, Mount Sinai Downtown–Union Square",
+        focus: "Minimally invasive robotic, laparoscopic, and endoscopic surgery for prostate, kidney, and bladder disease.",
+        url: "https://profiles.mountsinai.org/michael-a-palese",
+      },
+      {
+        name: "Peter Wiklund",
+        creds: "MD, PhD",
+        role: "Professor of Urology · Director, Bladder Cancer Program",
+        focus: "Robotic prostate and bladder surgery, prostate biopsy, and evaluation of an elevated PSA.",
+        url: "https://profiles.mountsinai.org/peter-wiklund",
+      },
+      {
+        name: "John P. Sfakianos",
+        creds: "MD",
+        role: "Professor of Urology and Urologic Oncology",
+        focus: "Open, laparoscopic, and robotic surgery for prostate, kidney, bladder, and testicular cancers.",
+        url: "https://profiles.mountsinai.org/john-p-sfakianos",
+      },
+      {
+        name: "Reza Mehrazin",
+        creds: "MD",
+        role: "Professor of Urology · Director, Society of Urologic Oncology Fellowship",
+        focus: "Nerve-sparing prostatectomy and organ-preserving surgery across urologic cancers.",
+        url: "https://profiles.mountsinai.org/reza-mehrazin",
+      },
+      {
+        name: "Michael A. Gorin",
+        creds: "MD",
+        role: "Associate Professor of Urology and of Artificial Intelligence and Human Health",
+        focus: "Prostate cancer screening and treatment, MRI-guided prostate biopsy, minimally invasive procedures.",
+        url: "https://profiles.mountsinai.org/michael-gorin",
+      },
+      {
+        name: "Richard G. Stock",
+        creds: "MD",
+        role: "Professor, Radiation Oncology",
+        focus: "Prostate brachytherapy and intensity-modulated radiation therapy (IMRT) for prostate cancer.",
+        url: "https://profiles.mountsinai.org/richard-g-stock",
+      },
+      {
+        name: "Natasha Kyprianou",
+        creds: "PhD",
+        role: "Vice Chair for Research, Urology · Professor of Urology, Pathology, and Oncological Sciences",
+        focus: "Laboratory research into prostate cancer biology and why some cancers resist treatment.",
+        url: "https://profiles.mountsinai.org/natasha-kyprianou",
+      },
+      {
+        name: "Nihal E. Mohamed",
+        creds: "PhD",
+        role: "Director, Patient Education and Behavioral Research, Urology",
+        focus: "How patients weigh treatment decisions, quality of life, and emotional adjustment after diagnosis.",
+        url: "https://profiles.mountsinai.org/nihal-e-mohamed",
+      },
+    ],
+    facultyNote:
+      "Titles and roles are drawn from public Mount Sinai physician profiles and may change. Your care team is assigned through your appointment, not through this list.",
     msCare: {
       title: "What care looks like at Mount Sinai",
       intro:

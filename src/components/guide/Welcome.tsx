@@ -31,14 +31,16 @@ export function Welcome({
       </div>
 
       <header className="guide-welcome-hero">
-        <img
-          className="guide-welcome-portrait"
-          src={`${import.meta.env.BASE_URL}drtewari.png`}
-          alt=""
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        />
+        <figure className="guide-welcome-portrait">
+          <img
+            src={`${import.meta.env.BASE_URL}drtewari.png`}
+            alt={w.portraitCaption}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+          <figcaption>{w.portraitCaption}</figcaption>
+        </figure>
         <span className="eyebrow">{w.eyebrow}</span>
         <h1>{w.title}</h1>
         <p className="lead">{w.lead}</p>

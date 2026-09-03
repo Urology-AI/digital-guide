@@ -1,6 +1,14 @@
 import type { GuideContent } from "../content";
 import { Callout, Chapter, Expandable } from "../primitives";
 
+/** First + last initial, e.g. "Ashutosh K. Tewari" -> "AT". */
+function initials(name: string): string {
+  const parts = name.split(" ").filter((w) => w.replace(/\W/g, "").length > 1);
+  const first = parts[0]?.[0] ?? "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return `${first}${last}`;
+}
+
 export function Team({ c }: { c: GuideContent }) {
   const t = c.team;
   return (
@@ -76,7 +84,36 @@ export function Team({ c }: { c: GuideContent }) {
           </div>
         ))}
       </div>
-      <div className="guide-block">
+      <div className="guide-chapter-head" style={{ marginTop: "2.4rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{t.facultyTitle}</h3>
+        <p>{t.facultyIntro}</p>
+      </div>
+      <div className="guide-faculty-grid">
+        {t.faculty.map((f) => (
+          <a
+            className="guide-faculty"
+            key={f.name}
+            href={f.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="mono" aria-hidden="true">
+              {initials(f.name)}
+            </span>
+            <span className="who">
+              <strong>
+                {f.name}
+                <span className="creds">{f.creds}</span>
+              </strong>
+              <span className="role">{f.role}</span>
+              <span className="focus">{f.focus}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+      <p className="guide-faculty-note">{t.facultyNote}</p>
+
+      <div className="guide-contact-card">
         <h4>{t.msCare.contactTitle}</h4>
         <ul>
           {t.msCare.contactLines.map((line) => (
