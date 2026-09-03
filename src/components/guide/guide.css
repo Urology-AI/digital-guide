@@ -175,12 +175,22 @@
   position: sticky;
   top: 0;
   align-self: start;
-  height: 100vh;
-  padding: 1.5rem 1rem;
+  /* dvh so mobile browser chrome cannot cut off the end of the list. */
+  height: 100dvh;
+  padding: 1.5rem 1rem calc(2.5rem + env(safe-area-inset-bottom));
   border-right: 1px solid var(--g-line);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--g-line) transparent;
   background: var(--g-surface);
 }
+.guide-nav::-webkit-scrollbar { width: 10px; }
+.guide-nav::-webkit-scrollbar-thumb {
+  background: var(--g-line); border-radius: 999px;
+  border: 3px solid var(--g-surface);
+}
+.guide-nav::-webkit-scrollbar-thumb:hover { background: var(--g-muted); }
 .guide-nav .brand { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 1.4rem; }
 .guide-nav .brand strong { font-size: 1.15rem; color: var(--g-violet); font-weight: 700; line-height: 1.2; }
 .guide-nav .brand span { font-size: 0.7rem; color: var(--g-muted); letter-spacing: 0.04em; }
@@ -215,9 +225,10 @@
 
 @media (max-width: 900px) {
   .guide-nav {
-    position: fixed; inset: 0 22% 0 0; height: 100%;
+    position: fixed; inset: 0 22% 0 0; height: 100dvh;
     z-index: 60; transform: translateX(-105%);
     transition: transform 0.25s ease; box-shadow: var(--g-shadow);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
   }
   .guide-nav.open { transform: translateX(0); }
 }
@@ -949,3 +960,92 @@ table.guide-cmp tbody tr.selected { background: var(--g-blue-tint); box-shadow: 
 .guide-papers a { display: block; font-size: 0.9rem; color: var(--g-ink); text-decoration: none; }
 .guide-papers a:hover { color: var(--g-blue); text-decoration: underline; text-underline-offset: 2px; }
 .guide-papers .note { display: block; font-size: 0.84rem; color: var(--g-muted); margin-top: 0.2rem; }
+
+/* Inline decision-tool call-to-action. */
+.guide-toolcta {
+  margin: 1.3rem 0; padding: 1.15rem 1.3rem;
+  border: 1px solid var(--g-line); border-left: 3px solid var(--g-blue-bright);
+  border-radius: var(--g-radius);
+  background:
+    radial-gradient(520px 180px at 100% 0%, var(--g-blue-tint), transparent 70%),
+    var(--g-surface);
+}
+.guide-toolcta h4 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+.guide-toolcta p { font-size: 0.9rem; color: var(--g-ink-soft); margin-bottom: 0.9rem; }
+.guide-toolcta a {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--g-blue-bright); color: var(--g-on-accent); text-decoration: none;
+  font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1rem; border-radius: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.guide-toolcta a:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -18px rgba(0, 174, 239, 0.9); }
+.guide-toolcta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.guide-toolcta-row .guide-toolcta { margin: 1.3rem 0 0; }
+@media (max-width: 860px) { .guide-toolcta-row { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .guide-toolcta a:hover { transform: none; } }
+
+/* Numbered decision pathway (how the surgical plan is made). */
+.guide-pathsteps { list-style: none; margin: 1.1rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.guide-pathsteps li {
+  display: flex; gap: 1rem; align-items: flex-start;
+  border: 1px solid var(--g-line); border-radius: var(--g-radius);
+  background: var(--g-surface); padding: 1rem 1.15rem;
+}
+.guide-pathsteps .n {
+  flex: none; font-family: monospace; font-size: 0.78rem; font-weight: 700;
+  color: var(--g-on-accent); background: var(--g-blue-bright);
+  border-radius: 8px; padding: 0.3rem 0.5rem; margin-top: 0.15rem;
+}
+.guide-pathsteps h4 { margin: 0 0 0.3rem; font-size: 1rem; }
+.guide-pathsteps p { margin: 0 0 0.4rem; font-size: 0.92rem; color: var(--g-ink-soft); }
+.guide-pathsteps .src { font-size: 0.76rem; color: var(--g-muted); font-style: italic; }
+
+/* Department outcome figures. */
+.guide-outcome-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--g-line); border: 1px solid var(--g-line);
+  border-radius: var(--g-radius); overflow: hidden; margin: 1rem 0 0.7rem;
+}
+@media (max-width: 700px) { .guide-outcome-grid { grid-template-columns: 1fr 1fr; } }
+.guide-outcome { background: var(--g-surface); padding: 1rem; }
+.guide-outcome .num { display: block; font-size: 1.5rem; font-weight: 700; color: var(--g-blue); }
+.guide-outcome .cap { font-size: 0.82rem; color: var(--g-muted); }
+
+/* Welcome: take-it-with-you QR block. */
+.guide-welcome-share {
+  display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap;
+  margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid var(--g-line);
+}
+.guide-welcome-share .guide-welcome-foot { margin-top: 0; flex: 1 1 18rem; }
+.guide-qr { margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.guide-qr img {
+  width: 104px; height: 104px; border-radius: 10px; background: #fff;
+  border: 1px solid var(--g-line); padding: 6px;
+}
+.guide-qr figcaption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Continuous ("book") reading: chapters flow one into the next. */
+.guide-book .guide-chapter { scroll-margin-top: 4.5rem; }
+.guide-book .guide-chapter:last-child { border-bottom: none; }
+
+/* Reading-mode toggle reuses the theme-toggle chrome but stacks on narrow rails. */
+.guide-nav-theme .guide-theme-toggle button { flex: 1 1 auto; }
+
+/* ---- Mobile ---- */
+@media (max-width: 760px) {
+  .guide-scope { font-size: 16.5px; }
+  .guide-pathsteps li { flex-direction: column; gap: 0.5rem; }
+  .guide-pathsteps .n { align-self: flex-start; }
+  .guide-outcome-grid { grid-template-columns: 1fr 1fr; }
+  .guide-faculty-grid { grid-template-columns: 1fr; }
+  .guide-toolcta { padding: 1rem; }
+  .guide-toolcta a { width: 100%; justify-content: center; }
+  .guide-papers li { padding-left: 0; padding-top: 1.6rem; }
+  .guide-papers li::before { top: 0; }
+  .guide-cite, .guide-stat-source { font-size: 0.8rem; }
+  .guide-pager { gap: 0.5rem; }
+  .guide-pager button { max-width: 49%; padding: 0.6rem 0.7rem; }
+  .guide-pager .ttl { font-size: 0.85rem; }
+  .guide-welcome-share { gap: 0.9rem; }
+  .guide-contact-card { padding: 1rem; }
+}

@@ -1,5 +1,5 @@
 import type { GuideContent } from "../content";
-import { Callout, Chapter, DefTable } from "../primitives";
+import { Callout, Chapter, DefTable, ToolCta } from "../primitives";
 
 export function Psa({ c }: { c: GuideContent }) {
   const p = c.psa;
@@ -22,6 +22,7 @@ export function Psa({ c }: { c: GuideContent }) {
         </ul>
       </div>
       <Callout data={p.beforeTest} />
+      <ToolCta data={c.toolCta.epsa} />
 
       <div className="guide-chapter-head" style={{ marginTop: "2.4rem" }}>
         <h3 style={{ fontSize: "1.3rem" }}>{p.numbersTitle}</h3>

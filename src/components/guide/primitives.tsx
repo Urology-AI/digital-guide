@@ -37,6 +37,24 @@ export function Callout({ data, tone }: { data: CalloutData; tone?: "info" | "wa
   );
 }
 
+/** Inline call-to-action for one of the department's decision tools. */
+export function ToolCta({
+  data,
+}: {
+  data: { eyebrow: string; title: string; body: string; cta: string; href: string };
+}) {
+  return (
+    <aside className="guide-toolcta">
+      <span className="eyebrow">{data.eyebrow}</span>
+      <h4>{data.title}</h4>
+      <p>{data.body}</p>
+      <a href={data.href} target="_blank" rel="noopener noreferrer">
+        {data.cta} →
+      </a>
+    </aside>
+  );
+}
+
 /** Horizontally-scrollable wrapper for wide tables on small screens. */
 export function ScrollX({ children }: { children: ReactNode }) {
   return <div className="guide-wrap-x">{children}</div>;

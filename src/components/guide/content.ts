@@ -109,6 +109,9 @@ export interface GuideContent {
   disclaimerBar: string;
   draftNotice: string;
   theme: { auto: string; light: string; dark: string; label: string };
+  readModeLabel: string;
+  readModePages: string;
+  readModeScroll: string;
   nav: NavItem[];
 
   welcome: {
@@ -117,10 +120,16 @@ export interface GuideContent {
     lead: string;
     reassurance: string;
     portraitCaption: string;
+    qrLabel: string;
     startLabel: string;
     continueLabel: string;
     highlights: { label: string; text: string }[];
     footNote: string;
+  };
+
+  toolCta: {
+    epsa: { eyebrow: string; title: string; body: string; cta: string; href: string };
+    compass: { eyebrow: string; title: string; body: string; cta: string; href: string };
   };
 
   tools: {
@@ -270,6 +279,13 @@ export interface GuideContent {
     byStageFoot: string;
     expandHint: string;
     surgeryFirstNote: string;
+    pathTitle: string;
+    pathIntro: string;
+    pathSteps: { n: string; title: string; body: string; cite: string }[];
+    pathOutcomeTitle: string;
+    pathOutcomeIntro: string;
+    pathOutcomeRows: CmpRow[];
+    pathOutcomeCaveat: string;
     papersTitle: string;
     papersIntro: string;
     papers: { cite: string; url: string; note: string }[];
@@ -392,6 +408,9 @@ const EN: GuideContent = {
   draftNotice:
     "Draft for medical and brand review. Treatment standards change — confirm all clinical details with your Mount Sinai care team.",
   theme: { auto: "Auto", light: "Light", dark: "Dark", label: "Color theme" },
+  readModeLabel: "Reading",
+  readModePages: "One page at a time",
+  readModeScroll: "Scroll straight through",
   welcome: {
     eyebrow: "Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute",
     title: "Understanding Localized Prostate Cancer",
@@ -400,6 +419,7 @@ const EN: GuideContent = {
       "A diagnosis can feel urgent. Your decision does not have to feel rushed. The right plan begins with understanding your cancer and your priorities.",
     portraitCaption:
       "Ashutosh K. Tewari, MBBS, MCh, FRCS (Hon.) — Professor and System Chair, Milton and Carroll Petrie Department of Urology",
+    qrLabel: "Scan to open this guide on your phone — your place, notes, and answers stay on each device.",
     startLabel: "Start the guide",
     continueLabel: "Continue where you left off",
     highlights: [
@@ -409,6 +429,23 @@ const EN: GuideContent = {
     ],
     footNote:
       "For general education and shared decision-making. This draft is pending medical review and does not replace your care team.",
+  },
+
+  toolCta: {
+    epsa: {
+      eyebrow: "Check your risk",
+      title: "ePSA — risk assessment",
+      body: "Answer a few questions about your history, symptoms, and — if you have them — your PSA and MRI results. ePSA estimates your risk of clinically significant prostate cancer, so a PSA conversation starts from your numbers instead of a general rule.",
+      cta: "Check your risk with ePSA",
+      href: "https://epsa.millionstrongmen.com/",
+    },
+    compass: {
+      eyebrow: "If you are weighing surgery",
+      title: "COMPASS — surgical digital twin",
+      body: "For patients considering robot-assisted radical prostatectomy, COMPASS combines your clinical data with MRI, micro-ultrasound, and PSMA PET to estimate adverse pathology, recurrence, side-specific nerve-sparing, and functional recovery — on a 3D model of your prostate. Research use only; bring the results to your consultation.",
+      cta: "Open COMPASS",
+      href: "https://urology-ai.github.io/digital-twin/",
+    },
   },
 
   tools: {
@@ -858,7 +895,7 @@ const EN: GuideContent = {
       "Recurrence after treatment, or cancer that has spread, changes the options again — this is why knowing your current stage and risk group matters before comparing anything.",
     expandHint: "Select a card for advantages, tradeoffs, and what to ask.",
     surgeryFirstNote:
-      "This guide comes from a surgical department, so surgery is described first and in the most detail — that reflects where our expertise lies, not a recommendation for you. Guidelines still favor active surveillance for most low-risk disease, and radiation is an equally standard choice for many. Use the comparison table and the trial evidence further down to weigh them.",
+      "Surgery is described first and in the most detail because that is where this department's expertise lies — it is not a recommendation for you. Whether active surveillance or surgery fits depends on your own case: Grade Group, PSA and PSA density, how much cancer is on biopsy, what MRI shows, your age and health, and what you want to protect. Guidelines still favor surveillance for most low-risk disease. The decision tools in \"Mount Sinai tools\" are built to make that comparison concrete with your own numbers.",
     paths: [
       {
         id: "surgery",
@@ -1076,6 +1113,60 @@ const EN: GuideContent = {
     ],
     evidenceSource:
       "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer. N Engl J Med. 2023;388(17):1547–1558.",
+    pathTitle: "How the surgical decision is actually made",
+    pathIntro:
+      "If you are considering surgery here, the plan is not decided in the operating room. It follows a published, risk-stratified algorithm developed in this department — and understanding it lets you ask sharper questions at your consultation.",
+    pathSteps: [
+      {
+        n: "01",
+        title: "Each side of the prostate is assessed separately",
+        body: "The nerves that matter for erections run along both sides of the prostate. The decision is not \u201cnerve-sparing: yes or no\u201d — it is made independently for the left and right sides, because cancer may threaten one side and not the other.",
+        cite: "Martini et al., BJU Int 2018",
+      },
+      {
+        n: "02",
+        title: "Four inputs predict whether cancer has reached the edge",
+        body: "A validated nomogram estimates the chance that cancer extends just outside the capsule on that side, using your PSA, the highest Gleason grade on that side of the biopsy, how much of those cores are involved, and whether MRI shows extracapsular extension. In the published series it predicted correctly about 82% of the time.",
+        cite: "Martini et al., BJU Int 2018 (nomogram AUC 0.82)",
+      },
+      {
+        n: "03",
+        title: "That probability sets how much tissue is spared",
+        body: "The predicted risk maps onto four anatomical grades of nerve sparing — Grade 1 is the closest dissection to the prostate (intrafascial), Grades 2 and 3 move progressively outward, and Grade 4 is a deliberate wide, extrafascial dissection. Lower predicted risk allows a closer plane; higher predicted risk means taking more tissue to keep the margin clean.",
+        cite: "Tewari et al., BJU Int 2011; Martini et al., BJU Int 2019",
+      },
+      {
+        n: "04",
+        title: "Cancer control outranks the nerve plan",
+        body: "The planned grade holds only if what the surgeon sees during the operation allows it. If the anatomy or the tumor says otherwise, the dissection moves wider. Preserving function never comes before removing the cancer.",
+        cite: "Tewari et al., BJU Int 2011",
+      },
+      {
+        n: "05",
+        title: "Structures that control urine are rebuilt, not just avoided",
+        body: "Continence is treated as its own surgical objective. The \u201chood technique\u201d preserves the detrusor apron, puboprostatic ligament complex, arcus tendineus, endopelvic fascia, and pouch of Douglas rather than dividing them, and reconstruction restores the supporting anatomy.",
+        cite: "Wagaskar et al., Eur Urol 2021; Vis et al., Eur Urol 2019",
+      },
+      {
+        n: "06",
+        title: "Expected recovery is estimated before you consent",
+        body: "The same inputs feed the COMPASS model, which projects your likely pathology, recurrence risk, side-specific nerve-sparing, and functional recovery on a 3D model of your prostate — so the conversation is about your predicted outcome, not a published average.",
+        cite: "Mount Sinai COMPASS (research use only)",
+      },
+    ],
+    pathOutcomeTitle: "What that technique produced in the published series",
+    pathOutcomeIntro:
+      "The hood technique was reported prospectively in 300 men with localized prostate cancer operated on between April 2018 and March 2019. Continence was measured from the time the catheter came out.",
+    pathOutcomeRows: [
+      { label: "Continent at 4 weeks", a: "83%" },
+      { label: "Continent at 12 weeks", a: "91%" },
+      { label: "Continent at 24 weeks", a: "94%" },
+      { label: "Continent at 48 weeks", a: "95%" },
+      { label: "Positive surgical margin", a: "6%" },
+      { label: "Any complication", a: "9.7%" },
+    ],
+    pathOutcomeCaveat:
+      "Read these as what the technique achieved in one prospective single-centre series, not as your own odds. Men with anterior tumours on biopsy or MRI were excluded, the results come from one surgical team, and continence definitions vary between studies. Your baseline urinary and erectile function, age, cardiovascular health, and cancer all shift the estimate. Ask your surgeon what these numbers look like for a patient like you.",
     papersTitle: "The surgical technique, in the peer-reviewed literature",
     papersIntro:
       "The nerve-sparing and reconstruction techniques described above are published, cited, and open to scrutiny. These are papers by Dr. Tewari and colleagues, in date order, so you can read the primary description of what may be proposed for you — or bring it to a second opinion.",
@@ -1475,7 +1566,8 @@ const EN: GuideContent = {
     placeholder: "Type a question…",
     send: "Send",
     close: "Close",
-    offlineNote: "Offline answer from the guide — the assistant is unavailable right now.",
+    offlineNote:
+      "Offline answer, drawn from this guide's own text — the assistant is unavailable right now. Every clinical statement in the guide is referenced in the \"Sources\" chapter.",
     moreHelp:
       "Have more questions after reading? You can book a separate live session — Chat with Dr. Tewari (AI) — for a fuller conversation.",
     suggestions: [

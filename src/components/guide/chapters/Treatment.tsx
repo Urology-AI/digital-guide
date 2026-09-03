@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { GuideContent } from "../content";
-import { Blocks, Callout, Chapter, DefTable, ScrollX } from "../primitives";
+import { Blocks, Callout, Chapter, DefTable, ScrollX, ToolCta } from "../primitives";
 
 export function Treatment({ c }: { c: GuideContent }) {
   const t = c.treatment;
@@ -15,7 +15,11 @@ export function Treatment({ c }: { c: GuideContent }) {
 
       <h3 style={{ marginTop: "2rem" }}>The options in detail</h3>
       <p style={{ fontSize: ".85rem", color: "var(--g-muted)" }}>{t.expandHint}</p>
-      <Callout data={{ label: "Why surgery is first here", body: t.surgeryFirstNote }} />
+      <Callout data={{ label: "Surveillance or surgery depends on your case", body: t.surgeryFirstNote }} />
+      <div className="guide-toolcta-row">
+        <ToolCta data={c.toolCta.epsa} />
+        <ToolCta data={c.toolCta.compass} />
+      </div>
 
       <div className="guide-path-list">
         {t.paths.map((p) => {
@@ -46,6 +50,35 @@ export function Treatment({ c }: { c: GuideContent }) {
           );
         })}
       </div>
+
+      <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
+        <h3 style={{ fontSize: "1.3rem" }}>{t.pathTitle}</h3>
+        <p>{t.pathIntro}</p>
+      </div>
+      <ol className="guide-pathsteps">
+        {t.pathSteps.map((step) => (
+          <li key={step.n}>
+            <span className="n">{step.n}</span>
+            <div>
+              <h4>{step.title}</h4>
+              <p>{step.body}</p>
+              <span className="src">{step.cite}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <h4 style={{ marginTop: "2rem" }}>{t.pathOutcomeTitle}</h4>
+      <p>{t.pathOutcomeIntro}</p>
+      <div className="guide-outcome-grid">
+        {t.pathOutcomeRows.map((r) => (
+          <div className="guide-outcome" key={r.label}>
+            <span className="num">{r.a}</span>
+            <span className="cap">{r.label}</span>
+          </div>
+        ))}
+      </div>
+      <p className="guide-cite">{t.pathOutcomeCaveat}</p>
 
       <div className="guide-chapter-head" style={{ marginTop: "2.6rem" }}>
         <h3 style={{ fontSize: "1.3rem" }}>{t.papersTitle}</h3>

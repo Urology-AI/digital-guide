@@ -1,5 +1,6 @@
 import type { GuideContent } from "./content";
 import { ThemeToggle, type ThemeChoice } from "./ThemeToggle";
+import { QrCode } from "./QrCode";
 
 export function Welcome({
   c,
@@ -85,7 +86,10 @@ export function Welcome({
         </ul>
       </div>
 
-      <p className="guide-welcome-foot">{w.footNote}</p>
+      <div className="guide-welcome-share">
+        <QrCode value={window.location.href} label={w.qrLabel} />
+        <p className="guide-welcome-foot">{w.footNote}</p>
+      </div>
     </div>
   );
 }
