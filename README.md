@@ -169,3 +169,24 @@ If your repo name is different, replace `/digital-avatar/` with your repo path.
 ## Disclaimer
 
 This tool provides educational information and emotional support. It does not provide medical advice.
+
+## ePSA engine (optional)
+
+The risk section can run the department's own screening model in the browser via
+`@urology-ai/epsa-engine` (Urology-AI/epsa-engine) — the same engine behind
+millionstrongmen.com and the MSSM screening tool.
+
+That package is **private** (GitHub Packages, scope `@urology-ai`), so it is not
+a dependency of this repo: the app builds and deploys without it, and the ePSA
+section falls back to linking out to the hosted tool. `vite.config.ts` aliases
+the specifier to `src/services/epsaEngineStub.ts` when the package is absent.
+
+To enable in-browser scoring, install it alongside this repo the way the other
+consuming apps do:
+
+```bash
+npm install ../epsa-engine
+```
+
+Results are stamped with `ENGINE_VERSION` and `GUIDELINE_VERSION`, as the
+engine's README requires for traceability.

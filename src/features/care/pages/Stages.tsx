@@ -5,6 +5,7 @@ import { DEMO_LABEL, RISK_FACTORS } from "../../../data/care/demo";
 import { REFS } from "../../../data/care/references";
 import { DemoBadge, Disclaimer, References } from "../components/ui";
 import { DiagnosticPathway, PiradsScale, PsaTrend } from "../components/charts";
+import { EpsaCheck } from "../components/EpsaCheck";
 import { Topic } from "./Topic";
 
 export function Health() {
@@ -55,19 +56,11 @@ export function Risk() {
               ? `You ticked ${count} ${count === 1 ? "factor" : "factors"}. Discuss these with your healthcare professional — they are things that may shape when and how screening is considered, not a diagnosis.`
               : "Discuss any factors that apply with your healthcare professional. Risk factors influence when screening may be considered; they do not diagnose anything."}
           </p>
-          <div className="mt-5">
-            <a
-              className="inline-block rounded-xl bg-sinai-400 px-5 py-3 text-sm font-bold text-white transition hover:bg-sinai-500"
-              href="https://epsa.millionstrongmen.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open the ePSA educational risk tool →
-            </a>
-            <p className="mt-2 text-xs text-slate-500">
-              ePSA is an educational, point-based tool from the department. It is not a diagnosis.
-            </p>
-          </div>
+        </div>
+      }
+      after={
+        <div className="mt-6">
+          <EpsaCheck />
         </div>
       }
     />
