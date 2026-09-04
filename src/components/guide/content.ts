@@ -109,6 +109,9 @@ export interface GuideContent {
   disclaimerBar: string;
   draftNotice: string;
   theme: { auto: string; light: string; dark: string; label: string };
+  readModeLabel: string;
+  readModePages: string;
+  readModeScroll: string;
   nav: NavItem[];
 
   welcome: {
@@ -116,10 +119,27 @@ export interface GuideContent {
     title: string;
     lead: string;
     reassurance: string;
+    portraitCaption: string;
+    qrLabel: string;
     startLabel: string;
     continueLabel: string;
     highlights: { label: string; text: string }[];
     footNote: string;
+  };
+
+  toolCta: {
+    epsa: { eyebrow: string; title: string; body: string; cta: string; href: string };
+    surveillance: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      cta: string;
+      href: string;
+      clinicianCta: string;
+      clinicianHref: string;
+      clinicianNote: string;
+    };
+    compass: { eyebrow: string; title: string; body: string; cta: string; href: string };
   };
 
   tools: {
@@ -138,6 +158,7 @@ export interface GuideContent {
     chips: string[];
   };
   stats: { num: string; cap: string }[];
+  statsSource: string;
 
   start: {
     eyebrow: string;
@@ -179,6 +200,13 @@ export interface GuideContent {
     factors: CmpRow[];
     testsThatFollow: string[];
     beforeTest: Callout;
+    numbersTitle: string;
+    numbersIntro: string;
+    numbers: CmpRow[];
+    screeningTitle: string;
+    screeningIntro: string;
+    screeningRows: CmpRow[];
+    screeningFoot: string;
   };
 
   diagnosis: {
@@ -218,7 +246,10 @@ export interface GuideContent {
     intro: string;
     chairName: string;
     chairRole: string;
+    chairTitles: string[];
     chairBody: string;
+    chairSourceUrl: string;
+    chairSourceLabel: string;
     roles: CmpRow[];
     secondOpinionTitle: string;
     secondOpinionItems: string[];
@@ -227,6 +258,25 @@ export interface GuideContent {
     prioritiesIntro: string;
     priorities: CmpRow[];
     decisionCheck: Callout;
+    facultyTitle: string;
+    facultyIntro: string;
+    facultyNote: string;
+    faculty: {
+      name: string;
+      creds: string;
+      role: string;
+      focus: string;
+      url: string;
+    }[];
+    msCare: {
+      title: string;
+      intro: string;
+      items: CmpRow[];
+      contactTitle: string;
+      contactLines: string[];
+      sourceUrl: string;
+      sourceLabel: string;
+    };
   };
 
   treatment: {
@@ -238,7 +288,25 @@ export interface GuideContent {
     byStageRows: CmpRow[];
     byStageFoot: string;
     expandHint: string;
+    surgeryFirstNote: string;
+    pathTitle: string;
+    pathIntro: string;
+    pathSteps: { n: string; title: string; body: string; cite: string }[];
+    pathOutcomeTitle: string;
+    pathOutcomeIntro: string;
+    pathOutcomeRows: CmpRow[];
+    pathOutcomeCaveat: string;
+    papersTitle: string;
+    papersIntro: string;
+    papers: { cite: string; url: string; note: string }[];
+    papersFoot: string;
     paths: TreatmentPath[];
+    evidenceTitle: string;
+    evidenceIntro: string;
+    evidenceHead: string[];
+    evidenceRows: { label: string; a: string; b: string; c: string }[];
+    evidenceCaveats: string[];
+    evidenceSource: string;
     compareTitle: string;
     compareIntro: string;
     compareHead: [string, string, string, string];
@@ -350,12 +418,18 @@ const EN: GuideContent = {
   draftNotice:
     "Draft for medical and brand review. Treatment standards change — confirm all clinical details with your Mount Sinai care team.",
   theme: { auto: "Auto", light: "Light", dark: "Dark", label: "Color theme" },
+  readModeLabel: "Reading",
+  readModePages: "One page at a time",
+  readModeScroll: "Scroll straight through",
   welcome: {
     eyebrow: "Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute",
     title: "Understanding Localized Prostate Cancer",
     lead: "How to read your pathology and imaging, how PSA, Grade Group, and stage combine into a risk group, and how active surveillance, surgery, and radiation actually differ — from the Mount Sinai Department of Urology, chaired by Dr. Ashutosh K. Tewari.",
     reassurance:
       "Most localized prostate cancer gives you weeks to decide, not days. Use that time to get your pathology and imaging right and to define what outcome matters most to you.",
+    portraitCaption:
+      "Ashutosh K. Tewari, MBBS, MCh, FRCS (Hon.) — Professor and System Chair, Milton and Carroll Petrie Department of Urology",
+    qrLabel: "Scan to open this guide on your phone — your place, notes, and answers stay on each device.",
     startLabel: "Start the guide",
     continueLabel: "Continue where you left off",
     highlights: [
@@ -367,11 +441,40 @@ const EN: GuideContent = {
       "For education and shared decision-making. This draft is pending Mount Sinai clinical review and does not replace your care team.",
   },
 
+  toolCta: {
+    epsa: {
+      eyebrow: "Check your risk",
+      title: "ePSA — risk assessment",
+      body: "Answer a few questions about your history, symptoms, and — if you have them — your PSA and MRI results. ePSA estimates your risk of clinically significant prostate cancer, so a PSA conversation starts from your numbers instead of a general rule.",
+      cta: "Check your risk with ePSA",
+      href: "https://epsa.millionstrongmen.com/",
+    },
+    surveillance: {
+      eyebrow: "If you are considering active surveillance",
+      title: "The Tewari Active Surveillance Program",
+      body: "The department runs a defined active surveillance pathway — risk stratification after your biopsy, a confirmatory biopsy and genomic testing before enrollment, then a standard monitoring protocol of quarterly PSA and office visits with annual MRI, micro-ultrasound, and exam. The patient version walks you through what surveillance actually involves and what would trigger a change of plan.",
+      cta: "See what surveillance involves",
+      href: "https://as.millionstrongmen.com/patient/",
+      clinicianCta: "Clinician pathway tool",
+      clinicianHref: "https://as.millionstrongmen.com/",
+      clinicianNote:
+        "The clinician version is the step-by-step decision tool your team uses to work through the same protocol — you are welcome to look at it, but it is written for clinicians.",
+    },
+
+    compass: {
+      eyebrow: "If you are weighing surgery",
+      title: "COMPASS — surgical digital twin",
+      body: "For patients considering robot-assisted radical prostatectomy, COMPASS combines your clinical data with MRI, micro-ultrasound, and PSMA PET to estimate adverse pathology, recurrence, side-specific nerve-sparing, and functional recovery — on a 3D model of your prostate. Research use only; bring the results to your consultation.",
+      cta: "Open COMPASS",
+      href: "https://urology-ai.github.io/digital-twin/",
+    },
+  },
+
   tools: {
     eyebrow: "Your toolkit",
     title: "Mount Sinai prostate tools",
     intro:
-      "Two tools built in the Department of Urology sit alongside this guide — one before a diagnosis, one when surgery is already on the table.",
+      "Three tools built in the Department of Urology sit alongside this guide — one before a diagnosis, one on active surveillance, and one when surgery is already on the table.",
     items: [
       {
         id: "epsa",
@@ -380,6 +483,15 @@ const EN: GuideContent = {
         body: "A short questionnaire (family history, symptoms, lifestyle, and — if you have it — your PSA and MRI results) that estimates your risk and flags whether a PSA test is worth discussing. Useful to revisit as your numbers change so you can see where you stand.",
         cta: "Open ePSA",
         href: "https://epsa.millionstrongmen.com/",
+      },
+      {
+        id: "as",
+        eyebrow: "On or considering active surveillance",
+        title: "Tewari Active Surveillance Program",
+        body: "The department's defined surveillance pathway: risk stratification after a positive biopsy, confirmatory biopsy and genomic testing before enrollment, then quarterly PSA and office visits with annual MRI, micro-ultrasound, and exam. The patient version explains what monitoring involves and what findings would prompt a change of plan. A separate clinician version steps your team through the same protocol.",
+        cta: "Open the patient version",
+        href: "https://as.millionstrongmen.com/patient/",
+        note: "Clinician pathway tool: as.millionstrongmen.com — written for clinicians, not as patient instructions.",
       },
       {
         id: "compass",
@@ -426,16 +538,16 @@ const EN: GuideContent = {
       "Works on any device",
     ],
   },
-  // TODO(clinical review): verify every figure below against a current, citable
-  // source (SEER / ACS) and confirm the phrasing "localized" matches how that
-  // source defines the stage. ">99%" is widely reported as ~100% 5-year
-  // relative survival for local/regional disease — pin the exact source + date.
+  // Figures below are pinned to NCI SEER Cancer Stat Facts: Prostate Cancer
+  // (SEER 21, 2016-2022 survival data), cited in `statsSource` and in Sources.
   stats: [
-    { num: ">99%", cap: "5-year relative survival for localized prostate cancer" },
+    { num: "~100%", cap: "5-year relative survival for localized prostate cancer (SEER)" },
     { num: "T1–T2", cap: "how most localized disease is staged" },
     { num: "1–5", cap: "Grade Groups, from lower-grade to highest-grade" },
-    { num: "5", cap: "common treatment approaches to compare" },
+    { num: "69%", cap: "of prostate cancers are found while still localized" },
   ],
+  statsSource:
+    "Source: NCI Surveillance, Epidemiology, and End Results Program (SEER) Cancer Stat Facts: Prostate Cancer. Survival figures use SEER 21 data for 2016–2022; stage distribution uses 2019–2023 cases. Relative survival compares people with the diagnosis to the general population — it is not a prediction for any one person.",
 
   start: {
     eyebrow: "Start here",
@@ -480,10 +592,8 @@ const EN: GuideContent = {
       "\"Localized\" means every test so far points to cancer that is still inside the prostate capsule (stage T1–T2). \"Locally advanced\" (some T3–T4) means it has grown through the capsule, into the seminal vesicles, or into an adjacent structure. \"Regional\" means it has reached nearby pelvic lymph nodes. These distinctions change which treatments apply, so confirm exactly which one your report describes.",
     notOneTest:
       "The plan comes from combining the biopsy grade and extent, PSA and how fast it has moved, the digital rectal exam, MRI (and PSMA PET or bone imaging when risk is higher), your age and other health conditions, family and genetic history, and the outcome you most want to protect.",
-    // TODO(clinical review): keep the survival framing qualitative until a cited
-    // SEER/ACS figure and date are confirmed alongside `stats`.
     reassuringFact:
-      "For cancer that is genuinely localized, long-term survival is high and death from the cancer within the first several years is uncommon. That is why there is usually room to get the pathology re-read, complete imaging, and take a second opinion before committing.",
+      "In SEER data (2016–2022), 5-year relative survival for localized prostate cancer is essentially 100%, and about 69% of prostate cancers are found before they have spread beyond the prostate. Statistics describe groups, not individual outcomes, but they help explain why there is often time to get the pathology re-read, complete imaging, and take a second opinion before committing.",
   },
 
   basics: {
@@ -520,6 +630,46 @@ const EN: GuideContent = {
       label: "Before a PSA test",
       body: "Tell the lab about any recent urinary infection, catheter, cystoscopy, or biopsy, and about finasteride or dutasteride. Avoid ejaculation and vigorous cycling for 48 hours beforehand. If a value comes back high and you feel well, ask to repeat it before scheduling anything else.",
     },
+    numbersTitle: "What the numbers usually mean",
+    numbersIntro:
+      "There is no PSA level that proves or rules out cancer. These figures, from the National Cancer Institute, give a sense of scale — your own result is read in the context of your age, prostate size, trend, and exam.",
+    numbers: [
+      {
+        label: "Above 4.0 ng/mL",
+        a: "The conventional threshold for calling a PSA abnormal, though clinicians adjust it for age and context. NCI is explicit that no single level means someone has cancer.",
+      },
+      {
+        label: "About 6–7%",
+        a: "of men have a false-positive PSA — an elevated result with no cancer found on biopsy.",
+      },
+      {
+        label: "About 25%",
+        a: "of men who have a biopsy because of an elevated PSA are found to have prostate cancer.",
+      },
+      {
+        label: "Slow-growing disease",
+        a: "Many cancers found by screening would never have caused symptoms. That is the case for weighing screening rather than assuming it — and for considering active surveillance when one is found.",
+      },
+    ],
+    screeningTitle: "When screening is usually discussed",
+    screeningIntro:
+      "Guidelines differ, which is why this is a conversation rather than a rule. Two widely used sets of recommendations:",
+    screeningRows: [
+      {
+        label: "U.S. Preventive Services Task Force",
+        a: "Ages 55–69: an individual decision made after discussing benefits and harms with a clinician. Age 70 and older: routine PSA screening is not recommended.",
+      },
+      {
+        label: "American Cancer Society",
+        a: "Start the conversation at 50 at average risk (with at least a 10-year life expectancy); 45 at high risk — Black men, or a father or brother diagnosed before 65; 40 with more than one first-degree relative diagnosed young.",
+      },
+      {
+        label: "Higher inherited risk",
+        a: "NCI notes that men at higher risk — including Black men, BRCA2 carriers, and those with a family history — may begin screening discussions at 40 to 45.",
+      },
+    ],
+    screeningFoot:
+      "If you already have a prostate cancer diagnosis, these screening ages no longer apply to you — they matter for your brothers and sons. See \"Genetics and inherited risk.\"",
   },
 
   diagnosis: {
@@ -560,13 +710,12 @@ const EN: GuideContent = {
       "Cribriform or intraductal carcinoma, or perineural invasion — adverse features that can rule out surveillance and influence surgical planning even at Grade Group 2.",
       "ASAP (atypical small acinar proliferation) or high-grade PIN are not cancer but often warrant a repeat biopsy, usually with MRI targeting.",
     ],
-    // TODO(clinical review): "roughly one in four ... higher grade" — biopsy
-    // upgrading rates at prostatectomy range ~25–35% across series and depend
-    // on biopsy technique (systematic vs MRI-fusion). Confirm the figure and
-    // qualifier, or soften to "a meaningful share".
+    // Upgrading rates at prostatectomy vary widely by series and by biopsy
+    // technique (roughly 14-40%, and higher for Grade Group 1), so the copy
+    // describes the direction and the reason rather than quoting one number.
     worthAsking: {
       label: "Worth asking",
-      body: "Can a genitourinary subspecialty pathologist re-read my slides before I decide? Grade Group is reproducible but not perfect between pathologists, and a biopsy samples a fraction of the gland — a meaningful share of cancers prove higher grade at surgery than the biopsy showed. A re-read changes management often enough to be worth the delay.",
+      body: "Can a genitourinary subspecialty pathologist re-read my slides before I decide? Grade Group is reproducible but not perfect between pathologists, and because a biopsy samples only a fraction of the gland, a meaningful share of cancers prove higher grade once the whole prostate is examined — published rates vary widely and are highest for Grade Group 1. MRI-targeted sampling narrows the gap but does not close it, which is why confirmatory testing is part of active surveillance and a re-read is often worth the delay.",
     },
     ifNegativeTitle: "If the biopsy does not find cancer",
     ifNegative:
@@ -586,7 +735,7 @@ const EN: GuideContent = {
     clinicalStage:
       "Clinical T stage is your team's estimate of tumor extent before any surgery, from the exam, MRI, and biopsy. T1c means cancer found on biopsy after an elevated PSA with a normal exam — the most common presentation. T2 means a nodule felt or seen confined to the gland (T2a one lobe, T2c both). T3 means extension through the capsule (T3a) or into a seminal vesicle (T3b). N and M describe lymph nodes and distant spread and are 0 in truly localized disease.",
     riskGroup:
-      "The NCCN and AUA risk groups take your PSA, Grade Group, and T stage and sort you into very low, low, favorable intermediate, unfavorable intermediate, high, or very high risk. The favorable/unfavorable split within intermediate risk is decisive: it often determines whether surveillance is still offered and whether radiation is paired with hormone therapy. Ask which subgroup you are in, not just \"intermediate.\"",
+      "Risk groups combine PSA, Grade Group, and clinical stage to estimate the likelihood of growth or recurrence. Terms you will hear include low, favorable intermediate, unfavorable intermediate, high, and very high risk. NCCN removed the separate \"very low risk\" category in its 2026 update, folding those cancers into low risk — if you see the older term on a report or an older website, that is why. The favorable/unfavorable split within intermediate risk is decisive: it often determines whether surveillance is still offered and whether radiation is paired with hormone therapy, so ask which subgroup you are in, not just \"intermediate.\" Different systems can also classify the same case slightly differently.",
     imaging: [
       "Multiparametric MRI is standard before biopsy and before treatment — it locates the tumor, estimates whether it has reached the capsule, and guides nerve-sparing and radiation planning.",
       "PSMA PET has largely replaced CT and bone scan for detecting nodal or distant spread in unfavorable intermediate, high, and very high risk disease; it is not needed for low or favorable intermediate risk.",
@@ -604,9 +753,16 @@ const EN: GuideContent = {
     intro:
       "Surgery and radiation are delivered by different specialists who each see patients that did well on their own modality. That is exactly why a urologist and a radiation oncologist should both weigh in before you choose — a single-specialty recommendation is not a second opinion.",
     chairName: "Dr. Ashutosh K. Tewari",
-    chairRole: "Chair, Milton and Carroll Petrie Department of Urology · Mount Sinai",
+    chairRole: "Professor and System Chair, Milton and Carroll Petrie Department of Urology · Icahn School of Medicine at Mount Sinai",
+    chairTitles: [
+      "Director, Center of Excellence for Prostate Cancer · The Tisch Cancer Center",
+      "Professor of Urology, Oncological Sciences, and Artificial Intelligence and Human Health",
+      "Board certified by the American Board of Urology",
+    ],
     chairBody:
-      "Dr. Tewari is a urologic surgeon known for advancing robotic radical prostatectomy and athermal nerve-sparing technique aimed at preserving continence and erections, and for integrating MRI, micro-ultrasound, and molecular imaging into surgical planning. A surgical consultation here covers whether nerve-sparing is feasible on one or both sides for your tumor, and what continence and erectile recovery look like for a patient with your age, baseline function, and pathology — not a published average.",
+      "Dr. Tewari is a urologic surgeon internationally recognized for advancing robotic-assisted radical prostatectomy and athermal nerve-sparing technique aimed at preserving continence and erections — including the total reconstruction technique used to help men recover urinary control — and for integrating MRI, micro-ultrasound, and molecular imaging into surgical planning. His clinical work covers MRI-targeted biopsy, active surveillance, robotic prostatectomy, and focal therapy protocols; his lab studies the genomic causes of prostate cancer, imaging biomarkers, and a prostate cancer vaccine supported by the NIH and Department of Defense. A surgical consultation here covers whether nerve-sparing is feasible on one or both sides for your tumor, and what continence and erectile recovery look like for a patient with your age, baseline function, and pathology — not a published average.",
+    chairSourceUrl: "https://profiles.mountsinai.org/ashutosh-tewari",
+    chairSourceLabel: "Mount Sinai physician profile",
     roles: [
       { label: "Urologic oncologist", a: "Confirms diagnosis and discusses surgery, surveillance, focal approaches, and urinary care." },
       { label: "Radiation oncologist", a: "Explains external-beam radiation, brachytherapy, schedules, and radiation-specific effects." },
@@ -641,6 +797,104 @@ const EN: GuideContent = {
       label: "Decision check",
       body: "Before choosing, be able to explain: what happens next, the goal of treatment, the main alternatives, the most likely side effects, and the follow-up plan.",
     },
+    facultyTitle: "The department behind this guide",
+    facultyIntro:
+      "Prostate cancer care at Mount Sinai is delivered by the Milton and Carroll Petrie Department of Urology together with radiation and medical oncology. These are some of the faculty whose work touches a prostate cancer diagnosis — you will not meet all of them, and your own team may include others.",
+    faculty: [
+      {
+        name: "Ashutosh K. Tewari",
+        creds: "MBBS, MCh, FRCS (Hon.)",
+        role: "Professor and System Chair, Urology · Director, Center of Excellence for Prostate Cancer",
+        focus: "Robotic radical prostatectomy, nerve-sparing and reconstruction, MRI-targeted biopsy, active surveillance, focal therapy protocols.",
+        url: "https://profiles.mountsinai.org/ashutosh-tewari",
+      },
+      {
+        name: "Ketan K. Badani",
+        creds: "MD",
+        role: "Vice Chair, Urology and Robotic Operations · Professor of Urology",
+        focus: "Robotic urologic oncology across prostate and kidney cancer, and reconstructive urology.",
+        url: "https://profiles.mountsinai.org/ketan-k-badani",
+      },
+      {
+        name: "Michael A. Palese",
+        creds: "MD",
+        role: "System Vice Chair, Clinical Operations · Site Chair, Mount Sinai Downtown–Union Square",
+        focus: "Minimally invasive robotic, laparoscopic, and endoscopic surgery for prostate, kidney, and bladder disease.",
+        url: "https://profiles.mountsinai.org/michael-a-palese",
+      },
+      {
+        name: "Peter Wiklund",
+        creds: "MD, PhD",
+        role: "Professor of Urology · Director, Bladder Cancer Program",
+        focus: "Robotic prostate and bladder surgery, prostate biopsy, and evaluation of an elevated PSA.",
+        url: "https://profiles.mountsinai.org/peter-wiklund",
+      },
+      {
+        name: "John P. Sfakianos",
+        creds: "MD",
+        role: "Professor of Urology and Urologic Oncology",
+        focus: "Open, laparoscopic, and robotic surgery for prostate, kidney, bladder, and testicular cancers.",
+        url: "https://profiles.mountsinai.org/john-p-sfakianos",
+      },
+      {
+        name: "Reza Mehrazin",
+        creds: "MD",
+        role: "Professor of Urology · Director, Society of Urologic Oncology Fellowship",
+        focus: "Nerve-sparing prostatectomy and organ-preserving surgery across urologic cancers.",
+        url: "https://profiles.mountsinai.org/reza-mehrazin",
+      },
+      {
+        name: "Michael A. Gorin",
+        creds: "MD",
+        role: "Associate Professor of Urology and of Artificial Intelligence and Human Health",
+        focus: "Prostate cancer screening and treatment, MRI-guided prostate biopsy, minimally invasive procedures.",
+        url: "https://profiles.mountsinai.org/michael-gorin",
+      },
+      {
+        name: "Richard G. Stock",
+        creds: "MD",
+        role: "Professor, Radiation Oncology",
+        focus: "Prostate brachytherapy and intensity-modulated radiation therapy (IMRT) for prostate cancer.",
+        url: "https://profiles.mountsinai.org/richard-g-stock",
+      },
+      {
+        name: "Natasha Kyprianou",
+        creds: "PhD",
+        role: "Vice Chair for Research, Urology · Professor of Urology, Pathology, and Oncological Sciences",
+        focus: "Laboratory research into prostate cancer biology and why some cancers resist treatment.",
+        url: "https://profiles.mountsinai.org/natasha-kyprianou",
+      },
+      {
+        name: "Nihal E. Mohamed",
+        creds: "PhD",
+        role: "Director, Patient Education and Behavioral Research, Urology",
+        focus: "How patients weigh treatment decisions, quality of life, and emotional adjustment after diagnosis.",
+        url: "https://profiles.mountsinai.org/nihal-e-mohamed",
+      },
+    ],
+    facultyNote:
+      "Titles and roles are drawn from public Mount Sinai physician profiles and may change. Your care team is assigned through your appointment, not through this list.",
+    msCare: {
+      title: "What care looks like at Mount Sinai",
+      intro:
+        "The Center of Excellence for Prostate Cancer sits inside The Tisch Cancer Center, an NCI-designated comprehensive cancer center. Urologic, radiation, and medical oncologists review cases alongside pathologists, radiologists, sexual medicine specialists, and oncology nurses, so one plan comes out of one discussion.",
+      items: [
+        { label: "Diagnosis", a: "MRI-fusion targeted biopsy, expert genitourinary pathology review, and genomic marker testing to sharpen your risk group." },
+        { label: "Surgery", a: "Robot-assisted, laparoscopic, and open prostatectomy, with nerve-sparing and reconstruction techniques developed in the department." },
+        { label: "Radiation", a: "Intensity-modulated radiation therapy (IMRT) and brachytherapy, planned with the surgical team rather than in isolation." },
+        { label: "Surveillance & focal therapy", a: "Structured active surveillance programs and clinical protocols for focal treatment of selected tumors." },
+        { label: "Research access", a: "Clinical trials in immunotherapy, vaccines, and imaging, through the department's research programs." },
+        { label: "Screening outreach", a: "The Robert F. Smith Mobile Prostate Cancer Screening Unit brings screening into New York communities." },
+      ],
+      contactTitle: "Making an appointment",
+      contactLines: [
+        "Mount Sinai cancer appointments: 844-MD-CANCER (844-632-2262)",
+        "Milton and Carroll Petrie Department of Urology / robotic prostate surgery: 212-241-9955",
+        "Main urology practice, 1425 Madison Avenue, 6th floor, Suite L6-50, New York, NY 10029",
+      ],
+      sourceUrl: "https://www.mountsinai.org/care/cancer/services/prostate",
+      sourceLabel: "Mount Sinai Prostate Cancer Center of Excellence",
+    },
   },
 
   treatment: {
@@ -653,8 +907,8 @@ const EN: GuideContent = {
       "Risk group — from your PSA, Grade Group, and T stage — is the main filter. This maps the standard options for localized disease (per AUA/ASTRO and NCCN); your own plan depends on MRI findings, genomics, age, and health.",
     byStageRows: [
       {
-        label: "Very low / low risk",
-        a: "Active surveillance is the recommended management. Surgery or radiation remain available if you prefer treatment or if surveillance later shows progression.",
+        label: "Low risk",
+        a: "Active surveillance is the recommended management, and NCCN reaffirmed that preference in its 2026 update. Surgery or radiation remain available if you prefer treatment or if surveillance later shows progression.",
       },
       {
         label: "Favorable intermediate (Grade Group 1–2, one intermediate factor, < 50% cores positive)",
@@ -676,56 +930,12 @@ const EN: GuideContent = {
     byStageFoot:
       "A recurrence after surgery or radiation, or newly detected spread, reopens the decision on different terms — which is why your current stage and risk group are the reference point for everything that follows.",
     expandHint: "Select a card for how it works, tradeoffs, and what to ask.",
+    surgeryFirstNote:
+      "Surgery is described first and in the most detail because that is where this department's expertise lies — it is not a recommendation for you. Whether active surveillance or surgery fits depends on your own case: Grade Group, PSA and PSA density, how much cancer is on biopsy, what MRI shows, your age and health, and what you want to protect. Guidelines still favor surveillance for most low-risk disease. The decision tools in \"Mount Sinai tools\" are built to make that comparison concrete with your own numbers.",
     paths: [
       {
-        id: "as",
-        n: "OPTION A",
-        title: "Active surveillance",
-        summary: "Closely monitor selected cancers; start treatment if there are signs of progression.",
-        blocks: [
-          {
-            title: "Who may consider it",
-            body: "The preferred approach for many people with very-low or low-risk prostate cancer — typically Grade Group 1, PSA under 10, and a limited amount of cancer on biopsy — with a life expectancy of about 10 years or more and comfort with ongoing monitoring. It is sometimes an option for carefully selected favorable intermediate-risk cancers, for example when only a small amount of Gleason pattern 4 is present, PSA density is low, or genomic tests suggest low risk.",
-          },
-          {
-            title: "Confirming you are a good candidate",
-            body: "Because a first biopsy can under-read a cancer, confirmatory testing is common before committing: a repeat biopsy (usually within 12–24 months), an MRI with PSA density, and sometimes a genomic test. Even with these, an aggressive cancer can occasionally go undetected.",
-          },
-          {
-            title: "What monitoring may include",
-            items: [
-              "A PSA blood test roughly every 6 months.",
-              "A clinical visit and, about once a year, an examination.",
-              "MRI and repeat biopsy on a schedule your team sets, often every 1–3 years, sooner if something changes.",
-              "Imaging and genomic tests support decisions but do not replace biopsy.",
-            ],
-          },
-          {
-            title: "When surveillance may change to treatment",
-            items: [
-              "A higher Grade Group on a repeat biopsy.",
-              "A meaningful increase in the amount of cancer, or a concerning rise in PSA density.",
-              "A new or growing suspicious area on MRI.",
-              "Significant anxiety, or your own preference to treat despite stable results.",
-            ],
-          },
-          {
-            title: "Benefits and tradeoffs",
-            items: [
-              "Avoids or delays treatment-related urinary, sexual, and bowel effects, and keeps curative treatment available if the cancer changes.",
-              "Requires reliable follow-up and repeat testing, and living with an untreated cancer can be emotionally difficult.",
-              "Many men on surveillance eventually need treatment; a smaller number are found to have, or develop, a more aggressive cancer.",
-            ],
-          },
-        ],
-        callout: {
-          label: "Not the same as watchful waiting",
-          body: "Active surveillance aims to preserve the option of cure and uses regular testing. Watchful waiting is less intensive, is usually chosen when life expectancy is shorter or other health problems outweigh the cancer risk, and focuses on treating symptoms if they arise.",
-        },
-      },
-      {
         id: "surgery",
-        n: "OPTION B",
+        n: "OPTION A",
         title: "Surgery: radical prostatectomy",
         summary: "Removes the whole prostate and seminal vesicles, usually robot-assisted; pelvic lymph nodes are removed when nodal risk is elevated.",
         blocks: [
@@ -762,6 +972,52 @@ const EN: GuideContent = {
         callout: {
           label: "Ask for your numbers, not the average",
           body: "Ask the surgeon to estimate your cancer control, your one-year continence, and your erectile recovery given your age, baseline function, and pathology — and which of those factors is pulling your estimate away from the published figures.",
+        },
+      },
+      {
+        id: "as",
+        n: "OPTION B",
+        title: "Active surveillance",
+        summary: "Closely monitor selected cancers; start treatment if there are signs of progression.",
+        blocks: [
+          {
+            title: "Who may consider it",
+            body: "The preferred approach for most people with low-risk prostate cancer — typically Grade Group 1, PSA under 10, and a limited amount of cancer on biopsy — with a life expectancy of about 10 years or more and comfort with ongoing monitoring. It is sometimes an option for carefully selected favorable intermediate-risk cancers, for example when only a small amount of Gleason pattern 4 is present, PSA density is low, or genomic tests suggest low risk.",
+          },
+          {
+            title: "Confirming you are a good candidate",
+            body: "Because a first biopsy can under-read a cancer, confirmatory testing is common before committing: a repeat biopsy (usually within 12–24 months), an MRI with PSA density, and sometimes a genomic test. Even with these, an aggressive cancer can occasionally go undetected.",
+          },
+          {
+            title: "What monitoring may include",
+            items: [
+              "A PSA blood test roughly every 6 months.",
+              "A clinical visit and, about once a year, an examination.",
+              "MRI and repeat biopsy on a schedule your team sets, often every 1–3 years, sooner if something changes.",
+              "Imaging and genomic tests support decisions but do not replace biopsy.",
+            ],
+          },
+          {
+            title: "When surveillance may change to treatment",
+            items: [
+              "A higher Grade Group on a repeat biopsy.",
+              "A meaningful increase in the amount of cancer, or a concerning rise in PSA density.",
+              "A new or growing suspicious area on MRI.",
+              "Significant anxiety, or your own preference to treat despite stable results.",
+            ],
+          },
+          {
+            title: "Benefits and tradeoffs",
+            items: [
+              "Avoids or delays treatment-related urinary, sexual, and bowel effects, and keeps curative treatment available if the cancer changes.",
+              "Requires reliable follow-up and repeat testing, and living with an untreated cancer can be emotionally difficult.",
+              "Many men on surveillance eventually need treatment; a smaller number are found to have, or develop, a more aggressive cancer.",
+            ],
+          },
+        ],
+        callout: {
+          label: "Not the same as watchful waiting",
+          body: "Active surveillance aims to preserve the option of cure and uses regular testing. Watchful waiting is less intensive, is usually chosen when life expectancy is shorter or other health problems outweigh the cancer risk, and focuses on treating symptoms if they arise.",
         },
       },
       {
@@ -828,7 +1084,7 @@ const EN: GuideContent = {
         ],
         callout: {
           label: "Not a smaller version of standard treatment",
-          body: "Focal therapy trades whole-gland side effects for the risk of undertreating cancer the imaging did not show. It commits you to intensive lifelong monitoring of the untreated prostate.",
+          body: "Focal therapy trades whole-gland side effects for the risk of undertreating cancer the imaging did not show, and commits you to intensive lifelong monitoring of the untreated prostate. NCCN's 2026 update specifically urges caution in using focal therapy for newly diagnosed disease — ask whether you would be treated on a protocol, and what the evidence is for your situation.",
         },
       },
       {
@@ -842,11 +1098,16 @@ const EN: GuideContent = {
             body: "An LHRH agonist (leuprolide, goserelin) by injection every 1 to 6 months is the usual approach; a GnRH antagonist — injectable degarelix or oral relugolix — suppresses testosterone faster and may carry lower cardiovascular risk. A short course of an anti-androgen pill often covers the initial testosterone flare with agonists.",
           },
           {
-            title: "How long, and why",
-            body: "Added to radiation, ADT improves cancer control for unfavorable intermediate risk (about 4 to 6 months) and high risk (roughly 18 months to 3 years). It is not used with surgery in localized disease, and ADT alone does not cure otherwise-treatable localized cancer — it only delays it.",
+            title: "How long it usually lasts",
+            items: [
+              "Unfavorable intermediate risk with radiation: short-course ADT, about 4 to 6 months.",
+              "High risk with definitive radiation: a longer course, generally 18 to 36 months.",
+              "Selected very high-risk or node-positive disease: ADT with abiraterone and prednisone for about 24 months.",
+              "These durations come from the AUA/ASTRO guideline. Yours may differ — ask why the specific length was chosen for you, and what would change it. It is not used with surgery in localized disease, and ADT alone does not cure otherwise-treatable localized cancer — it only delays it.",
+            ],
           },
           {
-            title: "Side effects to expect",
+            title: "Possible effects",
             items: [
               "Physical: hot flashes, fatigue, loss of muscle, weight gain around the middle, breast tenderness, and bone density loss over time.",
               "Sexual: loss of libido and erectile function while on treatment, usually partly recovering months after it ends.",
@@ -865,6 +1126,144 @@ const EN: GuideContent = {
         },
       },
     ],
+    evidenceTitle: "What the long-term evidence shows",
+    evidenceIntro:
+      "The ProtecT trial is the main randomized comparison of these approaches. It enrolled 1,643 men aged 50–69 whose cancer was found by PSA screening, assigned them to active monitoring, surgery, or radiotherapy, and followed them for a median of 15 years.",
+    evidenceHead: ["At 15 years", "Active monitoring", "Surgery", "Radiotherapy"],
+    evidenceRows: [
+      { label: "Died of prostate cancer", a: "3.1%", b: "2.2%", c: "2.9%" },
+      { label: "Cancer spread beyond the prostate (metastasis)", a: "9.4%", b: "4.7%", c: "5.0%" },
+      { label: "Cancer progressed locally", a: "25.9%", b: "10.5%", c: "11.0%" },
+    ],
+    evidenceCaveats: [
+      "Deaths from prostate cancer were low in all three groups and the differences between them were not statistically significant. Roughly 97% of men in every group were alive from a prostate cancer standpoint at 15 years.",
+      "Where the groups did differ was in metastasis and local progression — both about twice as common with monitoring. That is the tradeoff the table above is really describing.",
+      "\"Active monitoring\" in this trial was a PSA-triggered protocol from the 2000s, less intensive than today's MRI-based active surveillance. About three-quarters of that group went on to have radical treatment; 24% were alive with no prostate cancer treatment at all at the end of follow-up.",
+      "Participants were screen-detected and mostly low- or intermediate-risk, treated with the surgery and radiation techniques of 1999–2009. Results may not transfer directly to higher-risk disease or to current technique.",
+    ],
+    evidenceSource:
+      "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer. N Engl J Med. 2023;388(17):1547–1558.",
+    pathTitle: "How the surgical decision is actually made",
+    pathIntro:
+      "If you are considering surgery here, the plan is not decided in the operating room. It follows a published, risk-stratified algorithm developed in this department — and understanding it lets you ask sharper questions at your consultation.",
+    pathSteps: [
+      {
+        n: "01",
+        title: "Each side of the prostate is assessed separately",
+        body: "The nerves that matter for erections run along both sides of the prostate. The decision is not \u201cnerve-sparing: yes or no\u201d — it is made independently for the left and right sides, because cancer may threaten one side and not the other.",
+        cite: "Martini et al., BJU Int 2018",
+      },
+      {
+        n: "02",
+        title: "Four inputs predict whether cancer has reached the edge",
+        body: "A validated nomogram estimates the chance that cancer extends just outside the capsule on that side, using your PSA, the highest Gleason grade on that side of the biopsy, how much of those cores are involved, and whether MRI shows extracapsular extension. In the published series it predicted correctly about 82% of the time.",
+        cite: "Martini et al., BJU Int 2018 (nomogram AUC 0.82)",
+      },
+      {
+        n: "03",
+        title: "That probability sets how much tissue is spared",
+        body: "The predicted risk maps onto four anatomical grades of nerve sparing — Grade 1 is the closest dissection to the prostate (intrafascial), Grades 2 and 3 move progressively outward, and Grade 4 is a deliberate wide, extrafascial dissection. Lower predicted risk allows a closer plane; higher predicted risk means taking more tissue to keep the margin clean.",
+        cite: "Tewari et al., BJU Int 2011; Martini et al., BJU Int 2019",
+      },
+      {
+        n: "04",
+        title: "Cancer control outranks the nerve plan",
+        body: "The planned grade holds only if what the surgeon sees during the operation allows it. If the anatomy or the tumor says otherwise, the dissection moves wider. Preserving function never comes before removing the cancer.",
+        cite: "Tewari et al., BJU Int 2011",
+      },
+      {
+        n: "05",
+        title: "Structures that control urine are rebuilt, not just avoided",
+        body: "Continence is treated as its own surgical objective. The \u201chood technique\u201d preserves the detrusor apron, puboprostatic ligament complex, arcus tendineus, endopelvic fascia, and pouch of Douglas rather than dividing them, and reconstruction restores the supporting anatomy.",
+        cite: "Wagaskar et al., Eur Urol 2021; Vis et al., Eur Urol 2019",
+      },
+      {
+        n: "06",
+        title: "Expected recovery is estimated before you consent",
+        body: "The same inputs feed the COMPASS model, which projects your likely pathology, recurrence risk, side-specific nerve-sparing, and functional recovery on a 3D model of your prostate — so the conversation is about your predicted outcome, not a published average.",
+        cite: "Mount Sinai COMPASS (research use only)",
+      },
+    ],
+    pathOutcomeTitle: "What that technique produced in the published series",
+    pathOutcomeIntro:
+      "The hood technique was reported prospectively in 300 men with localized prostate cancer operated on between April 2018 and March 2019. Continence was measured from the time the catheter came out.",
+    pathOutcomeRows: [
+      { label: "Continent at 4 weeks", a: "83%" },
+      { label: "Continent at 12 weeks", a: "91%" },
+      { label: "Continent at 24 weeks", a: "94%" },
+      { label: "Continent at 48 weeks", a: "95%" },
+      { label: "Positive surgical margin", a: "6%" },
+      { label: "Any complication", a: "9.7%" },
+    ],
+    pathOutcomeCaveat:
+      "Read these as what the technique achieved in one prospective single-centre series, not as your own odds. Men with anterior tumours on biopsy or MRI were excluded, the results come from one surgical team, and continence definitions vary between studies. Your baseline urinary and erectile function, age, cardiovascular health, and cancer all shift the estimate. Ask your surgeon what these numbers look like for a patient like you.",
+    papersTitle: "The surgical technique, in the peer-reviewed literature",
+    papersIntro:
+      "The nerve-sparing and reconstruction techniques described above are published, cited, and open to scrutiny. These are papers by Dr. Tewari and colleagues, in date order, so you can read the primary description of what may be proposed for you — or bring it to a second opinion.",
+    papers: [
+      {
+        cite: "Tewari A, Peabody J, Sarle R, et al. Technique of da Vinci robot-assisted anatomic radical prostatectomy. Urology. 2002;60(4):569\u2013572.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/12385908/",
+        note: "The original description of the robot-assisted anatomic technique.",
+      },
+      {
+        cite: "Tewari A, Srivastava A, Menon M. A prospective comparison of radical retropubic and robot-assisted prostatectomy: experience in one institution. BJU Int. 2003;92(3):205\u2013210.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/12887468/",
+        note: "An early head-to-head comparison of open and robot-assisted surgery.",
+      },
+      {
+        cite: "Tewari AK, Bigelow K, Rao S, et al. Anatomic restoration technique of continence mechanism and preservation of puboprostatic collar. Urology. 2007;69(4):726\u2013731.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/17445659/",
+        note: "Reconstruction aimed at recovering urinary control after surgery.",
+      },
+      {
+        cite: "Tewari AK, Srivastava A, Huang MW, et al. Anatomical grades of nerve sparing: a risk-stratified approach to neural-hammock sparing during robot-assisted radical prostatectomy. BJU Int. 2011;108(6b):984\u2013992.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/21917101/",
+        note: "Grades nerve-sparing by risk instead of treating it as all-or-nothing.",
+      },
+      {
+        cite: "Ficarra V, Novara G, Ahlering TE, \u2026 Tewari AK, et al. Systematic review and meta-analysis of studies reporting potency rates after robot-assisted radical prostatectomy. Eur Urol. 2012;62(3):418\u2013430.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/22749850/",
+        note: "Pooled erectile-function outcomes across the published literature.",
+      },
+      {
+        cite: "Srivastava A, Chopra S, Pham A, et al. Effect of a risk-stratified grade of nerve-sparing technique on early return of continence after robot-assisted laparoscopic radical prostatectomy. Eur Urol. 2013;63(3):438\u2013444.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/22901982/",
+        note: "Links graded nerve-sparing to how quickly continence returns.",
+      },
+      {
+        cite: "Walz J, Epstein JI, Ganzer R, \u2026 Tewari A, et al. A critical analysis of the current knowledge of surgical anatomy of the prostate related to optimisation of cancer control and preservation of continence and erection. Eur Urol. 2016;70(2):301\u2013311.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/26850969/",
+        note: "International review of the anatomy the operation is planned around.",
+      },
+      {
+        cite: "Martini A, Gupta A, Lewis SC, et al. Development and internal validation of a side-specific, multiparametric MRI-based nomogram for the prediction of extracapsular extension. BJU Int. 2018;122(6):1025\u20131033.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/29676063/",
+        note: "Uses MRI to predict, side by side, whether nerve-sparing is safe.",
+      },
+      {
+        cite: "Martini A, Cumarasamy S, Haines KG, Tewari AK. An updated approach to incremental nerve sparing for robot-assisted radical prostatectomy. BJU Int. 2019;124(1):103\u2013108.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/30575261/",
+        note: "The current framework for deciding how much nerve tissue to spare.",
+      },
+      {
+        cite: "Vis AN, van der Poel HG, Ruiter AEC, \u2026 Tewari AK, et al. Posterior, anterior, and periurethral surgical reconstruction of urinary continence mechanisms in robot-assisted radical prostatectomy. Eur Urol. 2019;76(6):814\u2013822.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/30514568/",
+        note: "Systematic review of the reconstruction steps used to restore continence.",
+      },
+      {
+        cite: "Martini A, Falagario UG, Villers A, et al. Contemporary techniques of prostate dissection for robot-assisted prostatectomy. Eur Urol. 2020;78(4):583\u2013591.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/32747200/",
+        note: "How the gland is dissected, and what each variation aims to protect.",
+      },
+      {
+        cite: "Wagaskar VG, Mittal A, Sobotka S, et al. Hood technique for robotic radical prostatectomy \u2014 preserving periurethral anatomical structures in the space of Retzius and the pouch of Douglas. Eur Urol. 2021;80(2):213\u2013221.",
+        url: "https://pubmed.ncbi.nlm.nih.gov/33067016/",
+        note: "A Mount Sinai technique aimed at early return of urinary control.",
+      },
+    ],
+    papersFoot:
+      "Citations verified against PubMed. A published technique means an approach has been described and peer-reviewed \u2014 it is not a promise of your own result. Ask how each applies to your anatomy and your cancer.",
     compareTitle: "Compare the approaches",
     compareIntro:
       "Cancer control for low and intermediate risk is broadly similar across surveillance, surgery, and radiation — the columns that separate them are what happens to urinary, sexual, and bowel function, and on what timeline.",
@@ -1094,7 +1493,7 @@ const EN: GuideContent = {
     eyebrow: "Sources",
     title: "Trusted information and review notes",
     intro:
-      "Writing, organization, decision tools, diagrams, and visual system are original to this guide. Clinical content follows the AUA/ASTRO Clinically Localized Prostate Cancer guideline (2022, amended 2026), NCCN Prostate Cancer guidelines, the EAU-EANM-ESTRO-ESUR-ISUP-SIOG guideline, the ASTRO/ASCO/AUA hypofractionation guideline, and NCI PDQ patient summaries. Every figure and recommendation here is pending verification against current Mount Sinai protocols.",
+      "This guide rests on the NCCN Clinical Practice Guidelines for Prostate Cancer (Version 5.2026), the AUA/ASTRO Clinically Localized Prostate Cancer guideline (2022, amended 2026), the EAU-EANM-ESTRO-ESUR-ISUP-SIOG guideline, the ASTRO/ASCO/AUA hypofractionation guideline, NCI PDQ patient summaries, and the peer-reviewed surgical work of Dr. Ashutosh K. Tewari and the Milton and Carroll Petrie Department of Urology, listed in the treatment chapter. Population figures come from NCI SEER, and the randomized comparison of treatment approaches comes from the ProtecT trial. The 2023 Prostate Cancer Foundation patient guide was used as a scope reference only — the writing, organization, decision tools, diagrams, and visual system are newly created for Mount Sinai review, and every figure and recommendation here is pending verification against current Mount Sinai protocols.",
     groups: [
       {
         heading: "Clinical practice guidelines",
@@ -1112,16 +1511,28 @@ const EN: GuideContent = {
             url: "https://www.auanet.org/guidelines-and-quality/guidelines/clinically-localized-prostate-cancer",
           },
           {
-            cite: "Schaeffer EM, Srinivas S, Adra N, et al. NCCN Guidelines Insights: Prostate Cancer, Version 3.2024. J Natl Compr Canc Netw. 2024;22(3):140–150. PMID: 38626801.",
-            url: "https://pubmed.ncbi.nlm.nih.gov/38626801/",
+            cite: "National Comprehensive Cancer Network. NCCN Clinical Practice Guidelines in Oncology: Prostate Cancer, Version 5.2026 (January 23, 2026). The 2026 update removed the very-low-risk group, revised the principles of active surveillance, and urged caution with focal therapy in newly diagnosed disease.",
+            url: "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1459",
+          },
+          {
+            cite: "NCCN Guidelines Insights: Prostate Cancer, Version 5.2026. J Natl Compr Canc Netw. 2026;24(5):140–. Published summary of those changes.",
+            url: "https://jnccn.org/abstract/journals/jnccn/24/5/article-p140.xml",
+          },
+          {
+            cite: "National Comprehensive Cancer Network. NCCN Guidelines for Patients: Early-Stage Prostate Cancer (2026) — the patient-facing version of the same guidance.",
+            url: "https://www.nccn.org/patients/guidelines/content/PDF/prostate-early-patient.pdf",
           },
           {
             cite: "Cornford P, et al. EAU-EANM-ESTRO-ESUR-ISUP-SIOG Guidelines on Prostate Cancer — 2024 Update. Part I: screening, diagnosis, and local treatment with curative intent. Eur Urol. 2024;86(2):148–163.",
             url: "https://uroweb.org/guidelines/prostate-cancer",
           },
           {
-            cite: "American Urological Association / ASTRO. Clinically Localized Prostate Cancer: AUA/ASTRO Guideline (2022; amended 2026) — overview and full text.",
+            cite: "American Urological Association / ASTRO. Clinically Localized Prostate Cancer: AUA/ASTRO Guideline (2022; amended 2026) — overview and full text. Source for the ADT durations given with radiation.",
             url: "https://www.auanet.org/guidelines-and-quality/guidelines/clinically-localized-prostate-cancer",
+          },
+          {
+            cite: "Hamdy FC, Donovan JL, Lane JA, et al. Fifteen-year outcomes after monitoring, surgery, or radiotherapy for prostate cancer (the ProtecT trial). N Engl J Med. 2023;388(17):1547–1558. Source for the 15-year comparison table.",
+            url: "https://www.nejm.org/doi/full/10.1056/NEJMoa2214122",
           },
           {
             cite: "Morgan SC, Hoffman K, Loblaw DA, et al. Hypofractionated Radiation Therapy for Localized Prostate Cancer: An ASTRO, ASCO, and AUA Evidence-Based Guideline. J Clin Oncol / Pract Radiat Oncol. 2018 (with subsequent updates).",
@@ -1141,8 +1552,20 @@ const EN: GuideContent = {
             url: "https://www.cancer.gov/types/prostate/patient/prostate-treatment-pdq",
           },
           {
-            cite: "National Cancer Institute. Prostate-Specific Antigen (PSA) Test.",
+            cite: "National Cancer Institute. Prostate-Specific Antigen (PSA) Test — thresholds, false positives, and screening age guidance.",
             url: "https://www.cancer.gov/types/prostate/psa-fact-sheet",
+          },
+          {
+            cite: "National Cancer Institute, Surveillance, Epidemiology, and End Results Program. Cancer Stat Facts: Prostate Cancer (SEER 21 survival data 2016–2022; stage distribution 2019–2023). Source for the survival and stage figures in this guide.",
+            url: "https://seer.cancer.gov/statfacts/html/prost.html",
+          },
+          {
+            cite: "U.S. Preventive Services Task Force. Prostate Cancer: Screening — recommendation statement (shared decision-making ages 55–69; against routine screening at 70 and older).",
+            url: "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/prostate-cancer-screening",
+          },
+          {
+            cite: "American Cancer Society. American Cancer Society Recommendations for Prostate Cancer Early Detection (screening discussion at ages 50 / 45 / 40 by risk).",
+            url: "https://www.cancer.org/cancer/types/prostate-cancer/detection-diagnosis-staging/acs-recommendations.html",
           },
           {
             cite: "National Cancer Institute. Genetics of Prostate Cancer (PDQ).",
@@ -1153,8 +1576,16 @@ const EN: GuideContent = {
             url: "https://www.cancer.org/cancer/types/prostate-cancer.html",
           },
           {
-            cite: "Mount Sinai Health System. Prostate cancer care and multidisciplinary program overview.",
-            url: "https://www.mountsinai.org/care",
+            cite: "Mount Sinai Health System. Center of Excellence for Prostate Cancer — services, multidisciplinary team, and screening programs.",
+            url: "https://www.mountsinai.org/care/cancer/services/prostate",
+          },
+          {
+            cite: "Mount Sinai. Ashutosh K. Tewari, MD — physician profile, titles, specialties, and research focus.",
+            url: "https://profiles.mountsinai.org/ashutosh-tewari",
+          },
+          {
+            cite: "Mount Sinai. Milton and Carroll Petrie Department of Urology — urologic care and services.",
+            url: "https://www.mountsinai.org/care/urology",
           },
         ],
       },
@@ -1167,13 +1598,13 @@ const EN: GuideContent = {
       "Complete accessibility, reading-level, legal, privacy, translation, and print-production review.",
     ],
     version:
-      "Draft created August 27, 2026. Review source dates and update the guide at least annually or when practice standards change.",
+      "Draft created August 27, 2026. Statistics, PSA figures, screening ages, and Mount Sinai faculty titles were re-verified against the cited sources on September 3, 2026. Review source dates and update the guide at least annually or when practice standards change.",
   },
 
   footer: {
     fine: "Education and shared decision-making only — this guide does not replace your care team. Treatment decisions depend on your own pathology, imaging, and health history and should be made with clinicians who have reviewed them. Any figures are population-level and may not reflect your individual outcome. This is a draft pending Mount Sinai clinical, brand, legal, and accessibility review.",
     brandline: "Mount Sinai Health System · Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute",
-    contact: "mountsinai.org · 1-800-MD-SINAI",
+    contact: "mountsinai.org · Cancer appointments 844-MD-CANCER · Urology 212-241-9955",
   },
 
   chat: {
@@ -1187,7 +1618,8 @@ const EN: GuideContent = {
     placeholder: "Type a question…",
     send: "Send",
     close: "Close",
-    offlineNote: "Offline answer from the guide — the assistant is unavailable right now.",
+    offlineNote:
+      "Offline answer, drawn from this guide's own text — the assistant is unavailable right now. Every clinical statement in the guide is referenced in the \"Sources\" chapter.",
     moreHelp:
       "Have more questions after reading? You can book a separate live session — Chat with Dr. Tewari (AI) — for a fuller conversation.",
     suggestions: [

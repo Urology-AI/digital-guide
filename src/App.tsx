@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { PatientGuide } from "./components/guide/PatientGuide";
+import { CareApp } from "./features/care/CareApp";
 import { TalkingAvatar } from "./components/TalkingAvatar";
 import { ChatInput } from "./components/ChatInput";
 import { DirectTTS } from "./components/DirectTTS";
@@ -31,11 +31,11 @@ function resolveAvatarUrl(rawUrl?: string): string {
 }
 
 function App() {
-  // The avatar chat experience (ChatExperience, below) is disabled for now —
-  // it depends on the Python chat/TTS backend that is being retired. The guide
-  // has its own chat widget (Cloudflare worker). To re-enable, route to
-  // <ChatExperience /> here.
-  return <PatientGuide />;
+  // Tewari Prostate Care is the product shell; the in-depth clinical guide is a
+  // route inside it (#/guide). The avatar chat experience (ChatExperience,
+  // below) is disabled — it depends on the Python chat/TTS backend that is
+  // being retired.
+  return <CareApp />;
 }
 
 /** Avatar chat + Direct TTS. Currently unmounted (see App). Kept for re-enable. */

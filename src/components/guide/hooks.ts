@@ -21,6 +21,30 @@ export function useActiveChapter(ids: string[]): string {
   return active;
 }
 
+export type ReadMode = "pages" | "scroll";
+const MODE_KEY = "guide_readmode";
+
+/** "pages" turns one chapter at a time; "scroll" reads straight through, like a book. */
+export function useReadMode(): [ReadMode, (m: ReadMode) => void] {
+  const [mode, setModeState] = useState<ReadMode>(() => {
+    try {
+      const stored = localStorage.getItem(MODE_KEY) as ReadMode | null;
+      return stored === "scroll" ? "scroll" : "pages";
+    } catch {
+      return "pages";
+    }
+  });
+  const setMode = useCallback((m: ReadMode) => {
+    setModeState(m);
+    try {
+      localStorage.setItem(MODE_KEY, m);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+  return [mode, setMode];
+}
+
 type ThemeChoice = "auto" | "light" | "dark";
 const THEME_KEY = "guide_theme";
 
