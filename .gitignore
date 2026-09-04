@@ -23,7 +23,9 @@ env/
 
 # Backend runtime data (optional local settings)
 backend/data/
-data/
+# Root-level only: an unanchored "data/" also matched src/data/, silently
+# excluding the guide's content layer from the repo.
+/data/
 generated_audio/
 
 # TypeScript / Vite
