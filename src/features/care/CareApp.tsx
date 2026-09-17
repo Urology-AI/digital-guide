@@ -39,12 +39,19 @@ export function CareApp() {
   if (path === "/guide") {
     return (
       <div className="min-h-screen bg-white">
-        <a
-          href="#/"
-          className="fixed left-4 top-4 z-[70] rounded-full border border-slate-300 bg-white/95 px-4 py-2 text-xs font-bold text-slate-700 shadow-sm backdrop-blur hover:border-sinai-400 hover:text-sinai-600"
-        >
-          ← Tewari Prostate Care
-        </a>
+        {/* A real bar, so moving between the patient app and the clinical
+            guide reads as one product rather than two sites. */}
+        <div className="sticky top-0 z-[70] border-b border-[var(--c-line)] bg-white/95 backdrop-blur">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-2.5 sm:px-8">
+            <a
+              href="#/"
+              className="inline-flex items-center gap-2 text-fine font-semibold text-[var(--c-ink-soft)] hover:text-[var(--c-accent-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--c-blue-deep)]"
+            >
+              <span aria-hidden="true">←</span> Tewari Prostate Care
+            </a>
+            <span className="text-fine text-[var(--c-muted)]">Full clinical guide</span>
+          </div>
+        </div>
         <PatientGuide />
       </div>
     );

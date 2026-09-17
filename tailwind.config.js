@@ -20,6 +20,17 @@ export default {
       fontFamily: {
         sans: ["DM Sans", "system-ui", "sans-serif"],
       },
+      // Type scale from design tokens. Declared here rather than used as
+      // text-[var(--t-x)], which Tailwind parses as a colour, not a size.
+      fontSize: {
+        display: ["var(--t-display)", { lineHeight: "1.08" }],
+        h1: ["var(--t-h1)", { lineHeight: "1.15" }],
+        h2: ["var(--t-h2)", { lineHeight: "1.2" }],
+        h3: ["var(--t-h3)", { lineHeight: "1.35" }],
+        body: ["var(--t-body)", { lineHeight: "1.65" }],
+        small: ["var(--t-small)", { lineHeight: "1.6" }],
+        fine: ["var(--t-fine)", { lineHeight: "1.5" }],
+      },
       colors: {
         sinai: {
           50: "#e6f7fc",

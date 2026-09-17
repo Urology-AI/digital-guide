@@ -11,7 +11,7 @@ export function TopicDetail({ id }: { id: string }) {
 
   if (!item) {
     return (
-      <Section title="That page could not be found" lead="The link may be out of date.">
+      <Section level="h1" title="That page could not be found" lead="The link may be out of date.">
         <a
           href="#/"
           className="inline-block rounded-xl bg-sinai-400 px-5 py-3 text-sm font-bold text-white transition hover:bg-sinai-500"
@@ -26,7 +26,7 @@ export function TopicDetail({ id }: { id: string }) {
   const siblings = byCategory(item.category).filter((c) => c.id !== item.id);
 
   return (
-    <Section eyebrow={stage ? `${stage.n} · ${stage.title}` : undefined} title={item.title} lead={item.description}>
+    <Section level="h1" eyebrow={stage ? `${stage.n} · ${stage.title}` : undefined} title={item.title} lead={item.description}>
       <ContentBlock item={item} askTitle={tc(lang, "ask.title")} refsTitle={tc(lang, "refs.title")} />
 
       {stage && (

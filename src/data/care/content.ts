@@ -447,6 +447,39 @@ export const CONTENT: ContentItem[] = [
     references: refs("tewari2011", "aua"),
   },
 
+
+  {
+    id: "caregiver-supporting",
+    title: "Supporting someone through prostate cancer",
+    category: "recovery",
+    description: "Practical ways for family and caregivers to help, without taking over.",
+    sections: [
+      {
+        body: "Appointments carry a lot of information at once, and a person hearing news about their own cancer often remembers less of it than the person sitting next to them. Going along, taking notes, and writing down what was said is one of the most useful things a family member can do.",
+      },
+      {
+        heading: "Ways to help that tend to matter",
+        items: [
+          "Bring the question list to appointments and write down the answers.",
+          "Keep PSA values, dates and reports together in one place, so a trend is visible rather than scattered across letters.",
+          "Help with practical things during recovery — lifts to appointments, and the exercises a physiotherapist has set.",
+          "Ask what support exists for you as well. Supporting someone through cancer is demanding.",
+        ],
+      },
+      {
+        heading: "Whose decision it is",
+        body: "Treatment decisions belong to the person being treated. Helping them gather information and ask questions is more useful than steering the choice — and where more than one option is reasonable, what matters most to them is part of the answer.",
+        note: "What to expect after a particular treatment depends on that person's own procedure and health. The recovery sections here describe what may happen in general; their care team can say what applies.",
+      },
+    ],
+    questions: [
+      "What should we watch for at home after treatment?",
+      "Who do we contact out of hours?",
+      "How can I best support recovery in the first few weeks?",
+      "What support is available for me as a caregiver?",
+    ],
+    references: refs("nciTreat", "aua"),
+  },
   {
     id: "monitoring-after-treatment",
     title: "PSA follow-up after treatment",

@@ -5,20 +5,32 @@ import { JOURNEY } from "../../../data/care/journey";
 import { BrandLockup, MountSinaiLogo } from "./Logo";
 import { Search } from "./Search";
 
-const NAV: { key: Parameters<typeof tc>[1]; route: string }[] = [
-  { key: "nav.home", route: "/" },
+/**
+ * Eight stage links in the bar made the product read like documentation. The
+ * stages move into an "Explore care" disclosure; the bar keeps the two things
+ * a patient came to do, plus the guide.
+ */
+const STAGE_LINKS: { key: Parameters<typeof tc>[1]; route: string }[] = [
   { key: "nav.health", route: "/health" },
+  { key: "nav.risk", route: "/risk" },
   { key: "nav.screening", route: "/psa" },
+  { key: "nav.imaging", route: "/imaging" },
   { key: "nav.diagnosis", route: "/diagnosis" },
   { key: "nav.treatment", route: "/treatment" },
   { key: "nav.recovery", route: "/recovery" },
   { key: "nav.monitoring", route: "/monitoring" },
+];
+
+const DIRECT_LINKS: { key: Parameters<typeof tc>[1]; route: string }[] = [
+  { key: "nav.ask", route: "/ask" },
+  { key: "nav.questions", route: "/questions" },
   { key: "nav.journey", route: "/journey" },
 ];
 
 export function Header({ path }: { path: string }) {
   const { lang, setLang } = useLang();
   const [open, setOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -26,32 +38,69 @@ export function Header({ path }: { path: string }) {
         {/* aria-label supplies a single accessible name: the lockup's own text
             is hidden below sm, and duplicating it in a sr-only span made screen
             readers announce the product name twice. */}
-        <a href="#/" className="shrink-0" aria-label={tc(lang, "app.name")}>
+        <a href="#/" className="flex min-h-[44px] shrink-0 items-center" aria-label={tc(lang, "app.name")}>
           <BrandLockup />
         </a>
 
-        <nav aria-label="Primary" className="ml-auto hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {NAV.map((n) => {
-              const active = path === n.route;
-              return (
-                <li key={n.route}>
-                  <a
-                    href={`#${n.route}`}
-                    aria-current={active ? "page" : undefined}
-                    className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
-                      active ? "bg-sinai-50 text-sinai-700" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                    }`}
-                  >
-                    {tc(lang, n.key)}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+        <nav aria-label="Primary" className="ml-auto hidden items-center gap-1 lg:flex">
+          <div className="relative">
+            <button
+              type="button"
+              aria-expanded={exploreOpen}
+              aria-controls="explore-care-menu"
+              onClick={() => setExploreOpen((v) => !v)}
+              className="flex items-center gap-1.5 whitespace-nowrap rounded-[var(--r-md)] px-3 py-2 text-sm font-medium text-[var(--c-ink-soft)] transition hover:bg-[var(--c-surface-sunken)] hover:text-[var(--c-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--c-blue-deep)]"
+            >
+              {tc(lang, "nav.explore")}
+              <span aria-hidden="true" className="text-[0.6rem]">▾</span>
+            </button>
+            {exploreOpen && (
+              <div
+                id="explore-care-menu"
+                className="absolute left-0 top-full z-50 mt-1 w-64 rounded-[var(--r-lg)] border border-[var(--c-line)] bg-white p-2 shadow-[var(--e-3)]"
+              >
+                <ul>
+                  {STAGE_LINKS.map((n, i) => (
+                    <li key={n.route}>
+                      <a
+                        href={`#${n.route}`}
+                        onClick={() => setExploreOpen(false)}
+                        aria-current={path === n.route ? "page" : undefined}
+                        className={`flex items-baseline gap-2.5 rounded-[var(--r-sm)] px-3 py-2 text-sm ${
+                          path === n.route
+                            ? "bg-[var(--c-surface-accent)] font-semibold text-[var(--c-accent-ink)]"
+                            : "text-[var(--c-ink-soft)] hover:bg-[var(--c-surface-sunken)]"
+                        }`}
+                      >
+                        <span className="font-mono text-[0.65rem] text-[var(--c-muted)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        {tc(lang, n.key)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {DIRECT_LINKS.map((n) => (
+            <a
+              key={n.route}
+              href={`#${n.route}`}
+              aria-current={path === n.route ? "page" : undefined}
+              className={`whitespace-nowrap rounded-[var(--r-md)] px-3 py-2 text-sm font-medium transition ${
+                path === n.route
+                  ? "bg-[var(--c-surface-accent)] text-[var(--c-accent-ink)]"
+                  : "text-[var(--c-ink-soft)] hover:bg-[var(--c-surface-sunken)] hover:text-[var(--c-ink)]"
+              }`}
+            >
+              {tc(lang, n.key)}
+            </a>
+          ))}
         </nav>
 
-        <div className="ml-auto hidden lg:block">
+        <div className="ml-auto hidden lg:block lg:ml-2">
           <Search />
         </div>
 
@@ -69,6 +118,11 @@ export function Header({ path }: { path: string }) {
             ))}
           </select>
         </label>
+        {lang !== "en" && (
+          <p className="hidden text-[0.68rem] leading-tight text-[var(--c-muted)] xl:block xl:max-w-[9rem]">
+            {tc(lang, "lang.note")}
+          </p>
+        )}
 
         <button
           type="button"
@@ -87,22 +141,45 @@ export function Header({ path }: { path: string }) {
           <div className="mx-auto max-w-6xl px-3 pt-3">
             <Search />
           </div>
-          <ul className="mx-auto max-w-6xl px-3 py-2">
-            {NAV.map((n) => (
-              <li key={n.route}>
-                <a
-                  href={`#${n.route}`}
-                  onClick={() => setOpen(false)}
-                  aria-current={path === n.route ? "page" : undefined}
-                  className={`block rounded-lg px-3 py-3 text-sm font-medium ${
-                    path === n.route ? "bg-sinai-50 text-sinai-700" : "text-slate-700"
-                  }`}
-                >
-                  {tc(lang, n.key)}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="mx-auto max-w-6xl px-3 py-2">
+            <ul>
+              {DIRECT_LINKS.map((n) => (
+                <li key={n.route}>
+                  <a
+                    href={`#${n.route}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={path === n.route ? "page" : undefined}
+                    className={`block rounded-[var(--r-sm)] px-3 py-3 text-sm font-semibold ${
+                      path === n.route ? "bg-[var(--c-surface-accent)] text-[var(--c-accent-ink)]" : "text-[var(--c-ink)]"
+                    }`}
+                  >
+                    {tc(lang, n.key)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 px-3 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[var(--c-muted)]">
+              {tc(lang, "nav.explore")}
+            </p>
+            <ul className="mt-1">
+              {STAGE_LINKS.map((n) => (
+                <li key={n.route}>
+                  <a
+                    href={`#${n.route}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={path === n.route ? "page" : undefined}
+                    className={`block rounded-[var(--r-sm)] px-3 py-2.5 text-sm ${
+                      path === n.route
+                        ? "bg-[var(--c-surface-accent)] font-semibold text-[var(--c-accent-ink)]"
+                        : "text-[var(--c-ink-soft)]"
+                    }`}
+                  >
+                    {tc(lang, n.key)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
       )}
     </header>
@@ -120,19 +197,19 @@ export function Footer() {
           Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute · Mount Sinai
         </p>
         <nav aria-label="Support" className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/ask">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/ask">
             Urology Copilot
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/questions">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/questions">
             {tc(lang, "questions.title")}
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/caregiver">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/caregiver">
             Family &amp; caregivers
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/risk">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/risk">
             Risk factors
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/guide">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/guide">
             Full clinical guide
           </a>
         </nav>

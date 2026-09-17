@@ -93,3 +93,95 @@ describe("safety", () => {
     }
   });
 });
+
+/**
+ * The query matrix from the product brief. Each category asserts a different
+ * safety property, and the confusable cases are the ones lexical scoring gets
+ * wrong without the topic gate.
+ */
+describe("query safety matrix", () => {
+  const gated = async (q: string) => (await import("./intentGate")).gateQuestion(q);
+
+  it("SUPPORTED: answers questions the content covers", () => {
+    const cases: [string, string][] = [
+      ["What does PI-RADS 4 mean?", "mri-pirads"],
+      ["What is Grade Group 2?", "gleason-grade-group"],
+      ["What is active surveillance?", "active-surveillance"],
+      ["What happens after an elevated PSA?", "psa-after-elevated"],
+      ["What happens after a biopsy?", "biopsy"],
+    ];
+    for (const [q, expected] of cases) {
+      const hits = retrieve(q);
+      expect(hits.length, `abstained on supported question "${q}"`).toBeGreaterThan(0);
+      expect(hits.map((h) => h.passage.contentId), q).toContain(expected);
+    }
+  });
+
+  it("CONFUSABLE: cycling after a biopsy must not return the PSA passage", async () => {
+    // The named regression. "Cycling can raise PSA" shares the query's words
+    // but does not answer post-biopsy activity.
+    const q = "Can I cycle after a biopsy?";
+    const gate = await gated(q);
+    expect(gate?.kind, "activity questions must be gated").toBe("activity");
+    expect(retrieve(q).map((h) => h.passage.contentId)).not.toContain("psa-what-influences");
+  });
+
+  it("CONFUSABLE: procedure questions do not cross topics", async () => {
+    for (const q of ["Can I exercise after my biopsy?", "How soon can I drive after surgery?"]) {
+      const gate = await gated(q);
+      const hits = gate ? [] : retrieve(q);
+      expect(hits.map((h) => h.passage.contentId), q).not.toContain("psa-what-influences");
+    }
+    // "Radiation" in an imaging question must not resolve to treatment radiation.
+    expect(retrieve("Is radiation from an MRI dangerous?")).toHaveLength(0);
+  });
+
+  it("UNSUPPORTED: individualized questions abstain before retrieval", async () => {
+    const cases: [string, string][] = [
+      ["Do I have cancer?", "diagnosis"],
+      ["Is my PSA bad?", "individual-result"],
+      ["Should I choose surgery or radiation?", "treatment-choice"],
+      ["What would you recommend for me?", "treatment-choice"],
+      ["How long do I have?", "prognosis"],
+      ["Should I stop taking my medication?", "medication"],
+    ];
+    for (const [q, kind] of cases) {
+      const gate = await gated(q);
+      expect(gate?.kind, `"${q}" was not gated`).toBe(kind);
+    }
+  });
+
+  it("UNSUPPORTED: operational questions abstain", () => {
+    for (const q of ["How much does treatment cost?", "Can I park at the hospital?"]) {
+      expect(retrieve(q), q).toHaveLength(0);
+    }
+  });
+
+  it("gates do not fire on supported questions", async () => {
+    for (const q of [
+      "What does PI-RADS 4 mean?",
+      "What is active surveillance?",
+      "Will I be incontinent after surgery?",
+      "How long does hormone therapy last?",
+      "What can raise my PSA apart from cancer?",
+    ]) {
+      expect(await gated(q), `false gate on "${q}"`).toBeNull();
+    }
+  });
+});
+
+describe("caregiver content", () => {
+  it("is in the typed model, so it can be cited and retrieved", () => {
+    const item = CONTENT.find((c) => c.id === "caregiver-supporting");
+    expect(item, "caregiver content is not in the content layer").toBeTruthy();
+    expect(item!.references.length).toBeGreaterThan(0);
+  });
+
+  it("answers the questions families actually ask", () => {
+    for (const q of ["What should my wife expect after surgery?", "How can I support my husband?"]) {
+      const hits = retrieve(q);
+      expect(hits.length, `abstained on "${q}"`).toBeGreaterThan(0);
+      expect(hits.map((h) => h.passage.contentId), q).toContain("caregiver-supporting");
+    }
+  });
+});

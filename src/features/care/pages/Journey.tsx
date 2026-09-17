@@ -33,7 +33,7 @@ export function Journey() {
   const pct = Math.round((done / DEMO_JOURNEY.length) * 100);
 
   return (
-    <Section
+    <Section level="h1"
       eyebrow="Prototype"
       title="My prostate care"
       lead="A preview of how a personal care dashboard could work. It is populated with example data only — no real results are shown or stored."

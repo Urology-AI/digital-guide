@@ -8,7 +8,8 @@ export default defineConfig({
   // (CI overrides this with --base from the repo name; this covers local prod builds.)
   base: process.env.NODE_ENV === "production" ? "/digital-guide/" : "/",
   server: {
-    port: 5173,
+    // Honour PORT when the harness assigns one; 5173 remains the local default.
+    port: Number(process.env.PORT) || 5173,
     host: true, // Allow external connections
     hmr: {
       // Enable Hot Module Replacement

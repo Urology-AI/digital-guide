@@ -1,91 +1,81 @@
 import { useLang } from "../../../i18n/LanguageContext";
 import { tc } from "../../../i18n/care";
 import { ENTRY_POINTS, JOURNEY } from "../../../data/care/journey";
-import { Card, Disclaimer, Grid, Section } from "../components/ui";
 import { Search } from "../components/Search";
+import { Button, Card, Grid, Section, Surface } from "../design/primitives";
 
+/**
+ * Home answers, in order: what this is, what it can do, where to begin.
+ *
+ * Two primary actions are kept deliberately distinct rather than merged into
+ * one ambiguous input — looking up a term from a report is deterministic and
+ * instant; asking a question is retrieval with different guarantees. Blurring
+ * them would hide which one a patient is getting.
+ */
 export function Home() {
   const { lang } = useLang();
+
   return (
     <>
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+      <section className="relative overflow-hidden border-b border-[var(--c-line)] bg-[var(--c-surface)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -top-40 h-96 bg-[radial-gradient(60rem_24rem_at_20%_0%,rgba(0,174,239,0.13),transparent_65%),radial-gradient(45rem_20rem_at_95%_10%,rgba(33,32,112,0.10),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 -top-40 h-[28rem] bg-[radial-gradient(52rem_22rem_at_18%_0%,rgba(0,174,239,0.10),transparent_66%),radial-gradient(40rem_18rem_at_92%_8%,rgba(33,32,112,0.08),transparent_70%)]"
         />
-        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sinai-magenta">
+        <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[var(--c-magenta)]">
             Milton and Carroll Petrie Department of Urology · Mount Sinai
           </p>
-          <h1 className="mt-4 max-w-3xl text-3xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-display font-bold leading-[1.08] tracking-tight text-[var(--c-ink)]">
             {tc(lang, "app.name")}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-700 sm:text-xl">
+          <p className="mt-4 max-w-2xl text-[1.15rem] leading-[1.55] text-[var(--c-ink-soft)]">
             {tc(lang, "home.title")}
           </p>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">{tc(lang, "home.lead")}</p>
 
-          <div className="mt-8">
-            <p className="mb-2 text-sm font-semibold text-slate-700">
-              Have a report in front of you? Look up what it says.
-            </p>
-            <Search variant="hero" />
-            <p className="mt-3 text-sm text-slate-600">
-              Or{" "}
-              <a className="font-semibold text-sinai-600 underline underline-offset-2" href="#/ask">
-                ask Urology Copilot in your own words
-              </a>{" "}
-              — answered from this guide, with sources.
-            </p>
+          <div className="mt-10 grid gap-4 lg:grid-cols-2">
+            <Surface className="p-6">
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-[var(--c-magenta)]">
+                Have a report in front of you
+              </p>
+              <h2 className="mt-2 text-h3 font-bold text-[var(--c-ink)]">Look up a term</h2>
+              <p className="mt-1.5 text-small leading-relaxed text-[var(--c-ink-soft)]">
+                PI-RADS, Gleason, Grade Group, PSA density — type what is written and go straight to the
+                explanation.
+              </p>
+              <div className="mt-4">
+                <Search variant="hero" />
+              </div>
+            </Surface>
+
+            <Surface className="flex flex-col p-6">
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-[var(--c-magenta)]">
+                Have a question in your own words
+              </p>
+              <h2 className="mt-2 text-h3 font-bold text-[var(--c-ink)]">Ask Urology Copilot</h2>
+              <p className="mt-1.5 text-small leading-relaxed text-[var(--c-ink-soft)]">
+                Answers come from this guide, shown as written and with their sources. It will say so when the
+                guide does not cover something, and it cannot interpret your own results.
+              </p>
+              <div className="mt-auto pt-4">
+                <Button href="#/ask">Ask a question →</Button>
+              </div>
+            </Surface>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#/start"
-              className="rounded-xl bg-sinai-400 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-sinai-400/25 transition hover:-translate-y-0.5 hover:bg-sinai-500"
-            >
-              {tc(lang, "home.cta.primary")} →
-            </a>
-            <a
-              href="#/health"
-              className="rounded-xl border border-slate-300 px-6 py-3.5 text-sm font-bold text-slate-700 transition hover:border-sinai-400 hover:text-sinai-600"
-            >
-              {tc(lang, "home.cta.secondary")}
-            </a>
-          </div>
-
-          <div className="mt-10 max-w-2xl">
-            <Disclaimer text={tc(lang, "disclaimer")} />
-          </div>
+          <p className="mt-6 max-w-2xl rounded-[var(--r-md)] border border-[var(--c-line)] bg-[var(--c-surface-sunken)] px-4 py-3 text-fine leading-relaxed text-[var(--c-muted)]">
+            {tc(lang, "disclaimer")} If you need help now, contact your care team — Mount Sinai cancer
+            appointments 844-MD-CANCER, Urology 212-241-9955. In an emergency, call 911.
+          </p>
         </div>
       </section>
 
       <Section
-        eyebrow="Your care journey"
-        title={tc(lang, "home.journey.title")}
-        lead={tc(lang, "home.journey.lead")}
-        tone="tint"
+        eyebrow="Start where you are"
+        title={tc(lang, "start.title")}
+        lead="Pick what fits today. Each one opens the part of the guide written for that point."
+        tone="sunken"
       >
-        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {JOURNEY.map((s) => (
-            <li key={s.id}>
-              <a
-                href={`#${s.route}`}
-                className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-sinai-400 hover:shadow-lg hover:shadow-slate-200/70"
-              >
-                <span className="font-mono text-xs font-bold text-sinai-400">{s.n}</span>
-                <span className="mt-2 text-base font-bold text-slate-900">{s.title}</span>
-                <span className="mt-2 text-sm leading-relaxed text-slate-600">{s.blurb}</span>
-                <span className="mt-4 text-sm font-semibold text-sinai-600 group-hover:underline">
-                  {tc(lang, "readmore")} →
-                </span>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
-      <Section eyebrow="Start here" title={tc(lang, "start.title")} lead={tc(lang, "start.lead")}>
         <Grid cols={2}>
           {ENTRY_POINTS.map((e) => (
             <Card key={e.id} title={e.label} description={e.detail} href={`#${e.route}`} />
@@ -94,31 +84,37 @@ export function Home() {
       </Section>
 
       <Section
-        eyebrow="Support"
-        title="Help for appointments — and for the people alongside you"
-        lead="Two things worth having before your next visit."
+        eyebrow="Explore care"
+        title="Browse by stage"
+        lead="The same material organised as a journey, if you would rather read it in order."
       >
-        <Grid cols={2}>
+        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {JOURNEY.map((s) => (
+            <li key={s.id}>
+              <Card eyebrow={s.n} title={s.title} description={s.blurb} href={`#${s.route}`} />
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section eyebrow="Support" title="Help for appointments — and for the people alongside you" tone="sunken">
+        <Grid cols={3}>
           <Card
             title={tc(lang, "questions.title")}
-            description="Question lists organized by stage — before a PSA test, after an elevated result, after an MRI or biopsy, and before treatment. Copy them and take them with you."
+            description="Question lists by stage — before a PSA test, after an elevated result, after an MRI or biopsy, before treatment. Copy them and take them with you."
             href="#/questions"
           />
           <Card
             title="Supporting someone through prostate cancer"
-            description="For family and caregivers: understanding the journey, preparing for appointments, helping track results, and looking after yourself too."
+            description="For family and caregivers: understanding the journey, preparing for appointments, helping track results."
             href="#/caregiver"
           />
+          <Card
+            title={tc(lang, "deepdive.title")}
+            description="The full referenced clinical guide — treatment comparison, published trial outcomes, the department's surgical approach and its literature."
+            href="#/guide"
+          />
         </Grid>
-      </Section>
-
-      <Section eyebrow="Go deeper" title={tc(lang, "deepdive.title")} lead={tc(lang, "deepdive.lead")} tone="tint">
-        <a
-          href="#/guide"
-          className="inline-block rounded-xl bg-sinai-violet px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
-        >
-          {tc(lang, "deepdive.cta")} →
-        </a>
       </Section>
     </>
   );
