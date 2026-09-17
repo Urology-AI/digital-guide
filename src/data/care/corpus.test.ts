@@ -169,3 +169,19 @@ describe("query safety matrix", () => {
     }
   });
 });
+
+describe("caregiver content", () => {
+  it("is in the typed model, so it can be cited and retrieved", () => {
+    const item = CONTENT.find((c) => c.id === "caregiver-supporting");
+    expect(item, "caregiver content is not in the content layer").toBeTruthy();
+    expect(item!.references.length).toBeGreaterThan(0);
+  });
+
+  it("answers the questions families actually ask", () => {
+    for (const q of ["What should my wife expect after surgery?", "How can I support my husband?"]) {
+      const hits = retrieve(q);
+      expect(hits.length, `abstained on "${q}"`).toBeGreaterThan(0);
+      expect(hits.map((h) => h.passage.contentId), q).toContain("caregiver-supporting");
+    }
+  });
+});

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useLang } from "../../../i18n/LanguageContext";
 import { tc } from "../../../i18n/care";
 import { QUESTION_SETS } from "../../../data/care/demo";
-import { CopyButton, Section } from "../components/ui";
+import { ContentBlock, CopyButton } from "../components/ui";
+import { byId } from "../../../data/care/content";
+import { Button, Section } from "../design/primitives";
 
 export function Questions() {
   const { lang } = useLang();
@@ -53,52 +55,25 @@ export function Questions() {
 }
 
 export function Caregiver() {
+  const { lang } = useLang();
+  const item = byId("caregiver-supporting");
+
   return (
     <Section
       eyebrow="For family and caregivers"
       title="Supporting someone through prostate cancer"
       lead="Practical ways to help, without taking over."
     >
-      <div className="grid gap-4 sm:grid-cols-2">
-        {[
-          {
-            t: "Understand the care journey",
-            d: "Read the same stages they are going through. Knowing what a Grade Group or a PI-RADS score means makes conversations at home much easier.",
-          },
-          {
-            t: "Prepare for appointments",
-            d: "Bring the question list, take notes, and write down what was said. Two sets of ears in a consultation is genuinely useful.",
-          },
-          {
-            t: "Help track results",
-            d: "Keep PSA values, dates, and reports together in one place, so a trend is visible rather than scattered across letters.",
-          },
-          {
-            t: "Support recovery",
-            d: "Recovery from treatment takes months, not days. Practical help — lifts to appointments, pelvic floor exercise reminders — often matters more than advice.",
-          },
-          {
-            t: "Ask about support for you",
-            d: "Caregiver support exists and is worth asking about. Supporting someone through cancer is demanding.",
-          },
-          {
-            t: "Let them lead",
-            d: "Treatment decisions belong to the person being treated. Helping them get information and ask questions is more useful than steering the choice.",
-          },
-        ].map((c) => (
-          <div key={c.t} className="rounded-2xl border border-slate-200 bg-white p-6">
-            <h3 className="text-base font-bold text-slate-900">{c.t}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">{c.d}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-6">
-        <a
-          href="#/questions"
-          className="inline-block rounded-xl border border-slate-300 px-5 py-3 text-sm font-bold text-slate-700 transition hover:border-sinai-400 hover:text-sinai-600"
-        >
-          Questions caregivers may want to ask →
-        </a>
+      {item && (
+        <ContentBlock item={item} askTitle={tc(lang, "ask.title")} refsTitle={tc(lang, "refs.title")} />
+      )}
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Button tone="secondary" href="#/questions">
+          Questions to take to an appointment →
+        </Button>
+        <Button tone="secondary" href="#/recovery">
+          What recovery involves →
+        </Button>
       </div>
     </Section>
   );
