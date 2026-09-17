@@ -13,6 +13,7 @@ const NAV: { key: Parameters<typeof tc>[1]; route: string }[] = [
   { key: "nav.treatment", route: "/treatment" },
   { key: "nav.recovery", route: "/recovery" },
   { key: "nav.monitoring", route: "/monitoring" },
+  { key: "nav.journey", route: "/journey" },
 ];
 
 export function Header({ path }: { path: string }) {
@@ -119,6 +120,9 @@ export function Footer() {
           Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute · Mount Sinai
         </p>
         <nav aria-label="Support" className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/ask">
+            Urology Copilot
+          </a>
           <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/questions">
             {tc(lang, "questions.title")}
           </a>
@@ -148,7 +152,7 @@ export function BottomNav({ path }: { path: string }) {
     { label: tc(lang, "nav.home"), route: "/", icon: "◆" },
     { label: tc(lang, "nav.screening"), route: "/psa", icon: "◎" },
     { label: tc(lang, "nav.treatment"), route: "/treatment", icon: "✚" },
-    { label: tc(lang, "nav.diagnosis"), route: "/diagnosis", icon: "▤" },
+    { label: tc(lang, "nav.journey"), route: "/journey", icon: "▤" },
   ];
   return (
     <nav

@@ -4,6 +4,8 @@ import { BottomNav, Footer, Header } from "./components/Chrome";
 import { routePath, useRoute } from "./router";
 import { Home } from "./pages/Home";
 import { Start } from "./pages/Start";
+import { Journey } from "./pages/Journey";
+import { AskPage } from "./pages/AskPage";
 import { Caregiver, Questions } from "./pages/Questions";
 import { TopicDetail } from "./pages/TopicDetail";
 import { Diagnosis, Health, Imaging, Monitoring, Psa, Recovery, Risk, Treatment } from "./pages/Stages";
@@ -19,6 +21,8 @@ export const ROUTES: Record<string, () => JSX.Element> = {
   "/treatment": Treatment,
   "/recovery": Recovery,
   "/monitoring": Monitoring,
+  "/ask": AskPage,
+  "/journey": Journey,
   "/questions": Questions,
   "/caregiver": Caregiver,
 };

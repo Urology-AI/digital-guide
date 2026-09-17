@@ -30,6 +30,13 @@ export function Home() {
               Have a report in front of you? Look up what it says.
             </p>
             <Search variant="hero" />
+            <p className="mt-3 text-sm text-slate-600">
+              Or{" "}
+              <a className="font-semibold text-sinai-600 underline underline-offset-2" href="#/ask">
+                ask Urology Copilot in your own words
+              </a>{" "}
+              — answered from this guide, with sources.
+            </p>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
