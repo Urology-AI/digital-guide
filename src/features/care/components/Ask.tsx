@@ -1,6 +1,23 @@
 import { useState } from "react";
 import { retrieve, type Retrieved } from "../../../data/care/corpus";
+import { CONTENT } from "../../../data/care/content";
 import { logMiss } from "../../../services/askLog";
+import { checkRedFlags } from "../../../data/care/redFlags";
+
+/**
+ * Starters, so the page is never a blank "ask me anything" box. An empty
+ * prompt invites the questions this must not answer ("do I have cancer?",
+ * "should I cancel my surgery?"); showing what it can answer sets the scope.
+ * Each is covered by the content — a test asserts every one retrieves.
+ */
+const SUGGESTIONS = [
+  "What does active surveillance mean?",
+  "What happens after a biopsy?",
+  "Will I be incontinent after surgery?",
+  "Why do I need another PSA if I already had an MRI?",
+  "What can raise my PSA apart from cancer?",
+  "How long does hormone therapy last?",
+];
 
 /**
  * Retrieval-only question answering.
@@ -14,15 +31,23 @@ export function Ask() {
   const [question, setQuestion] = useState("");
   const [asked, setAsked] = useState("");
   const [hits, setHits] = useState<Retrieved[] | null>(null);
+  const [urgent, setUrgent] = useState<string | null>(null);
+
+  const ask = (raw: string) => {
+    const q = raw.trim();
+    if (q.length < 3) return;
+    setQuestion(q);
+    setAsked(q);
+    // Symptoms that need care now are answered before anything is retrieved.
+    setUrgent(checkRedFlags(q));
+    const found = retrieve(q);
+    setHits(found);
+    if (!found.length) logMiss(q);
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const q = question.trim();
-    if (q.length < 3) return;
-    const found = retrieve(q);
-    setHits(found);
-    setAsked(q);
-    if (!found.length) logMiss(q);
+    ask(question);
   };
 
   return (
@@ -51,6 +76,32 @@ export function Ask() {
           Ask
         </button>
       </form>
+
+      {hits === null && (
+        <div className="mt-6">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Things people ask</p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {SUGGESTIONS.map((s2) => (
+              <li key={s2}>
+                <button
+                  type="button"
+                  onClick={() => ask(s2)}
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 transition hover:border-sinai-400 hover:text-sinai-600"
+                >
+                  {s2}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {urgent && (
+        <div className="mt-6 rounded-xl border-l-4 border-red-400 bg-red-50 p-5" role="alert">
+          <h3 className="text-sm font-bold text-slate-900">This may need medical attention now</h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate-700">{urgent}</p>
+        </div>
+      )}
 
       {hits !== null && hits.length > 0 && (
         <div className="mt-7 space-y-4" aria-live="polite">
@@ -82,6 +133,32 @@ export function Ask() {
               </div>
             </article>
           ))}
+          {(() => {
+            const shown = new Set(hits.map((h) => h.passage.contentId));
+            const primary = CONTENT.find((c) => c.id === hits[0].passage.contentId);
+            const related = CONTENT.filter(
+              (c) => c.category === primary?.category && !shown.has(c.id)
+            ).slice(0, 4);
+            if (!related.length) return null;
+            return (
+              <div className="rounded-xl border border-slate-200 p-5">
+                <h3 className="text-sm font-bold text-slate-900">Related topics</h3>
+                <ul className="mt-2 flex flex-wrap gap-2">
+                  {related.map((r) => (
+                    <li key={r.id}>
+                      <a
+                        className="inline-block rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-700 hover:border-sinai-400 hover:text-sinai-600"
+                        href={`#/t/${r.id}`}
+                      >
+                        {r.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })()}
+
           {hits[0].passage.questions.length > 0 && (
             <div className="rounded-xl bg-slate-50 p-5">
               <h3 className="text-sm font-bold text-slate-900">Worth asking your care team</h3>

@@ -145,8 +145,11 @@ export function retrieve(question: string, limit = 3, minScore = 1.6): Retrieved
       // Saturating term frequency: a passage repeating a word is not
       // proportionally more relevant.
       score += idf(term) * (tf / (tf + 1.2));
-      if (passage.title.toLowerCase().includes(term)) score += 0.6;
-      if (passage.heading?.toLowerCase().includes(term)) score += 0.3;
+      // A term in the title is a strong signal of what the passage is about:
+      // "what happens after a biopsy" carries one content word, and without
+      // this weighting it scored below the refusal threshold.
+      if (passage.title.toLowerCase().includes(term)) score += 1;
+      if (passage.heading?.toLowerCase().includes(term)) score += 0.5;
     }
     // Reward covering more of the question rather than one word very often.
     score *= 0.6 + 0.4 * (matched.length / new Set(terms).size);

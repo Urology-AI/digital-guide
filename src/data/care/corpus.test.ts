@@ -55,3 +55,41 @@ describe("retrieve", () => {
     expect(hits[0].passage.contentId).toBe("active-surveillance");
   });
 });
+
+describe("safety", () => {
+  it("answers red-flag symptoms with urgent guidance before any retrieval", async () => {
+    const { checkRedFlags } = await import("./redFlags");
+    const urgent = [
+      "I can't pass urine since my biopsy",
+      "I have a fever and chills after my biopsy",
+      "I'm passing blood clots",
+      "I have chest pain",
+    ];
+    for (const q of urgent) {
+      expect(checkRedFlags(q), `no urgent guidance for "${q}"`).toBeTruthy();
+    }
+  });
+
+  it("does not raise urgent guidance on ordinary questions", async () => {
+    const { checkRedFlags } = await import("./redFlags");
+    for (const q of ["what does active surveillance mean", "will I be incontinent after surgery"]) {
+      expect(checkRedFlags(q), `false alarm on "${q}"`).toBeNull();
+    }
+  });
+
+  it("every suggested starter is actually answerable", () => {
+    // The starters set expectations; one that returns nothing would teach
+    // patients the tool is broken.
+    const starters = [
+      "What does active surveillance mean?",
+      "What happens after a biopsy?",
+      "Will I be incontinent after surgery?",
+      "Why do I need another PSA if I already had an MRI?",
+      "What can raise my PSA apart from cancer?",
+      "How long does hormone therapy last?",
+    ];
+    for (const q of starters) {
+      expect(retrieve(q).length, `starter has no answer: "${q}"`).toBeGreaterThan(0);
+    }
+  });
+});
