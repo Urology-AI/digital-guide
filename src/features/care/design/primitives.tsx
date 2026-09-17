@@ -133,6 +133,8 @@ export function Section({
   children,
   tone = "plain",
   as = "section",
+  /** Page-level sections are the document's h1; sections within a page are h2. */
+  level = "h2",
 }: {
   eyebrow?: string;
   title?: string;
@@ -140,8 +142,10 @@ export function Section({
   children?: ReactNode;
   tone?: "plain" | "sunken";
   as?: "section" | "div";
+  level?: "h1" | "h2";
 }) {
   const Tag = as;
+  const Heading = level;
   return (
     <Tag className={tone === "sunken" ? "bg-[var(--c-surface-sunken)]" : ""}>
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
@@ -153,9 +157,11 @@ export function Section({
               </p>
             )}
             {title && (
-              <h2 className="text-h2 font-bold leading-[var(--lh-tight)] tracking-tight text-[var(--c-ink)]">
+              <Heading
+                className={`${level === "h1" ? "text-h1" : "text-h2"} font-bold leading-[var(--lh-tight)] tracking-tight text-[var(--c-ink)]`}
+              >
                 {title}
-              </h2>
+              </Heading>
             )}
             {lead && (
               <p className="mt-3 text-body leading-[var(--lh-body)] text-[var(--c-ink-soft)]">{lead}</p>

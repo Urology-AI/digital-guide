@@ -6,7 +6,7 @@ import { Card, Disclaimer, Grid, Section } from "../components/ui";
 export function Start() {
   const { lang } = useLang();
   return (
-    <Section eyebrow="Start your guide" title={tc(lang, "start.title")} lead={tc(lang, "start.lead")}>
+    <Section level="h1" eyebrow="Start your guide" title={tc(lang, "start.title")} lead={tc(lang, "start.lead")}>
       <Grid cols={2}>
         {ENTRY_POINTS.map((e) => (
           <Card key={e.id} title={e.label} description={e.detail} href={`#${e.route}`} />

@@ -31,7 +31,7 @@ export function Topic({
           <StageStrip activeId={stage} />
         </div>
       </div>
-      <Section eyebrow={eyebrow} title={title} lead={lead}>
+      <Section level="h1" eyebrow={eyebrow} title={title} lead={lead}>
         {before}
         <div className="mt-8 space-y-5">
           {items.map((item) => (

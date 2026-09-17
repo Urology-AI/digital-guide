@@ -38,7 +38,7 @@ export function Header({ path }: { path: string }) {
         {/* aria-label supplies a single accessible name: the lockup's own text
             is hidden below sm, and duplicating it in a sr-only span made screen
             readers announce the product name twice. */}
-        <a href="#/" className="shrink-0" aria-label={tc(lang, "app.name")}>
+        <a href="#/" className="flex min-h-[44px] shrink-0 items-center" aria-label={tc(lang, "app.name")}>
           <BrandLockup />
         </a>
 
@@ -197,19 +197,19 @@ export function Footer() {
           Milton and Carroll Petrie Department of Urology · The Tisch Cancer Institute · Mount Sinai
         </p>
         <nav aria-label="Support" className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/ask">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/ask">
             Urology Copilot
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/questions">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/questions">
             {tc(lang, "questions.title")}
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/caregiver">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/caregiver">
             Family &amp; caregivers
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/risk">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/risk">
             Risk factors
           </a>
-          <a className="text-xs font-semibold text-sinai-600 hover:underline" href="#/guide">
+          <a className="inline-flex min-h-[44px] items-center text-fine font-semibold text-[var(--c-accent-ink)] hover:underline" href="#/guide">
             Full clinical guide
           </a>
         </nav>

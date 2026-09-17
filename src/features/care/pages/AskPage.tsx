@@ -3,7 +3,7 @@ import { Ask } from "../components/Ask";
 
 export function AskPage() {
   return (
-    <Section
+    <Section level="h1"
       eyebrow="Urology Copilot"
       title="Ask a question in your own words"
       lead="For questions a single term does not answer — what to expect, why a test is being repeated, what to tell your family."

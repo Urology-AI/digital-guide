@@ -12,7 +12,7 @@ export function Questions() {
   const set = QUESTION_SETS.find((s) => s.id === active) ?? QUESTION_SETS[0];
 
   return (
-    <Section eyebrow="Take this with you" title={tc(lang, "questions.title")} lead={tc(lang, "questions.lead")}>
+    <Section level="h1" eyebrow="Take this with you" title={tc(lang, "questions.title")} lead={tc(lang, "questions.lead")}>
       <div className="flex flex-wrap gap-2" role="tablist" aria-label={tc(lang, "questions.title")}>
         {QUESTION_SETS.map((s) => (
           <button
@@ -60,6 +60,7 @@ export function Caregiver() {
 
   return (
     <Section
+      level="h1"
       eyebrow="For family and caregivers"
       title="Supporting someone through prostate cancer"
       lead="Practical ways to help, without taking over."
