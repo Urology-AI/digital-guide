@@ -4,6 +4,32 @@
  */
 export const DEMO_LABEL = "Example data — not a real patient record";
 
+import type { DemoResult } from "../../types/care";
+
+export const DEMO_RESULTS: DemoResult[] = [
+  { label: "Latest PSA", value: "4.1 ng/mL", meta: "Example result, 2025", state: "done" },
+  { label: "MRI", value: "PI-RADS 4", meta: "Example report", state: "done" },
+  { label: "Biopsy", value: "Pending", meta: "Example status", state: "pending" },
+  { label: "Current stage", value: "Diagnostic evaluation", meta: "Example journey position", state: "pending" },
+];
+
+export const DEMO_JOURNEY: { stage: string; state: DemoResult["state"] }[] = [
+  { stage: "Risk assessment", state: "done" },
+  { stage: "PSA", state: "done" },
+  { stage: "MRI", state: "done" },
+  { stage: "Biopsy", state: "pending" },
+  { stage: "Treatment", state: "upcoming" },
+  { stage: "Follow-up", state: "upcoming" },
+];
+
+export const DEMO_SURVEILLANCE: { item: string; detail: string; state: DemoResult["state"] }[] = [
+  { item: "PSA", detail: "Example: completed this quarter", state: "done" },
+  { item: "MRI", detail: "Example: completed this year", state: "done" },
+  { item: "Clinical visit", detail: "Example: completed", state: "done" },
+  { item: "Next PSA", detail: "Example: upcoming next quarter", state: "upcoming" },
+  { item: "Next clinical review", detail: "Example: upcoming", state: "upcoming" },
+];
+
 export const DEMO_PSA_HISTORY = [
   { date: "2022", value: 2.1 },
   { date: "2023", value: 2.8 },
