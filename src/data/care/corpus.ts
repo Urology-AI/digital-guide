@@ -114,6 +114,83 @@ for (const p of CORPUS) {
 }
 const idf = (term: string) => Math.log(1 + CORPUS.length / (1 + (DF.get(term) ?? 0)));
 
+/**
+ * Procedural context anchors.
+ *
+ * Lexical scoring cannot tell "cycling raises PSA" from "cycling after a
+ * biopsy": both contain the query's words. When a question names a procedure,
+ * the answer must come from content about that procedure — otherwise the
+ * product abstains. This is what stops a PSA passage answering a post-biopsy
+ * question, or treatment radiation answering a question about MRI safety.
+ */
+const TOPIC_ANCHORS: { topic: string; match: RegExp; allow: string[] }[] = [
+  {
+    topic: "biopsy",
+    match: /\bbiops(y|ies)\b|\bcores?\b|\bpathology report\b/i,
+    allow: ["biopsy", "gleason-grade-group", "staging-risk"],
+  },
+  {
+    topic: "imaging",
+    match: /\bmri\b|\bscan\b|\bimaging\b|\bpi-?rads\b/i,
+    allow: ["mri-why", "mri-pirads", "biopsy"],
+  },
+  {
+    topic: "psa",
+    match: /\bpsa\b|\bprostate[- ]specific antigen\b/i,
+    allow: [
+      "psa-what-is-it",
+      "psa-what-influences",
+      "psa-after-elevated",
+      "when-to-talk",
+      "monitoring-after-treatment",
+      "benign-enlargement",
+    ],
+  },
+  {
+    topic: "surgery",
+    match: /\bsurgery\b|\bprostatectomy\b|\boperation\b|\bsurgical\b/i,
+    allow: ["surgery", "recovery-continence", "recovery-sexual", "monitoring-after-treatment"],
+  },
+  {
+    topic: "radiotherapy",
+    match: /\bradiation\b|\bradiotherapy\b|\bbrachytherapy\b|\bhormone therapy\b|\badt\b/i,
+    allow: ["radiation", "other-approaches", "monitoring-after-treatment"],
+  },
+  {
+    topic: "surveillance",
+    match: /\bactive surveillance\b|\bsurveillance\b|\bmonitoring\b/i,
+    allow: ["active-surveillance", "monitoring-surveillance", "monitoring-after-treatment"],
+  },
+];
+
+/**
+ * Topic pairs with no approved content and a known confusion between them.
+ * "Is the radiation from an MRI dangerous?" names imaging and radiotherapy;
+ * the treatment-radiation passage is not an answer, and nothing approved is.
+ */
+const CONFLICTING_TOPICS: [string, string][] = [["imaging", "radiotherapy"]];
+
+/**
+ * Passages allowed for a question, or null when it names no procedure.
+ *
+ * A question may legitimately span topics ("why another PSA if I had an MRI?"),
+ * so allow-lists are combined rather than intersected. Known-confusing pairs
+ * abstain instead.
+ */
+function allowedContent(question: string): Set<string> | null {
+  const hits = TOPIC_ANCHORS.filter((a) => a.match.test(question));
+  if (!hits.length) return null;
+
+  const topics = new Set(hits.map((h) => h.topic));
+  for (const [a, b] of CONFLICTING_TOPICS) {
+    if (topics.has(a) && topics.has(b)) return new Set();
+  }
+
+  const allowed = new Set<string>();
+  for (const hit of hits) for (const id of hit.allow) allowed.add(id);
+  return allowed;
+}
+
 export interface Retrieved {
   passage: Passage;
   score: number;
@@ -129,8 +206,12 @@ export function retrieve(question: string, limit = 3, minScore = 1.6): Retrieved
   const terms = expand(tokenize(question));
   if (!terms.length) return [];
 
+  const allowed = allowedContent(question);
   const scored: Retrieved[] = [];
   for (const passage of CORPUS) {
+    // A question naming a procedure can only be answered from that procedure's
+    // content; anything else is a coincidence of vocabulary.
+    if (allowed && !allowed.has(passage.contentId)) continue;
     const haystack = `${passage.title} ${passage.heading ?? ""} ${passage.text}`.toLowerCase();
     const body = tokenize(haystack);
     const counts = new Map<string, number>();

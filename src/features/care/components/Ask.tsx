@@ -3,6 +3,7 @@ import { retrieve, type Retrieved } from "../../../data/care/corpus";
 import { CONTENT } from "../../../data/care/content";
 import { logMiss } from "../../../services/askLog";
 import { checkRedFlags } from "../../../data/care/redFlags";
+import { gateQuestion, type Gate } from "../../../data/care/intentGate";
 
 /**
  * Starters, so the page is never a blank "ask me anything" box. An empty
@@ -32,14 +33,24 @@ export function Ask() {
   const [asked, setAsked] = useState("");
   const [hits, setHits] = useState<Retrieved[] | null>(null);
   const [urgent, setUrgent] = useState<string | null>(null);
+  const [gate, setGate] = useState<Gate | null>(null);
 
   const ask = (raw: string) => {
     const q = raw.trim();
     if (q.length < 3) return;
     setQuestion(q);
     setAsked(q);
-    // Symptoms that need care now are answered before anything is retrieved.
-    setUrgent(checkRedFlags(q));
+    // Order matters: urgent symptoms first, then questions this product must
+    // not answer, and only then retrieval.
+    const red = checkRedFlags(q);
+    setUrgent(red);
+    const blocked = gateQuestion(q);
+    setGate(blocked);
+    if (blocked) {
+      setHits([]);
+      logMiss(q);
+      return;
+    }
     const found = retrieve(q);
     setHits(found);
     if (!found.length) logMiss(q);
@@ -174,7 +185,17 @@ export function Ask() {
         </div>
       )}
 
-      {hits !== null && hits.length === 0 && (
+      {gate && (
+        <div className="mt-7 rounded-xl border-l-4 border-sinai-400 bg-sinai-50/70 p-5" aria-live="polite">
+          <h3 className="text-sm font-bold text-slate-900">{gate.heading}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate-700">{gate.message}</p>
+          <p className="mt-3 text-sm text-slate-600">
+            Mount Sinai cancer appointments 844-MD-CANCER · Urology 212-241-9955
+          </p>
+        </div>
+      )}
+
+      {!gate && hits !== null && hits.length === 0 && (
         <div className="mt-7 rounded-xl border-l-4 border-amber-300 bg-amber-50 p-5" aria-live="polite">
           <h3 className="text-sm font-bold text-slate-900">
             I couldn't find this in the approved content
