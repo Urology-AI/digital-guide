@@ -105,7 +105,7 @@ export function Card({
       )}
       <h3 className="text-[1.02rem] font-bold leading-snug text-[var(--c-ink)]">{title}</h3>
       {description && (
-        <p className="mt-2 text-[var(--t-small)] leading-relaxed text-[var(--c-ink-soft)]">{description}</p>
+        <p className="mt-2 text-small leading-relaxed text-[var(--c-ink-soft)]">{description}</p>
       )}
       {children}
     </>
@@ -153,12 +153,12 @@ export function Section({
               </p>
             )}
             {title && (
-              <h2 className="text-[var(--t-h2)] font-bold leading-[var(--lh-tight)] tracking-tight text-[var(--c-ink)]">
+              <h2 className="text-h2 font-bold leading-[var(--lh-tight)] tracking-tight text-[var(--c-ink)]">
                 {title}
               </h2>
             )}
             {lead && (
-              <p className="mt-3 text-[var(--t-body)] leading-[var(--lh-body)] text-[var(--c-ink-soft)]">{lead}</p>
+              <p className="mt-3 text-body leading-[var(--lh-body)] text-[var(--c-ink-soft)]">{lead}</p>
             )}
           </header>
         )}
@@ -207,7 +207,7 @@ export function Alert({
       <div className={`h-1 w-full ${t.bar}`} aria-hidden="true" />
       <div className="p-5">
         <h3 className={`text-sm font-bold ${t.head}`}>{heading}</h3>
-        <div className="mt-2 text-[var(--t-small)] leading-relaxed text-[var(--c-ink)]">{children}</div>
+        <div className="mt-2 text-small leading-relaxed text-[var(--c-ink)]">{children}</div>
       </div>
     </div>
   );
@@ -224,7 +224,7 @@ export function SourcePanel({
   if (!items.length) return null;
   return (
     <details className="group mt-6 rounded-[var(--r-md)] border border-[var(--c-line)] bg-[var(--c-surface-sunken)]">
-      <summary className="cursor-pointer list-none px-4 py-3 text-[var(--t-fine)] font-semibold text-[var(--c-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--c-blue-deep)]">
+      <summary className="cursor-pointer list-none px-4 py-3 text-fine font-semibold text-[var(--c-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--c-blue-deep)]">
         <span className="inline-flex items-center gap-2">
           <span aria-hidden="true" className="text-[var(--c-accent-ink)] transition-transform group-open:rotate-90">
             ▸
@@ -234,7 +234,7 @@ export function SourcePanel({
       </summary>
       <ol className="space-y-2 border-t border-[var(--c-line)] px-4 py-3">
         {items.map((r) => (
-          <li key={r.id} className="text-[var(--t-fine)] leading-relaxed text-[var(--c-ink-soft)]">
+          <li key={r.id} className="text-fine leading-relaxed text-[var(--c-ink-soft)]">
             {r.url ? (
               <a
                 className="text-[var(--c-accent-ink)] underline underline-offset-2"

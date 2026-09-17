@@ -67,7 +67,7 @@ export function Ask() {
   };
 
   const contact = (
-    <p className="mt-3 text-[var(--t-small)] text-[var(--c-ink-soft)]">
+    <p className="mt-3 text-small text-[var(--c-ink-soft)]">
       Mount Sinai cancer appointments <strong>844-MD-CANCER</strong> · Urology{" "}
       <strong>212-241-9955</strong>
     </p>
@@ -77,12 +77,12 @@ export function Ask() {
     <div>
       <Surface className="p-6 sm:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className="text-[var(--t-h2)] font-bold text-[var(--c-ink)]">Urology Copilot</h2>
+          <h2 className="text-h2 font-bold text-[var(--c-ink)]">Urology Copilot</h2>
           <span className="rounded-[var(--r-pill)] bg-[var(--c-surface-sunken)] px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wide text-[var(--c-muted)]">
             Answers from the approved guide
           </span>
         </div>
-        <p className="mt-2 max-w-2xl text-[var(--t-small)] leading-relaxed text-[var(--c-ink-soft)]">
+        <p className="mt-2 max-w-2xl text-small leading-relaxed text-[var(--c-ink-soft)]">
           Ask in your own words. Answers are passages from this guide shown exactly as written, with their sources —
           nothing is generated. It cannot interpret your results or recommend a treatment, and it will say so when
           the guide does not cover something.
@@ -103,14 +103,14 @@ export function Ask() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="What happens after a biopsy?"
-            className="min-w-0 flex-1 rounded-[var(--r-md)] border border-[var(--c-line-strong)] px-4 py-3 text-[var(--t-small)] text-[var(--c-ink)] placeholder:text-[var(--c-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--c-blue-deep)]"
+            className="min-w-0 flex-1 rounded-[var(--r-md)] border border-[var(--c-line-strong)] px-4 py-3 text-small text-[var(--c-ink)] placeholder:text-[var(--c-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--c-blue-deep)]"
           />
           <Button type="submit">Ask</Button>
         </form>
 
         {hits === null && (
           <div className="mt-6">
-            <p className="text-[var(--t-fine)] font-semibold uppercase tracking-wide text-[var(--c-muted)]">
+            <p className="text-fine font-semibold uppercase tracking-wide text-[var(--c-muted)]">
               Things people ask
             </p>
             <ul className="mt-3 flex flex-wrap gap-2">
@@ -119,7 +119,7 @@ export function Ask() {
                   <button
                     type="button"
                     onClick={() => ask(s)}
-                    className="rounded-[var(--r-pill)] border border-[var(--c-line)] bg-white px-4 py-2 text-[var(--t-small)] text-[var(--c-ink-soft)] transition hover:border-[var(--c-blue)] hover:text-[var(--c-accent-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--c-blue-deep)] motion-reduce:transition-none"
+                    className="rounded-[var(--r-pill)] border border-[var(--c-line)] bg-white px-4 py-2 text-small text-[var(--c-ink-soft)] transition hover:border-[var(--c-blue)] hover:text-[var(--c-accent-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--c-blue-deep)] motion-reduce:transition-none"
                   >
                     {s}
                   </button>
@@ -150,20 +150,20 @@ export function Ask() {
 
       {!gate && hits !== null && hits.length > 0 && (
         <div className="mt-4 space-y-4" aria-live="polite">
-          <p className="text-[var(--t-fine)] font-semibold uppercase tracking-wide text-[var(--c-muted)]">
+          <p className="text-fine font-semibold uppercase tracking-wide text-[var(--c-muted)]">
             From the approved guide · “{asked}”
           </p>
 
           {hits.map(({ passage }) => (
             <Surface as="article" key={passage.id} className="p-6">
-              <h3 className="text-[var(--t-h3)] font-bold text-[var(--c-ink)]">
+              <h3 className="text-h3 font-bold text-[var(--c-ink)]">
                 {passage.title}
                 {passage.heading ? <span className="text-[var(--c-muted)]"> · {passage.heading}</span> : null}
               </h3>
-              <p className="mt-3 text-[var(--t-body)] leading-[var(--lh-body)] text-[var(--c-ink)]">{passage.text}</p>
+              <p className="mt-3 text-body leading-[var(--lh-body)] text-[var(--c-ink)]">{passage.text}</p>
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[var(--c-line)] pt-3">
                 <a
-                  className="text-[var(--t-fine)] font-semibold text-[var(--c-accent-ink)] hover:underline"
+                  className="text-fine font-semibold text-[var(--c-accent-ink)] hover:underline"
                   href={`#/t/${passage.contentId}`}
                 >
                   Read the full explanation →
@@ -171,7 +171,7 @@ export function Ask() {
                 {passage.references.slice(0, 2).map((r) => (
                   <a
                     key={r.id}
-                    className="text-[var(--t-fine)] text-[var(--c-muted)] underline underline-offset-2 hover:text-[var(--c-accent-ink)]"
+                    className="text-fine text-[var(--c-muted)] underline underline-offset-2 hover:text-[var(--c-accent-ink)]"
                     href={r.url}
                     target="_blank"
                     rel="noreferrer"
@@ -190,14 +190,14 @@ export function Ask() {
             if (!related.length) return null;
             return (
               <Surface tone="sunken" className="p-5">
-                <h3 className="text-[var(--t-fine)] font-bold uppercase tracking-wide text-[var(--c-ink)]">
+                <h3 className="text-fine font-bold uppercase tracking-wide text-[var(--c-ink)]">
                   Related topics
                 </h3>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {related.map((r) => (
                     <li key={r.id}>
                       <a
-                        className="inline-block rounded-[var(--r-pill)] border border-[var(--c-line)] bg-white px-3 py-1.5 text-[var(--t-fine)] text-[var(--c-ink-soft)] hover:border-[var(--c-blue)] hover:text-[var(--c-accent-ink)]"
+                        className="inline-block rounded-[var(--r-pill)] border border-[var(--c-line)] bg-white px-3 py-1.5 text-fine text-[var(--c-ink-soft)] hover:border-[var(--c-blue)] hover:text-[var(--c-accent-ink)]"
                         href={`#/t/${r.id}`}
                       >
                         {r.title}
@@ -211,12 +211,12 @@ export function Ask() {
 
           {hits[0].passage.questions.length > 0 && (
             <Surface tone="accent" className="p-5">
-              <h3 className="text-[var(--t-fine)] font-bold uppercase tracking-wide text-[var(--c-ink)]">
+              <h3 className="text-fine font-bold uppercase tracking-wide text-[var(--c-ink)]">
                 Questions to ask your care team
               </h3>
               <ul className="mt-3 space-y-2">
                 {hits[0].passage.questions.map((q) => (
-                  <li key={q} className="text-[var(--t-small)] leading-relaxed text-[var(--c-ink)]">
+                  <li key={q} className="text-small leading-relaxed text-[var(--c-ink)]">
                     {q}
                   </li>
                 ))}
@@ -225,7 +225,7 @@ export function Ask() {
           )}
 
           <Surface tone="sunken" className="flex flex-wrap items-center gap-3 p-4">
-            <span className="text-[var(--t-fine)] font-semibold text-[var(--c-ink-soft)]">Was this helpful?</span>
+            <span className="text-fine font-semibold text-[var(--c-ink-soft)]">Was this helpful?</span>
             {(
               [
                 ["helped", "Yes, this helped"],
@@ -242,7 +242,7 @@ export function Ask() {
                   // Only the outcome is recorded, never the question text.
                   if (value !== "helped") logMiss(`[${value}]`);
                 }}
-                className={`rounded-[var(--r-pill)] border px-3 py-1.5 text-[var(--t-fine)] transition ${
+                className={`rounded-[var(--r-pill)] border px-3 py-1.5 text-fine transition ${
                   feedback === value
                     ? "border-[var(--c-blue-deep)] bg-white text-[var(--c-accent-ink)] font-semibold"
                     : "border-[var(--c-line)] bg-white text-[var(--c-ink-soft)] hover:border-[var(--c-blue)]"
@@ -252,7 +252,7 @@ export function Ask() {
               </button>
             ))}
             {feedback && (
-              <span className="text-[var(--t-fine)] text-[var(--c-muted)]" role="status">
+              <span className="text-fine text-[var(--c-muted)]" role="status">
                 Thank you — noted for the team reviewing this guide.
               </span>
             )}
@@ -268,7 +268,7 @@ export function Ask() {
               better to ask your care team.
             </p>
             {contact}
-            <p className="mt-3 text-[var(--t-fine)] text-[var(--c-muted)]">
+            <p className="mt-3 text-fine text-[var(--c-muted)]">
               You can also browse care stages from the menu, or look up a term from your report.
             </p>
           </Alert>
