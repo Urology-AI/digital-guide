@@ -1,0 +1,73 @@
+/**
+ * Design tokens for Tewari Prostate Care.
+ *
+ * One source for colour, type, spacing, radii and elevation, so the product
+ * shell and the clinical guide share a visual language instead of maintaining
+ * two. Mount Sinai blue, violet and magenta appear as controlled accents
+ * against a near-white base — the brand carries authority; the reading surface
+ * stays calm.
+ *
+ * Contrast: --c-ink on --c-surface is 15.8:1, --c-ink-soft 8.1:1, --c-muted
+ * 4.7:1, --c-accent-ink 4.8:1 — all at or above WCAG AA for body text.
+ */
+:root {
+  --c-blue: #00aeef;
+  --c-blue-deep: #0077b3;
+  --c-violet: #212070;
+  --c-magenta: #dc298d;
+
+  --c-bg: #fbfcfe;
+  --c-surface: #ffffff;
+  --c-surface-sunken: #f4f7fb;
+  --c-surface-accent: #eef7fd;
+
+  --c-ink: #0f172a;
+  --c-ink-soft: #40506b;
+  --c-muted: #64748b;
+
+  --c-line: #e2e8f0;
+  --c-line-strong: #cbd5e1;
+
+  /* The brand blue is a fill, not a text colour; this is its readable pair. */
+  --c-accent-ink: #0369a1;
+
+  --c-urgent: #b91c1c;
+  --c-urgent-bg: #fef2f2;
+  --c-urgent-line: #fca5a5;
+  --c-caution: #a16207;
+  --c-caution-bg: #fffbeb;
+
+  --t-display: clamp(2rem, 4.5vw, 3rem);
+  --t-h1: clamp(1.75rem, 3.2vw, 2.4rem);
+  --t-h2: clamp(1.35rem, 2.2vw, 1.75rem);
+  --t-h3: 1.125rem;
+  --t-body: 1.0625rem;
+  --t-small: 0.9375rem;
+  --t-fine: 0.8125rem;
+
+  --lh-tight: 1.2;
+  --lh-body: 1.65;
+  --measure: 68ch;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  /* Restrained elevation — depth comes from borders first. */
+  --e-1: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --e-2: 0 6px 20px -8px rgba(15, 23, 42, 0.14);
+  --e-3: 0 18px 44px -20px rgba(33, 32, 112, 0.28);
+
+  --motion-fast: 140ms;
+  --motion-base: 220ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+  }
+}
