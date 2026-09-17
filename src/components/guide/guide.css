@@ -6,32 +6,34 @@
    ========================================================================== */
 
 .guide-scope {
-  /* Light mode is true white; dark mode is true black. Mount Sinai brand
-     colors ride on top of both grounds. */
-  --g-bg: #ffffff;
-  --g-surface: #ffffff;
-  --g-surface-2: #f3f6fb;
-  --g-ink: #10193a;
-  --g-ink-soft: #3a4568;
-  --g-muted: #6b7590;
-  --g-line: #dbe3f0;
-  --g-blue: #0077b3;          /* accessible text-weight Sinai blue */
-  --g-blue-bright: #00AEEF;   /* Sinai brand blue for fills/accents */
-  --g-violet: #212070;        /* Sinai violet */
-  --g-navy: #00002D;          /* Sinai deep navy */
-  --g-blue-tint: #e0f2fb;
+  /* Light mode maps onto the product's shared design tokens (see
+     features/care/design/tokens.css) so the guide and the patient shell are
+     the same surface rather than two products. Dark mode below overrides
+     these; it is a guide-only reading feature. */
+  --g-bg: var(--c-surface);
+  --g-surface: var(--c-surface);
+  --g-surface-2: var(--c-surface-sunken);
+  --g-ink: var(--c-ink);
+  --g-ink-soft: var(--c-ink-soft);
+  --g-muted: var(--c-muted);
+  --g-line: var(--c-line);
+  --g-blue: var(--c-accent-ink);
+  --g-blue-bright: var(--c-blue);
+  --g-violet: var(--c-violet);
+  --g-navy: #00002D;
+  --g-blue-tint: var(--c-surface-accent);
   --g-violet-tint: #e7e7f4;
-  --g-magenta: #DC298D;
-  --g-amber: #b26a1a;
-  --g-amber-tint: #f6ead6;
-  --g-focus: #00AEEF;
+  --g-magenta: var(--c-magenta);
+  --g-amber: var(--c-caution);
+  --g-amber-tint: var(--c-caution-bg);
+  --g-focus: var(--c-blue-deep);
   --g-bar-bg: #212070;
   --g-bar-ink: #ffffff;
   --g-bar-line: #212070;
   /* Text drawn on top of a filled accent (buttons, chips, chat header). */
   --g-on-accent: #ffffff;
-  --g-shadow: 0 18px 40px -22px rgba(33, 32, 112, 0.35);
-  --g-radius: 14px;
+  --g-shadow: var(--e-3);
+  --g-radius: var(--r-lg);
 
   background: var(--g-bg);
   color: var(--g-ink);
